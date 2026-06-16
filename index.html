@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FNDLY — Findability Made Simple</title>
+  <meta name="description" content="FNDLY helps businesses become more discoverable online through SEO, AI Search Optimization, Local SEO, Content Strategy, and Reputation Management." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #111111;
+      --ink-soft: #444444;
+      --ink-muted: #888888;
+      --ink-faint: #BBBBBB;
+      --bg: #FFFFFF;
+      --bg-soft: #F7F7F5;
+      --bg-dark: #0F0F0F;
+      --bg-dark-2: #161616;
+      --accent: #5B5BF7;
+      --border: #E8E8E5;
+      --border-dark: rgba(255,255,255,0.09);
+      --success: #16A34A;
+      --radius: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+    }
+
+    html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+
+    ::selection { background: rgba(91,91,247,0.12); }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+    .section { padding: 112px 0; }
+    .section--sm { padding: 72px 0; }
+
+    /* ── TYPE ── */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--ink-muted);
+    }
+    .eyebrow::before {
+      content: ''; display: block; width: 20px; height: 1px; background: var(--ink-faint);
+    }
+    .h1 {
+      font-size: clamp(42px, 6vw, 76px); font-weight: 800;
+      line-height: 1.0; letter-spacing: -0.04em; color: var(--ink);
+    }
+    .h2 {
+      font-size: clamp(30px, 4vw, 52px); font-weight: 800;
+      line-height: 1.08; letter-spacing: -0.035em; color: var(--ink);
+    }
+    .h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+    .lead { font-size: 18px; line-height: 1.72; color: var(--ink-soft); }
+    .body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 13px 26px; border-radius: var(--radius);
+      font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.18s ease; white-space: nowrap;
+    }
+    .btn--dark { background: var(--ink); color: #fff; }
+    .btn--dark:hover { background: #2a2a2a; }
+    .btn--outline { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+    .btn--outline:hover { border-color: #ccc; background: var(--bg-soft); }
+    .btn--accent { background: var(--accent); color: #fff; }
+    .btn--accent:hover { background: #4a4ae0; }
+    .btn--lg { padding: 16px 32px; font-size: 15px; border-radius: var(--radius-lg); }
+    .btn svg { flex-shrink: 0; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 64px; display: flex; align-items: center;
+      padding: 0 40px; transition: all 0.25s ease;
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px) saturate(1.6);
+      -webkit-backdrop-filter: blur(16px) saturate(1.6);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__inner { display: flex; align-items: center; width: 100%; }
+    .nav__logo {
+      font-size: 18px; font-weight: 900; letter-spacing: -0.05em;
+      color: var(--ink); text-decoration: none;
+      display: flex; align-items: center; gap: 8px; margin-right: auto;
+    }
+    .nav__logo-mark {
+      width: 30px; height: 30px; border-radius: 7px;
+      background: var(--ink); display: flex; align-items: center;
+      justify-content: center; color: #fff; font-size: 13px; font-weight: 900;
+    }
+    .nav__links { display: flex; align-items: center; gap: 2px; }
+    .nav__links a {
+      font-size: 14px; font-weight: 500; color: var(--ink-soft);
+      text-decoration: none; padding: 7px 14px; border-radius: 8px;
+      transition: all 0.14s ease;
+    }
+    .nav__links a:hover { color: var(--ink); background: var(--bg-soft); }
+    .nav__actions { display: flex; align-items: center; gap: 10px; margin-left: 24px; }
+    @media (max-width: 768px) { .nav__links { display: none; } }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 160px 0 100px; position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero__grid-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 30%, transparent 100%);
+      opacity: 0.5;
+    }
+    .hero__inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .hero__tag { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+    .hero__tag-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
+    .hero__tag-text { font-size: 13px; color: var(--ink-soft); }
+    .hero__title { margin-bottom: 22px; }
+    .hero__title em { font-style: normal; color: var(--accent); }
+    .hero__subtitle { margin-bottom: 36px; max-width: 440px; }
+    .hero__cta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .hero__proof { margin-top: 52px; display: flex; align-items: center; gap: 20px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .hero__proof-faces { display: flex; }
+    .hero__proof-face {
+      width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff;
+      margin-left: -7px; background: #e2e2e2; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #888;
+    }
+    .hero__proof-face:first-child { margin-left: 0; }
+    .hero__proof-text { font-size: 13px; color: var(--ink-muted); line-height: 1.5; }
+    .hero__proof-text strong { color: var(--ink); }
+
+    /* Dashboard */
+    .hero__visual { position: relative; }
+    .ui-window {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius-xl); box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.06), 0 32px 64px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .ui-window__bar {
+      padding: 14px 18px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 7px; background: #FAFAFA;
+    }
+    .ui-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .ui-dot--r { background: #FF5F56; }
+    .ui-dot--y { background: #FFBD2E; }
+    .ui-dot--g { background: #27C93F; }
+    .ui-window__title { font-size: 12px; color: var(--ink-muted); margin-left: 6px; font-weight: 500; letter-spacing: -0.01em; }
+    .ui-window__body { padding: 22px; }
+    .ui-kpi-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .ui-kpi {
+      background: var(--bg-soft); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 14px 16px;
+    }
+    .ui-kpi__label { font-size: 11px; color: var(--ink-muted); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+    .ui-kpi__value { font-size: 26px; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); line-height: 1; }
+    .ui-kpi__delta { font-size: 12px; font-weight: 600; color: var(--success); margin-top: 4px; }
+    .ui-chart-block {
+      background: var(--bg-soft); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px; margin-bottom: 12px;
+    }
+    .ui-chart-label { font-size: 11px; color: var(--ink-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 12px; }
+    .ui-bars { display: flex; align-items: flex-end; gap: 4px; height: 52px; }
+    .ui-bar { flex: 1; border-radius: 3px 3px 0 0; background: #E0E0F8; transition: background 0.2s; }
+    .ui-bar--hi { background: var(--accent); }
+    .ui-score-row {
+      background: var(--bg-soft); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 14px 16px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .ui-score-ring { width: 48px; height: 48px; flex-shrink: 0; position: relative; }
+    .ui-score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .ui-score-num {
+      position: absolute; inset: 0; display: flex; align-items: center;
+      justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink);
+    }
+    .ui-score-info { flex: 1; }
+    .ui-score-title { font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; }
+    .ui-score-desc { font-size: 13px; font-weight: 600; color: var(--ink); margin-top: 2px; }
+    .ui-score-tag { font-size: 11px; font-weight: 700; color: var(--success); background: rgba(22,163,74,0.08); padding: 3px 9px; border-radius: 100px; border: 1px solid rgba(22,163,74,0.15); }
+
+    /* Floating chips */
+    .chip {
+      position: absolute; background: #fff;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 10px 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    .chip--a { top: -18px; right: -16px; animation-delay: 0s; }
+    .chip--b { bottom: 30px; left: -22px; animation-delay: 2.5s; }
+    .chip__label { font-size: 10px; color: var(--ink-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+    .chip__value { font-size: 16px; font-weight: 800; color: var(--ink); letter-spacing: -0.03em; margin-top: 2px; }
+    .chip__sub { font-size: 11px; color: var(--success); font-weight: 600; margin-top: 1px; }
+    @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
+    @media (max-width: 900px) {
+      .hero__inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero__visual { order: -1; }
+    }
+
+    /* ── VALUE BAND (what/why/benefit) ── */
+    .value-band { padding: 56px 0; border-bottom: 1px solid var(--border); }
+    .value-band__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .value-item { padding-left: 20px; border-left: 2px solid var(--border); }
+    .value-item__num { font-size: 12px; font-weight: 700; color: var(--ink-faint); letter-spacing: 0.06em; margin-bottom: 10px; }
+    .value-item__label { font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 8px; }
+    .value-item__text { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+    @media (max-width: 900px) { .value-band__grid { grid-template-columns: 1fr; gap: 28px; } }
+
+    /* ── CLIENTS ── */
+    .clients {
+      padding: 48px 0; border-bottom: 1px solid var(--border);
+    }
+    .clients__inner { display: flex; align-items: center; gap: 48px; flex-wrap: wrap; }
+    .clients__label { font-size: 12px; color: var(--ink-faint); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; flex-shrink: 0; }
+    .clients__logos { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; }
+    .clients__logo { font-size: 15px; font-weight: 800; color: var(--ink-faint); letter-spacing: -0.03em; transition: color 0.2s; cursor: default; }
+    .clients__logo:hover { color: var(--ink-soft); }
+
+    /* ── NUMBERS ── */
+    .numbers { background: var(--bg-soft); border-bottom: 1px solid var(--border); padding: 72px 0; }
+    .numbers__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .number-cell { background: var(--bg-soft); padding: 40px 36px; }
+    .number-cell__value { font-size: clamp(32px, 4vw, 48px); font-weight: 800; letter-spacing: -0.05em; color: var(--ink); line-height: 1; }
+    .number-cell__label { font-size: 14px; color: var(--ink-muted); margin-top: 8px; line-height: 1.5; }
+    @media (max-width: 768px) { .numbers__grid { grid-template-columns: 1fr 1fr; } }
+
+    /* ── SERVICES ── */
+    .services__intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 64px; }
+    .services__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .svc {
+      background: var(--bg); padding: 36px 32px;
+      transition: background 0.2s ease; position: relative;
+    }
+    .svc:hover { background: var(--bg-soft); }
+    .svc__icon {
+      width: 40px; height: 40px; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .svc__title { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.02em; }
+    .svc__desc { font-size: 14px; color: var(--ink-soft); line-height: 1.72; margin-bottom: 14px; }
+    .svc__outcome { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 18px; }
+    .svc__link { font-size: 13px; font-weight: 600; color: var(--ink-muted); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.15s, gap 0.15s; }
+    .svc:hover .svc__link { color: var(--accent); gap: 9px; }
+    @media (max-width: 900px) { .services__intro { grid-template-columns: 1fr; gap: 24px; } .services__grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .services__grid { grid-template-columns: 1fr; } }
+
+    /* ── PROCESS ── */
+    .process { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .process__inner { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+    .process__steps { display: flex; flex-direction: column; gap: 0; }
+    .step-row {
+      display: flex; gap: 24px; padding: 32px 0;
+      border-bottom: 1px solid var(--border); position: relative;
+    }
+    .step-row:last-child { border-bottom: none; }
+    .step-row__num {
+      font-size: 13px; font-weight: 700; color: var(--ink-faint);
+      letter-spacing: 0.02em; min-width: 24px; padding-top: 2px;
+    }
+    .step-row__body { }
+    .step-row__title { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.02em; }
+    .step-row__desc { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
+    @media (max-width: 768px) { .process__inner { grid-template-columns: 1fr; gap: 40px; } }
+
+    /* ── SHOWCASE / DASHBOARD ── */
+    .showcase { border-top: 1px solid var(--border); }
+    .showcase__header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 64px; }
+    .showcase__window {
+      background: #FAFAF9; border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03), 0 12px 40px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    .showcase__topbar {
+      background: #fff; border-bottom: 1px solid var(--border);
+      padding: 14px 20px; display: flex; align-items: center; gap: 8px;
+    }
+    .showcase__body { padding: 28px; display: flex; flex-direction: column; gap: 20px; }
+    .sc-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .sc-title { font-size: 11px; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .sc-value { font-size: 38px; font-weight: 800; color: var(--ink); letter-spacing: -0.05em; line-height: 1; margin-top: 6px; }
+    .sc-sub { font-size: 13px; color: var(--success); font-weight: 600; margin-top: 4px; }
+    .sc-badge { font-size: 12px; font-weight: 700; color: var(--success); background: rgba(22,163,74,0.08); padding: 5px 12px; border-radius: 100px; border: 1px solid rgba(22,163,74,0.15); }
+    .sc-chart { height: 88px; position: relative; }
+    .sc-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .sc-metric { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+    .sc-metric__label { font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; margin-bottom: 6px; }
+    .sc-metric__val { font-size: 20px; font-weight: 800; color: var(--ink); letter-spacing: -0.04em; }
+    .sc-metric__d { font-size: 12px; color: var(--success); font-weight: 600; margin-top: 2px; }
+    .sc-two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .sc-kw { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+    .sc-kw__title { font-size: 11px; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+    .sc-kw-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .sc-kw-row:last-child { border: none; padding-bottom: 0; }
+    .sc-kw-pos { width: 24px; height: 24px; border-radius: 5px; background: rgba(91,91,247,0.07); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+    .sc-kw-term { flex: 1; color: var(--ink-soft); }
+    .sc-kw-delta { font-size: 12px; font-weight: 600; color: var(--success); }
+    .sc-vis { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+    .sc-vis__title { font-size: 11px; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+    .sc-vis-item { margin-bottom: 12px; }
+    .sc-vis-item:last-child { margin-bottom: 0; }
+    .sc-vis-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
+    .sc-vis-name { font-size: 12px; color: var(--ink-soft); }
+    .sc-vis-score { font-size: 12px; font-weight: 700; color: var(--ink); }
+    .sc-vis-bar { height: 5px; background: #EBEBEB; border-radius: 3px; overflow: hidden; }
+    .sc-vis-fill { height: 100%; border-radius: 3px; background: var(--accent); opacity: 0.7; }
+    @media (max-width: 900px) { .showcase__header { grid-template-columns: 1fr; gap: 32px; } }
+
+    /* ── VISIBILITY CHECKER (interactive tool) ── */
+    .checker { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .checker__intro { max-width: 620px; margin: 0 auto 48px; text-align: center; }
+    .checker__box {
+      max-width: 680px; margin: 0 auto; background: #fff;
+      border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 40px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03), 0 12px 40px rgba(0,0,0,0.05);
+    }
+    .checker__form { display: flex; gap: 12px; flex-wrap: wrap; }
+    .checker__input {
+      flex: 1; min-width: 200px; padding: 14px 18px;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      font-size: 15px; font-family: inherit; color: var(--ink); outline: none;
+      transition: border-color 0.15s;
+    }
+    .checker__input:focus { border-color: var(--accent); }
+    .checker__form .btn { flex-shrink: 0; }
+    .checker__note { font-size: 12px; color: var(--ink-faint); margin-top: 14px; text-align: center; }
+
+    .checker__scan { display: flex; flex-direction: column; gap: 12px; }
+    .checker__scan[hidden] { display: none; }
+    .checker__row {
+      display: flex; align-items: center; gap: 14px; padding: 14px 16px;
+      background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
+      opacity: 0.45; transition: opacity 0.3s, border-color 0.3s, background 0.3s;
+    }
+    .checker__row.active { opacity: 1; border-color: rgba(91,91,247,0.25); }
+    .checker__row.done { opacity: 1; border-color: rgba(22,163,74,0.18); background: #fff; }
+    .checker__row-icon { font-size: 18px; width: 24px; text-align: center; flex-shrink: 0; }
+    .checker__row-label { flex: 1; font-size: 14px; font-weight: 600; color: var(--ink); }
+    .checker__row-finding { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+    .checker__row-status { width: 22px; height: 22px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .checker__spinner { width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: checkerspin 0.8s linear infinite; }
+    @keyframes checkerspin { to { transform: rotate(360deg); } }
+    .checker__check { color: var(--success); font-size: 16px; font-weight: 700; }
+
+    .checker__result[hidden] { display: none; }
+    .checker__result-top { display: flex; align-items: center; gap: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+    .checker__ring { width: 96px; height: 96px; flex-shrink: 0; position: relative; }
+    .checker__ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .checker__ring-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); }
+    .checker__result-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 8px; }
+    .checker__result-headline { font-size: 18px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+    .checker__result-sub { font-size: 14px; color: var(--ink-soft); margin-top: 8px; line-height: 1.65; }
+    .checker__breakdown { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+    .checker__bd-head { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; }
+    .checker__bd-name { color: var(--ink-soft); }
+    .checker__bd-score { font-weight: 700; color: var(--ink); }
+    .checker__bd-bar { height: 6px; background: #EBEBEB; border-radius: 3px; overflow: hidden; }
+    .checker__bd-fill { height: 100%; border-radius: 3px; background: var(--accent); opacity: 0.78; transform: scaleX(0); transform-origin: left center; }
+    .checker__again { font-size: 13px; color: var(--ink-muted); text-decoration: underline; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; }
+
+    .checker__leadgen { border-top: 1px solid var(--border); padding-top: 28px; }
+    .checker__leadgen-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.01em; }
+    .checker__leadgen-sub { font-size: 13px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 18px; }
+    .checker__leadgen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .checker__leadgen-grid .checker__input { width: 100%; }
+    .checker__leadgen .checker__input { margin-bottom: 0; }
+    .checker__leadgen-email { margin-bottom: 10px; }
+    .checker__leadgen .btn { width: 100%; justify-content: center; }
+    .checker__leadgen-note { font-size: 12px; color: var(--ink-faint); margin-top: 12px; text-align: center; }
+    .checker__leadgen-status { font-size: 13px; margin-top: 14px; text-align: center; display: none; }
+    .checker__leadgen-status.show { display: block; }
+    .checker__leadgen-status.success { color: var(--success); font-weight: 600; }
+    .checker__leadgen-status.error { color: #DC2626; font-weight: 600; }
+    .checker__leadgen[data-sent] .checker__leadgen-form { display: none; }
+    .checker__again-wrap { text-align: center; margin-top: 18px; }
+    @media (max-width: 600px) { .checker__box { padding: 28px 22px; } .checker__result-top { flex-direction: column; text-align: center; } .checker__leadgen-grid { grid-template-columns: 1fr; } }
+
+    /* ── WHY ── */
+    .why { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .why__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .why__cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .why-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; transition: border-color 0.2s, box-shadow 0.2s; }
+    .why-card:hover { border-color: #ccc; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+    .why-card__num { font-size: 28px; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); line-height: 1; margin-bottom: 6px; }
+    .why-card__label { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+    @media (max-width: 900px) { .why__inner { grid-template-columns: 1fr; gap: 48px; } }
+
+    /* ── PRICING ── */
+    .pricing { background: var(--bg-soft); border-top: 1px solid var(--border); }
+    .pricing__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 64px; }
+    .plan {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 32px;
+      transition: border-color 0.2s, box-shadow 0.2s; position: relative;
+    }
+    .plan:hover { border-color: #ccc; box-shadow: 0 8px 32px rgba(0,0,0,0.07); }
+    .plan--featured { background: var(--bg-dark); border-color: var(--bg-dark); }
+    .plan--featured:hover { border-color: #2a2a2a; box-shadow: 0 12px 48px rgba(0,0,0,0.3); }
+    .plan__chip {
+      position: absolute; top: -12px; left: 28px;
+      background: var(--accent); color: #fff;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 100px;
+    }
+    .plan__tier { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 6px; }
+    .plan--featured .plan__tier { color: rgba(255,255,255,0.4); }
+    .plan__price { font-size: 40px; font-weight: 800; letter-spacing: -0.05em; color: var(--ink); line-height: 1; }
+    .plan--featured .plan__price { color: #fff; }
+    .plan__note { font-size: 13px; color: var(--ink-muted); margin-top: 4px; margin-bottom: 28px; }
+    .plan--featured .plan__note { color: rgba(255,255,255,0.3); }
+    .plan__hr { height: 1px; background: var(--border); margin: 24px 0; }
+    .plan--featured .plan__hr { background: rgba(255,255,255,0.08); }
+    .plan__features { display: flex; flex-direction: column; gap: 11px; margin-bottom: 32px; }
+    .plan__feat { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--ink-soft); }
+    .plan--featured .plan__feat { color: rgba(255,255,255,0.65); }
+    .plan__feat-icon { color: var(--success); flex-shrink: 0; margin-top: 1px; font-size: 14px; }
+    .plan .btn { width: 100%; justify-content: center; }
+    @media (max-width: 900px) { .pricing__grid { grid-template-columns: 1fr; } }
+
+    /* ── FAQ ── */
+    .faq { border-top: 1px solid var(--border); }
+    .faq__inner { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; }
+    .faq__list { display: flex; flex-direction: column; }
+    .faq-q {
+      border-bottom: 1px solid var(--border); overflow: hidden;
+    }
+    .faq-q__trigger {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; padding: 22px 0; cursor: pointer;
+      font-size: 15px; font-weight: 600; color: var(--ink);
+      list-style: none; user-select: none;
+    }
+    .faq-q__trigger::-webkit-details-marker { display: none; }
+    .faq-q__icon {
+      width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+      background: var(--bg-soft); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: var(--ink-muted); transition: all 0.2s;
+    }
+    .faq-q[open] .faq-q__icon { background: var(--ink); color: #fff; transform: rotate(45deg); border-color: var(--ink); }
+    .faq-q__body { font-size: 14px; color: var(--ink-soft); line-height: 1.8; padding-bottom: 20px; }
+    @media (max-width: 768px) { .faq__inner { grid-template-columns: 1fr; gap: 40px; } }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--bg-dark); color: #fff;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding: 140px 0; text-align: center;
+    }
+    .cta-section__eyebrow { color: rgba(255,255,255,0.3); margin-bottom: 28px; display: inline-flex; }
+    .cta-section__eyebrow::before { background: rgba(255,255,255,0.15); }
+    .cta-section__title { color: #fff; margin-bottom: 20px; }
+    .cta-section__title em { font-style: normal; color: rgba(255,255,255,0.35); }
+    .cta-section__sub { font-size: 17px; color: rgba(255,255,255,0.4); max-width: 480px; margin: 0 auto 40px; line-height: 1.75; }
+    .cta-section__note { margin-top: 20px; font-size: 13px; color: rgba(255,255,255,0.2); }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--bg-dark-2); padding: 72px 0 40px; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+    .footer__logo { font-size: 17px; font-weight: 900; color: #fff; letter-spacing: -0.04em; display: flex; align-items: center; gap: 7px; margin-bottom: 14px; text-decoration: none; }
+    .footer__logo-mark { width: 26px; height: 26px; border-radius: 6px; background: #fff; display: flex; align-items: center; justify-content: center; color: var(--bg-dark-2); font-size: 12px; font-weight: 900; }
+    .footer__blurb { font-size: 14px; color: rgba(255,255,255,0.3); line-height: 1.7; max-width: 220px; margin-bottom: 22px; }
+    .footer__socials { display: flex; gap: 8px; }
+    .footer__s {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.35); text-decoration: none; font-size: 13px;
+      transition: all 0.15s;
+    }
+    .footer__s:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.7); }
+    .footer__col-h { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.25); margin-bottom: 14px; }
+    .footer__links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer__links a { font-size: 14px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.15s; }
+    .footer__links a:hover { color: rgba(255,255,255,0.7); }
+    .footer__bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .footer__copy { font-size: 13px; color: rgba(255,255,255,0.2); }
+    .footer__bl { display: flex; gap: 20px; }
+    .footer__bl a { font-size: 13px; color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.15s; }
+    .footer__bl a:hover { color: rgba(255,255,255,0.4); }
+    @media (max-width: 900px) { .footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; } .footer__brand { grid-column: 1/-1; } }
+
+    /* ── LINE REVEAL (GSAP) ── */
+    .line-wrap { overflow: hidden; display: block; }
+    .line { display: block; padding-bottom: 0.07em; margin-bottom: -0.07em; }
+
+    /* ── MARQUEE ── */
+    .clients { padding: 28px 0 0; border-bottom: 1px solid var(--border); }
+    .clients__top { padding: 0 32px 20px; }
+    @media (max-width: 600px) { .clients__top { padding: 0 24px 16px; } }
+    .marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%); }
+    .marquee__track {
+      display: flex; align-items: center; gap: 52px;
+      width: max-content; padding: 16px 0 28px;
+      animation: mscroll 32s linear infinite;
+    }
+    .marquee:hover .marquee__track { animation-play-state: paused; }
+    @keyframes mscroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .clients__sep { color: var(--ink-faint); font-size: 20px; font-weight: 300; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#" class="nav__logo">
+      <div class="nav__logo-mark">F</div>
+      FNDLY
+    </a>
+    <div class="nav__links">
+      <a href="#services">Services</a>
+      <a href="#process">How it works</a>
+      <a href="#checker">Free check</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+    </div>
+    <div class="nav__actions">
+      <a href="#" class="btn btn--outline btn--sm" style="font-size:13px;padding:9px 18px;">Log in</a>
+      <a href="#contact" class="btn btn--dark" style="font-size:13px;padding:9px 18px;">Book a call</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__grid-bg"></div>
+  <div class="container">
+    <div class="hero__inner">
+      <div class="hero__content">
+        <div class="hero__tag">
+          <div class="hero__tag-dot"></div>
+          <span class="hero__tag-text">Serving 250+ businesses across Europe</span>
+        </div>
+        <h1 class="h1 hero__title">
+          <div class="line-wrap"><span class="line">Get Found Before Your</span></div>
+          <div class="line-wrap"><span class="line"><em>Competitors</em> Do</span></div>
+        </h1>
+        <p class="lead hero__subtitle">We help businesses increase their visibility across Google, AI search engines, maps, and directories—turning discoverability into measurable growth.</p>
+        <div class="hero__cta">
+          <a href="#contact" class="btn btn--dark btn--lg">Book a free audit
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#process" class="btn btn--outline btn--lg">See how it works</a>
+        </div>
+        <div class="hero__proof">
+          <div class="hero__proof-faces">
+            <div class="hero__proof-face" style="background:#F0E6FF;color:#7C3AED;">M</div>
+            <div class="hero__proof-face" style="background:#E6F4F1;color:#065F46;">J</div>
+            <div class="hero__proof-face" style="background:#FEF3C7;color:#92400E;">S</div>
+            <div class="hero__proof-face" style="background:#EFF6FF;color:#1D4ED8;">A</div>
+          </div>
+          <p class="hero__proof-text"><strong>250+ businesses</strong> trust FNDLY<br>to manage their online visibility</p>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <div class="chip chip--a">
+          <div class="chip__label">Search Impressions</div>
+          <div class="chip__value">1.2M+</div>
+          <div class="chip__sub">↑ 184% this month</div>
+        </div>
+        <div class="ui-window">
+          <div class="ui-window__bar">
+            <div class="ui-dot ui-dot--r"></div>
+            <div class="ui-dot ui-dot--y"></div>
+            <div class="ui-dot ui-dot--g"></div>
+            <span class="ui-window__title">FNDLY Visibility Dashboard</span>
+          </div>
+          <div class="ui-window__body">
+            <div class="ui-kpi-row">
+              <div class="ui-kpi">
+                <div class="ui-kpi__label">Visibility Score</div>
+                <div class="ui-kpi__value" id="score-counter">0</div>
+                <div class="ui-kpi__delta">↑ 23 pts this month</div>
+              </div>
+              <div class="ui-kpi">
+                <div class="ui-kpi__label">AI Mentions</div>
+                <div class="ui-kpi__value" id="ai-counter">0</div>
+                <div class="ui-kpi__delta">↑ 4× since Q1</div>
+              </div>
+            </div>
+            <div class="ui-chart-block">
+              <div class="ui-chart-label">Organic Traffic Growth</div>
+              <div class="ui-bars">
+                <div class="ui-bar" style="height:35%"></div>
+                <div class="ui-bar" style="height:42%"></div>
+                <div class="ui-bar" style="height:38%"></div>
+                <div class="ui-bar" style="height:54%"></div>
+                <div class="ui-bar" style="height:50%"></div>
+                <div class="ui-bar" style="height:66%"></div>
+                <div class="ui-bar" style="height:61%"></div>
+                <div class="ui-bar" style="height:78%"></div>
+                <div class="ui-bar" style="height:72%"></div>
+                <div class="ui-bar" style="height:88%"></div>
+                <div class="ui-bar" style="height:83%"></div>
+                <div class="ui-bar ui-bar--hi" style="height:100%"></div>
+              </div>
+            </div>
+            <div class="ui-score-row">
+              <div class="ui-score-ring">
+                <svg viewBox="0 0 48 48">
+                  <circle cx="24" cy="24" r="19" fill="none" stroke="#EBEBEB" stroke-width="5"/>
+                  <circle cx="24" cy="24" r="19" fill="none" stroke="#5B5BF7" stroke-width="5" stroke-dasharray="119.4" stroke-dashoffset="19" stroke-linecap="round"/>
+                </svg>
+                <div class="ui-score-num">84</div>
+              </div>
+              <div class="ui-score-info">
+                <div class="ui-score-title">Domain Authority</div>
+                <div class="ui-score-desc">Strong authority score</div>
+              </div>
+              <div class="ui-score-tag">Top 15%</div>
+            </div>
+          </div>
+        </div>
+        <div class="chip chip--b">
+          <div class="chip__label">Review Score</div>
+          <div class="chip__value">4.9 ★</div>
+          <div class="chip__sub">+47 reviews this quarter</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE BAND -->
+<div class="value-band">
+  <div class="container value-band__grid">
+    <div class="value-item">
+      <div class="value-item__num">01</div>
+      <div class="value-item__label">What we do</div>
+      <p class="value-item__text">We make your business visible everywhere people search — Google, Maps, AI tools like ChatGPT, and online directories.</p>
+    </div>
+    <div class="value-item">
+      <div class="value-item__num">02</div>
+      <div class="value-item__label">Why it matters</div>
+      <p class="value-item__text">68% of purchases start with a search. If customers can't find you there, they buy from whoever they can find instead.</p>
+    </div>
+    <div class="value-item">
+      <div class="value-item__num">03</div>
+      <div class="value-item__label">What you get</div>
+      <p class="value-item__text">More qualified traffic, more inbound leads, and measurable revenue growth — tracked and reported every month.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CLIENTS -->
+<div class="clients">
+  <div class="clients__top container">
+    <span class="clients__label">Trusted by growing businesses</span>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span class="clients__logo">Meridian</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Vantage</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Helix</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Nexora</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Solaris</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Praximo</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Orbis</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Centex</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Lumera</span><span class="clients__sep">·</span>
+      <!-- duplicate for seamless loop -->
+      <span class="clients__logo">Meridian</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Vantage</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Helix</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Nexora</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Solaris</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Praximo</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Orbis</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Centex</span><span class="clients__sep">·</span>
+      <span class="clients__logo">Lumera</span><span class="clients__sep">·</span>
+    </div>
+  </div>
+</div>
+
+<!-- NUMBERS -->
+<div class="numbers">
+  <div class="container">
+    <div class="numbers__grid">
+      <div class="number-cell reveal">
+        <div class="number-cell__value"><span id="c1">250</span>+</div>
+        <div class="number-cell__label">Businesses helped</div>
+      </div>
+      <div class="number-cell reveal d1">
+        <div class="number-cell__value"><span id="c2">1</span>M+</div>
+        <div class="number-cell__label">Search impressions generated</div>
+      </div>
+      <div class="number-cell reveal d2">
+        <div class="number-cell__value"><span id="c3">98</span>%</div>
+        <div class="number-cell__label">Client retention rate</div>
+      </div>
+      <div class="number-cell reveal d3">
+        <div class="number-cell__value"><span id="c4">1,000</span>+</div>
+        <div class="number-cell__label">Rankings improved</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="services__intro">
+      <div class="reveal">
+        <span class="eyebrow" style="margin-bottom: 18px; display: inline-flex;">Services</span>
+        <h2 class="h2">Everything you need<br>to be found</h2>
+      </div>
+      <div class="reveal d1">
+        <p class="body" style="max-width: 380px;">A complete suite of visibility services designed to put your business in front of the customers already searching for you—on every platform that matters.</p>
+      </div>
+    </div>
+    <div class="services__grid">
+      <div class="svc reveal">
+        <div class="svc__icon">🔍</div>
+        <div class="svc__title">SEO Optimization</div>
+        <div class="svc__desc">Improve your search rankings and drive consistent, high-intent organic traffic that converts into real customers.</div>
+        <div class="svc__outcome">→ Result: more qualified organic traffic, month over month</div>
+        <a href="#" class="svc__link">Learn more →</a>
+      </div>
+      <div class="svc reveal d1">
+        <div class="svc__icon">🤖</div>
+        <div class="svc__title">AI Search Optimization</div>
+        <div class="svc__desc">Get visible in ChatGPT, Gemini, Claude, and Perplexity—the AI tools redefining how people discover businesses.</div>
+        <div class="svc__outcome">→ Result: recommended by AI, not just search engines</div>
+        <a href="#" class="svc__link">Learn more →</a>
+      </div>
+      <div class="svc reveal d2">
+        <div class="svc__icon">📍</div>
+        <div class="svc__title">Local SEO</div>
+        <div class="svc__desc">Dominate local search results and Google Maps so nearby customers find you first—not your competitors.</div>
+        <div class="svc__outcome">→ Result: more calls, visits, and direction requests</div>
+        <a href="#" class="svc__link">Learn more →</a>
+      </div>
+      <div class="svc reveal">
+        <div class="svc__icon">✍️</div>
+        <div class="svc__title">Content Strategy</div>
+        <div class="svc__desc">Create content engineered for discoverability, authority, and engagement that attracts the right audience.</div>
+        <div class="svc__outcome">→ Result: content that ranks and builds lasting authority</div>
+        <a href="#" class="svc__link">Learn more →</a>
+      </div>
+      <div class="svc reveal d1">
+        <div class="svc__icon">⭐</div>
+        <div class="svc__title">Reputation Management</div>
+        <div class="svc__desc">Build trust through strategic review management and online authority building across all platforms.</div>
+        <div class="svc__outcome">→ Result: more 5-star reviews, less reputation risk</div>
+        <a href="#" class="svc__link">Learn more →</a>
+      </div>
+      <div class="svc reveal d2">
+        <div class="svc__icon">📊</div>
+        <div class="svc__title">Digital Presence Audit</div>
+        <div class="svc__desc">A comprehensive analysis of your online visibility, uncovering gaps that are costing you customers and revenue.</div>
+        <div class="svc__outcome">→ Result: a clear roadmap of your biggest visibility gaps</div>
+        <a href="#" class="svc__link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section process" id="process">
+  <div class="container">
+    <div class="process__inner">
+      <div class="reveal">
+        <span class="eyebrow" style="margin-bottom: 18px; display: inline-flex;">How it works</span>
+        <h2 class="h2">A simple process.<br>Powerful results.</h2>
+        <p class="body" style="margin-top: 20px; max-width: 300px;">We keep things clear and focused so you always know where you stand and where you're headed.</p>
+      </div>
+      <div class="process__steps">
+        <div class="step-row reveal d1">
+          <div class="step-row__num">01</div>
+          <div class="step-row__body">
+            <div class="step-row__title">Audit</div>
+            <div class="step-row__desc">We conduct a deep analysis of your current online visibility—identifying exactly where you stand across search engines, AI platforms, maps, and directories.</div>
+          </div>
+        </div>
+        <div class="step-row reveal d2">
+          <div class="step-row__num">02</div>
+          <div class="step-row__body">
+            <div class="step-row__title">Optimize</div>
+            <div class="step-row__desc">We implement strategic improvements across all channels: technical SEO, AI search visibility, local listings, content, and reputation signals.</div>
+          </div>
+        </div>
+        <div class="step-row reveal d3">
+          <div class="step-row__num">03</div>
+          <div class="step-row__body">
+            <div class="step-row__title">Grow</div>
+            <div class="step-row__desc">You generate more organic traffic, qualified leads, and paying customers as your visibility compounds month after month.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIBILITY CHECKER (interactive) -->
+<section class="section checker" id="checker">
+  <div class="container">
+    <div class="checker__intro reveal">
+      <span class="eyebrow" style="justify-content:center;margin-bottom:18px;">Free tool</span>
+      <h2 class="h2" style="text-align:center;">How visible is your business right now?</h2>
+      <p class="body" style="text-align:center;margin-top:14px;">Type your website. Get an instant snapshot of your online visibility and website design — no signup required.</p>
+    </div>
+
+    <div class="checker__box reveal">
+      <form class="checker__form" id="checkerForm">
+        <input type="text" id="checkerInput" class="checker__input" placeholder="yourbusiness.com" autocomplete="off">
+        <button type="submit" class="btn btn--dark btn--lg">Check my visibility</button>
+      </form>
+      <p class="checker__note">Takes 10 seconds. We'll never contact you without permission.</p>
+
+      <div class="checker__scan" id="checkerScan" hidden>
+        <div class="checker__row" data-row>
+          <div class="checker__row-icon">🔍</div>
+          <div style="flex:1;">
+            <div class="checker__row-label">Google Search Visibility</div>
+            <div class="checker__row-finding"></div>
+          </div>
+          <div class="checker__row-status"><span class="checker__spinner"></span></div>
+        </div>
+        <div class="checker__row" data-row>
+          <div class="checker__row-icon">📍</div>
+          <div style="flex:1;">
+            <div class="checker__row-label">Google Maps &amp; Local</div>
+            <div class="checker__row-finding"></div>
+          </div>
+          <div class="checker__row-status"><span class="checker__spinner"></span></div>
+        </div>
+        <div class="checker__row" data-row>
+          <div class="checker__row-icon">🤖</div>
+          <div style="flex:1;">
+            <div class="checker__row-label">AI Search Mentions</div>
+            <div class="checker__row-finding"></div>
+          </div>
+          <div class="checker__row-status"><span class="checker__spinner"></span></div>
+        </div>
+        <div class="checker__row" data-row>
+          <div class="checker__row-icon">⭐</div>
+          <div style="flex:1;">
+            <div class="checker__row-label">Reviews &amp; Reputation</div>
+            <div class="checker__row-finding"></div>
+          </div>
+          <div class="checker__row-status"><span class="checker__spinner"></span></div>
+        </div>
+        <div class="checker__row" data-row>
+          <div class="checker__row-icon">📂</div>
+          <div style="flex:1;">
+            <div class="checker__row-label">Directories &amp; Citations</div>
+            <div class="checker__row-finding"></div>
+          </div>
+          <div class="checker__row-status"><span class="checker__spinner"></span></div>
+        </div>
+        <div class="checker__row" data-row>
+          <div class="checker__row-icon">🎨</div>
+          <div style="flex:1;">
+            <div class="checker__row-label">Website Design &amp; UX</div>
+            <div class="checker__row-finding"></div>
+          </div>
+          <div class="checker__row-status"><span class="checker__spinner"></span></div>
+        </div>
+      </div>
+
+      <div class="checker__result" id="checkerResult" hidden>
+        <div class="checker__result-top">
+          <div class="checker__ring">
+            <svg viewBox="0 0 96 96">
+              <circle cx="48" cy="48" r="42" fill="none" stroke="#EBEBEB" stroke-width="7"/>
+              <circle class="checker__ring-fill" cx="48" cy="48" r="42" fill="none" stroke="#5B5BF7" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
+            </svg>
+            <div class="checker__ring-num">0</div>
+          </div>
+          <div>
+            <div class="checker__result-title">Visibility &amp; design snapshot</div>
+            <div class="checker__result-headline"></div>
+            <div class="checker__result-sub"></div>
+          </div>
+        </div>
+        <div class="checker__breakdown">
+          <div class="checker__bd-row">
+            <div class="checker__bd-head"><span class="checker__bd-name">Google Search</span><span class="checker__bd-score">0</span></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill"></div></div>
+          </div>
+          <div class="checker__bd-row">
+            <div class="checker__bd-head"><span class="checker__bd-name">Google Maps &amp; Local</span><span class="checker__bd-score">0</span></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill"></div></div>
+          </div>
+          <div class="checker__bd-row">
+            <div class="checker__bd-head"><span class="checker__bd-name">AI Search</span><span class="checker__bd-score">0</span></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill"></div></div>
+          </div>
+          <div class="checker__bd-row">
+            <div class="checker__bd-head"><span class="checker__bd-name">Reviews &amp; Reputation</span><span class="checker__bd-score">0</span></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill"></div></div>
+          </div>
+          <div class="checker__bd-row">
+            <div class="checker__bd-head"><span class="checker__bd-name">Directories &amp; Citations</span><span class="checker__bd-score">0</span></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill"></div></div>
+          </div>
+          <div class="checker__bd-row">
+            <div class="checker__bd-head"><span class="checker__bd-name">Website Design &amp; UX</span><span class="checker__bd-score">0</span></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill"></div></div>
+          </div>
+        </div>
+        <div class="checker__leadgen" id="checkerLeadgen">
+          <div class="checker__leadgen-title">Get your full in-depth report</div>
+          <p class="checker__leadgen-sub">We'll email you the complete breakdown plus a personalized action plan — and follow up with next steps to fix the biggest gaps.</p>
+          <form class="checker__leadgen-form" id="leadgenForm">
+            <input type="text" id="leadName" class="checker__input checker__leadgen-email" placeholder="Your name (optional)" autocomplete="name">
+            <input type="email" id="leadEmail" class="checker__input checker__leadgen-email" placeholder="Your email" autocomplete="email" required>
+            <div class="checker__leadgen-grid">
+              <input type="tel" id="leadPhone" class="checker__input" placeholder="Your phone number" autocomplete="tel" required>
+              <button type="submit" class="btn btn--accent" id="leadgenSubmit">Email me the report</button>
+            </div>
+          </form>
+          <p class="checker__leadgen-note">We'll only use this to send your report and discuss next steps. No spam.</p>
+          <div class="checker__leadgen-status" id="leadgenStatus"></div>
+        </div>
+        <div class="checker__again-wrap">
+          <button type="button" class="checker__again" id="checkerAgain">Check another site</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD SHOWCASE -->
+<section class="section showcase" id="dashboard">
+  <div class="container">
+    <div class="showcase__header">
+      <div class="reveal">
+        <span class="eyebrow" style="margin-bottom: 18px; display: inline-flex;">Dashboard</span>
+        <h2 class="h2">Complete visibility.<br>Real-time insights.</h2>
+      </div>
+      <div class="reveal d1">
+        <p class="body">Track every dimension of your online presence in one clear dashboard. No guesswork—just data and decisive action.</p>
+      </div>
+    </div>
+
+    <div class="showcase__window reveal">
+      <div class="showcase__topbar">
+        <div class="ui-dot ui-dot--r"></div>
+        <div class="ui-dot ui-dot--y"></div>
+        <div class="ui-dot ui-dot--g"></div>
+        <span class="ui-window__title" style="margin-left:6px;">FNDLY · Visibility Overview</span>
+      </div>
+      <div class="showcase__body">
+        <!-- Top chart -->
+        <div style="background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:22px;">
+          <div class="sc-header">
+            <div>
+              <div class="sc-title">Organic Traffic</div>
+              <div class="sc-value">48,291</div>
+              <div class="sc-sub">↑ 127% year over year</div>
+            </div>
+            <div class="sc-badge">↑ 127% YoY</div>
+          </div>
+          <div class="sc-chart" style="margin-top:18px;">
+            <svg width="100%" height="88" viewBox="0 0 800 88" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#5B5BF7" stop-opacity="0.12"/>
+                  <stop offset="100%" stop-color="#5B5BF7" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,80 L70,72 L140,65 L210,58 L280,50 L350,40 L420,32 L490,22 L560,14 L630,8 L700,4 L800,1 L800,88 L0,88Z" fill="url(#g1)"/>
+              <path d="M0,80 L70,72 L140,65 L210,58 L280,50 L350,40 L420,32 L490,22 L560,14 L630,8 L700,4 L800,1" fill="none" stroke="#5B5BF7" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Metrics row -->
+        <div class="sc-metrics">
+          <div class="sc-metric">
+            <div class="sc-metric__label">Keywords #1–3</div>
+            <div class="sc-metric__val">142</div>
+            <div class="sc-metric__d">↑ 38 new this month</div>
+          </div>
+          <div class="sc-metric">
+            <div class="sc-metric__label">AI Mentions</div>
+            <div class="sc-metric__val">2,847</div>
+            <div class="sc-metric__d">↑ 4.2× since Jan</div>
+          </div>
+          <div class="sc-metric">
+            <div class="sc-metric__label">Avg. Review</div>
+            <div class="sc-metric__val">4.9 ★</div>
+            <div class="sc-metric__d">↑ 0.3 pts this quarter</div>
+          </div>
+        </div>
+
+        <!-- Bottom two -->
+        <div class="sc-two">
+          <div class="sc-kw">
+            <div class="sc-kw__title">Top rankings</div>
+            <div class="sc-kw-row">
+              <div class="sc-kw-pos">#1</div>
+              <div class="sc-kw-term">online visibility agency</div>
+              <div class="sc-kw-delta">↑6</div>
+            </div>
+            <div class="sc-kw-row">
+              <div class="sc-kw-pos">#2</div>
+              <div class="sc-kw-term">AI search optimization</div>
+              <div class="sc-kw-delta">↑12</div>
+            </div>
+            <div class="sc-kw-row">
+              <div class="sc-kw-pos">#1</div>
+              <div class="sc-kw-term">local SEO Netherlands</div>
+              <div class="sc-kw-delta">↑9</div>
+            </div>
+            <div class="sc-kw-row">
+              <div class="sc-kw-pos">#3</div>
+              <div class="sc-kw-term">reputation management</div>
+              <div class="sc-kw-delta">↑3</div>
+            </div>
+          </div>
+          <div class="sc-vis">
+            <div class="sc-vis__title">Platform visibility</div>
+            <div class="sc-vis-item">
+              <div class="sc-vis-row"><span class="sc-vis-name">Google Search</span><span class="sc-vis-score">92</span></div>
+              <div class="sc-vis-bar"><div class="sc-vis-fill" style="width:92%"></div></div>
+            </div>
+            <div class="sc-vis-item">
+              <div class="sc-vis-row"><span class="sc-vis-name">Google Maps</span><span class="sc-vis-score">87</span></div>
+              <div class="sc-vis-bar"><div class="sc-vis-fill" style="width:87%;background:#16A34A;opacity:0.7"></div></div>
+            </div>
+            <div class="sc-vis-item">
+              <div class="sc-vis-row"><span class="sc-vis-name">AI Search (ChatGPT)</span><span class="sc-vis-score">71</span></div>
+              <div class="sc-vis-bar"><div class="sc-vis-fill" style="width:71%;background:#2563EB;opacity:0.7"></div></div>
+            </div>
+            <div class="sc-vis-item">
+              <div class="sc-vis-row"><span class="sc-vis-name">Directories & Citations</span><span class="sc-vis-score">84</span></div>
+              <div class="sc-vis-bar"><div class="sc-vis-fill" style="width:84%;background:#D97706;opacity:0.7"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY FNDLY -->
+<section class="section why" id="about">
+  <div class="container">
+    <div class="why__inner">
+      <div>
+        <span class="eyebrow reveal" style="margin-bottom: 18px; display: inline-flex;">Why FNDLY</span>
+        <h2 class="h2 reveal">Visibility is the new competitive advantage</h2>
+        <p class="body reveal" style="margin-top: 20px;">Businesses no longer compete only on product quality or pricing. Today, they compete on discoverability.</p>
+        <p class="body reveal" style="margin-top: 14px;">The businesses easiest to find are the ones that win. FNDLY helps companies become visible where modern customers search—Google, AI tools, maps, and beyond.</p>
+        <p class="body reveal" style="margin-top: 14px; color: var(--ink); font-weight: 600;">If your customers can't find you, they can't buy from you.</p>
+        <div style="margin-top: 32px;" class="reveal d1">
+          <a href="#contact" class="btn btn--dark btn--lg">Start growing today
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="why__cards reveal d2">
+        <div class="why-card">
+          <div class="why-card__num">68%</div>
+          <div class="why-card__label">of online journeys start with a search</div>
+        </div>
+        <div class="why-card">
+          <div class="why-card__num">3.5B</div>
+          <div class="why-card__label">Google searches happen every single day</div>
+        </div>
+        <div class="why-card">
+          <div class="why-card__num">76%</div>
+          <div class="why-card__label">of local searches lead to a visit within 24 hrs</div>
+        </div>
+        <div class="why-card">
+          <div class="why-card__num">93%</div>
+          <div class="why-card__label">of consumers read reviews before buying</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing" id="pricing">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:0;">
+      <div class="reveal">
+        <span class="eyebrow" style="margin-bottom:18px;display:inline-flex;">Pricing</span>
+        <h2 class="h2">Choose your<br>growth plan</h2>
+      </div>
+      <div class="reveal d1">
+        <p class="body">Transparent pricing. No hidden fees. Cancel any time. All plans include a dedicated point of contact.</p>
+      </div>
+    </div>
+    <div class="pricing__grid">
+      <div class="plan reveal">
+        <div class="plan__tier">Starter</div>
+        <div class="plan__price">Custom</div>
+        <div class="plan__note">Tailored to your business</div>
+        <div class="plan__hr"></div>
+        <ul class="plan__features">
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Visibility Audit</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>SEO Health Check</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Local Listings Review</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Competitor Analysis</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Action Plan Report</li>
+        </ul>
+        <a href="#contact" class="btn btn--outline">Get started</a>
+      </div>
+      <div class="plan plan--featured reveal d1">
+        <div class="plan__chip">Most popular</div>
+        <div class="plan__tier">Growth</div>
+        <div class="plan__price" style="color:#fff">Custom</div>
+        <div class="plan__note">Tailored to your business</div>
+        <div class="plan__hr"></div>
+        <ul class="plan__features">
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Everything in Starter</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>SEO Optimization</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>AI Search Optimization</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Content Strategy</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Monthly Reporting</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Priority Support</li>
+        </ul>
+        <a href="#contact" class="btn btn--accent">Book a strategy call</a>
+      </div>
+      <div class="plan reveal d2">
+        <div class="plan__tier">Scale</div>
+        <div class="plan__price">Custom</div>
+        <div class="plan__note">For ambitious growth goals</div>
+        <div class="plan__hr"></div>
+        <ul class="plan__features">
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Everything in Growth</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Reputation Management</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Full Content Strategy</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Dedicated Specialist</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Weekly Check-ins</li>
+          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Custom Integrations</li>
+        </ul>
+        <a href="#contact" class="btn btn--dark">Contact us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq">
+  <div class="container">
+    <div class="faq__inner">
+      <div class="reveal">
+        <span class="eyebrow" style="margin-bottom:18px;display:inline-flex;">FAQ</span>
+        <h2 class="h2">Common questions</h2>
+        <p class="body" style="margin-top:16px;">Still have questions? <a href="#contact" style="color:var(--ink);font-weight:600;">Reach out</a> and we'll get back to you within one business day.</p>
+      </div>
+      <div class="faq__list reveal d1">
+        <details class="faq-q">
+          <summary class="faq-q__trigger">What is AI Search Optimization? <div class="faq-q__icon">+</div></summary>
+          <div class="faq-q__body">AI Search Optimization ensures your business appears and is recommended by AI tools like ChatGPT, Gemini, Claude, and Perplexity. As more people use AI to find products and services, being visible in these systems is essential. We optimize your digital footprint so AI models understand and recommend your business accurately.</div>
+        </details>
+        <details class="faq-q">
+          <summary class="faq-q__trigger">How long does SEO take to show results? <div class="faq-q__icon">+</div></summary>
+          <div class="faq-q__body">Most clients see meaningful movement in rankings within 60–90 days, with significant traffic growth apparent within 4–6 months. The timeline depends on your current visibility, competition, and services implemented. We provide monthly reports so you always see what's happening.</div>
+        </details>
+        <details class="faq-q">
+          <summary class="faq-q__trigger">Can you improve my local search rankings? <div class="faq-q__icon">+</div></summary>
+          <div class="faq-q__body">Absolutely. Local SEO is one of our core specialties. We optimize your Google Business Profile, build consistent citations across directories, manage reviews, and implement geo-targeted content strategies. Many clients reach the Google Maps top 3 within a few months.</div>
+        </details>
+        <details class="faq-q">
+          <summary class="faq-q__trigger">What platforms do you optimize for? <div class="faq-q__icon">+</div></summary>
+          <div class="faq-q__body">We optimize across Google Search, Google Maps, Bing, AI search tools (ChatGPT, Gemini, Perplexity, Claude), online directories, social media, and review platforms. Our goal is to maximize your presence everywhere your potential customers search.</div>
+        </details>
+        <details class="faq-q">
+          <summary class="faq-q__trigger">How does the free audit work? <div class="faq-q__icon">+</div></summary>
+          <div class="faq-q__body">Book a strategy call and we'll conduct a comprehensive visibility audit covering your website's SEO health, local presence, AI search visibility, review profile, and competitor landscape. You'll receive a clear report with your highest-impact opportunities—whether you become a client or not.</div>
+        </details>
+        <details class="faq-q">
+          <summary class="faq-q__trigger">Do you offer monthly retainer services? <div class="faq-q__icon">+</div></summary>
+          <div class="faq-q__body">Yes. Our Growth and Scale plans are ongoing monthly services. SEO and AI search optimization require sustained effort to maintain and improve rankings. We work as an extension of your team—continuously optimizing, reporting, and adapting as search landscapes evolve.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <span class="eyebrow cta-section__eyebrow">Ready to grow?</span>
+    <h2 class="h2 cta-section__title">
+      <div class="line-wrap"><span class="line">Ready to become</span></div>
+      <div class="line-wrap"><span class="line"><em>impossible to ignore?</em></span></div>
+    </h2>
+    <p class="cta-section__sub reveal">Book a free strategy call and discover exactly where your business is missing visibility opportunities—and how we'll capture them.</p>
+    <div class="reveal">
+      <a href="mailto:hello@fndly.nl" class="btn btn--accent btn--lg" style="font-size:16px;padding:18px 36px;">
+        Book your free strategy call
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <p class="cta-section__note">No commitment. No credit card. Just clarity.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="#" class="footer__logo">
+          <div class="footer__logo-mark">F</div>
+          FNDLY
+        </a>
+        <p class="footer__blurb">Findability Made Simple. We help businesses get found by the customers already searching for them.</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__s" aria-label="LinkedIn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="footer__s" aria-label="X">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="footer__s" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer__col-h">Company</div>
+        <ul class="footer__links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Partners</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-h">Services</div>
+        <ul class="footer__links">
+          <li><a href="#services">SEO</a></li>
+          <li><a href="#services">AI Search</a></li>
+          <li><a href="#services">Local SEO</a></li>
+          <li><a href="#services">Content</a></li>
+          <li><a href="#services">Reputation</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-h">Resources</div>
+        <ul class="footer__links">
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Case Studies</a></li>
+          <li><a href="#">Guides</a></li>
+          <li><a href="#">Visibility Report</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-h">Legal</div>
+        <ul class="footer__links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2025 FNDLY.nl — All rights reserved.</span>
+      <div class="footer__bl">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── LENIS ── */
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+  });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(time => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  /* ── NAVBAR ── */
+  const nav = document.getElementById('nav');
+  lenis.on('scroll', ({ scroll }) => nav.classList.toggle('scrolled', scroll > 16));
+
+  /* ── COUNTER HELPER ── */
+  function countUp(id, to, delay) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: to, duration: 1.9, delay: delay || 0, ease: 'power2.out',
+      onUpdate: () => { el.textContent = Math.round(obj.val).toLocaleString(); }
+    });
+  }
+
+  /* ── HERO (load timeline) ── */
+  gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.1 })
+    .from('.hero__tag',         { opacity: 0, y: 12, duration: 0.65 })
+    .from('.hero__title .line', { y: '105%', duration: 1.0, stagger: 0.15 }, '-=0.38')
+    .from('.hero__subtitle',    { opacity: 0, y: 20, duration: 0.85 }, '-=0.62')
+    .from('.hero__cta > *',     { opacity: 0, y: 14, stagger: 0.1, duration: 0.65 }, '-=0.5')
+    .from('.hero__proof',       { opacity: 0, y: 10, duration: 0.55 }, '-=0.4')
+    .from('.hero__visual',      { opacity: 0, y: 44, duration: 1.2, ease: 'power2.out' }, 0.35)
+    .from('.chip--a',           { opacity: 0, y: -16, duration: 0.55, ease: 'power2.out' }, '-=0.45')
+    .from('.chip--b',           { opacity: 0, y: 16, duration: 0.55, ease: 'power2.out' }, '-=0.35');
+
+  gsap.from('.ui-bar', {
+    scaleY: 0, transformOrigin: 'bottom center',
+    duration: 0.5, stagger: 0.04, ease: 'power2.out', delay: 1.3
+  });
+  countUp('score-counter', 87, 1.3);
+  countUp('ai-counter', 142, 1.45);
+
+  /* ── HERO PARALLAX (scrubbed) ── */
+  gsap.to('.hero__visual', {
+    yPercent: -14, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
+  });
+
+  /* ── VALUE BAND ── */
+  gsap.from('.value-item', {
+    opacity: 0, y: 22, stagger: 0.12, duration: 0.8, ease: 'power2.out',
+    scrollTrigger: { trigger: '.value-band', start: 'top 85%', once: true }
+  });
+
+  /* ── NUMBERS ── */
+  gsap.from('.number-cell', {
+    opacity: 0, y: 28, stagger: 0.1, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.numbers__grid', start: 'top 82%', once: true,
+      onEnter: () => { countUp('c1', 250); countUp('c3', 98); }
+    }
+  });
+
+  /* ── SERVICES ── */
+  gsap.from('.services__intro > *', {
+    opacity: 0, y: 24, stagger: 0.14, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: { trigger: '.services__intro', start: 'top 82%', once: true }
+  });
+  gsap.from('.svc', {
+    opacity: 0, y: 28, stagger: { amount: 0.5 }, duration: 0.8, ease: 'power2.out',
+    scrollTrigger: { trigger: '.services__grid', start: 'top 82%', once: true }
+  });
+
+  /* ── PROCESS ── */
+  gsap.from('.process__inner > :first-child > *', {
+    opacity: 0, y: 24, stagger: 0.12, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: { trigger: '.process__inner', start: 'top 82%', once: true }
+  });
+  gsap.from('.step-row', {
+    opacity: 0, x: -24, stagger: 0.16, duration: 0.8, ease: 'power2.out',
+    scrollTrigger: { trigger: '.process__steps', start: 'top 80%', once: true }
+  });
+
+  /* ── VISIBILITY CHECKER (interactive) ── */
+  gsap.from('.checker__intro, .checker__box', {
+    opacity: 0, y: 24, stagger: 0.12, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: { trigger: '.checker', start: 'top 82%', once: true }
+  });
+
+  (function () {
+    const form = document.getElementById('checkerForm');
+    const input = document.getElementById('checkerInput');
+    const scan = document.getElementById('checkerScan');
+    const result = document.getElementById('checkerResult');
+    const again = document.getElementById('checkerAgain');
+    const rows = scan.querySelectorAll('.checker__row');
+    const bdRows = result.querySelectorAll('.checker__bd-row');
+    const leadgen = document.getElementById('checkerLeadgen');
+    const leadgenForm = document.getElementById('leadgenForm');
+    const leadgenSubmit = document.getElementById('leadgenSubmit');
+    const leadgenStatus = document.getElementById('leadgenStatus');
+    let currentReport = null;
+
+    const FINDINGS = [
+      ['Ranking outside the top 10 for key terms', 'Strong page-1 presence, room to grow', 'Missing meta data on key pages'],
+      ['Incomplete Google Business Profile', 'Inconsistent address listings found', 'Missing service-area details'],
+      ['Not yet appearing in AI recommendations', 'Limited structured data for AI crawlers', 'Low topical authority signals'],
+      ['Review volume below local competitors', 'Response rate could be improved', 'Strong rating, but low visibility'],
+      ['Several key directories missing', 'Inconsistent business info detected', 'Citation profile mostly complete'],
+      ['Design feels dated compared to competitors', 'Slow load times are hurting the experience', 'Clean look, but navigation could be clearer'],
+    ];
+
+    function hashString(str) {
+      let h = 0;
+      for (let i = 0; i < str.length; i++) { h = (h * 31 + str.charCodeAt(i)) >>> 0; }
+      return h;
+    }
+
+    function animateNumber(el, to, duration) {
+      const obj = { val: 0 };
+      gsap.to(obj, { val: to, duration, ease: 'power2.out', onUpdate: () => { el.textContent = Math.round(obj.val); } });
+    }
+
+    function resetRows() {
+      rows.forEach(r => {
+        r.classList.remove('active', 'done');
+        r.querySelector('.checker__row-status').innerHTML = '<span class="checker__spinner"></span>';
+        r.querySelector('.checker__row-finding').textContent = '';
+      });
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const val = input.value.trim() || 'yourbusiness.com';
+      const seed = hashString(val.toLowerCase());
+
+      result.hidden = true;
+      resetRows();
+      leadgenForm.reset();
+      leadgen.removeAttribute('data-sent');
+      leadgenSubmit.disabled = false;
+      leadgenSubmit.textContent = 'Email me the report';
+      leadgenStatus.className = 'checker__leadgen-status';
+      leadgenStatus.textContent = '';
+      scan.hidden = false;
+      scan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      const subScores = [];
+      rows.forEach((row, i) => {
+        setTimeout(() => { row.classList.add('active'); }, i * 480);
+        setTimeout(() => {
+          row.classList.remove('active');
+          row.classList.add('done');
+          row.querySelector('.checker__row-status').innerHTML = '<span class="checker__check">✓</span>';
+          const options = FINDINGS[i];
+          row.querySelector('.checker__row-finding').textContent = options[(seed + i * 7) % options.length];
+          subScores[i] = 28 + ((seed >> (i * 4)) % 50);
+        }, i * 480 + 420);
+      });
+
+      setTimeout(() => {
+        scan.hidden = true;
+        showResult(val, subScores);
+      }, rows.length * 480 + 600);
+    });
+
+    function showResult(domain, subScores) {
+      const overall = Math.round(subScores.reduce((a, b) => a + b, 0) / subScores.length);
+      result.hidden = false;
+
+      const ring = result.querySelector('.checker__ring-fill');
+      const circumference = 2 * Math.PI * 42;
+      const offset = circumference - (overall / 100) * circumference;
+      gsap.fromTo(ring, { strokeDashoffset: circumference }, { strokeDashoffset: offset, duration: 1.2, ease: 'power2.out' });
+      animateNumber(result.querySelector('.checker__ring-num'), overall, 1.2);
+
+      result.querySelector('.checker__result-headline').textContent = `${domain} scores ${overall}/100`;
+      result.querySelector('.checker__result-sub').textContent = overall < 60
+        ? `There's significant visibility and design opportunity being left on the table — businesses in this range are losing customers to competitors who simply show up first and look more credible.`
+        : `A solid foundation, but there are still clear gaps in visibility and design holding back your full potential.`;
+
+      const breakdown = [];
+      bdRows.forEach((r, i) => {
+        const score = subScores[i];
+        const name = r.querySelector('.checker__bd-name').textContent;
+        r.querySelector('.checker__bd-score').textContent = score;
+        const fill = r.querySelector('.checker__bd-fill');
+        gsap.set(fill, { scaleX: 0 });
+        gsap.to(fill, { scaleX: score / 100, duration: 1, delay: i * 0.12, ease: 'power2.out' });
+        breakdown.push({ name, score });
+      });
+
+      currentReport = { domain, overall, breakdown };
+      result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    leadgenForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!currentReport) return;
+
+      const name = document.getElementById('leadName').value.trim();
+      const email = document.getElementById('leadEmail').value.trim();
+      const phone = document.getElementById('leadPhone').value.trim();
+
+      leadgenSubmit.disabled = true;
+      leadgenSubmit.textContent = 'Sending…';
+      leadgenStatus.className = 'checker__leadgen-status show';
+      leadgenStatus.textContent = '';
+
+      try {
+        const res = await fetch('/api/send-report', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, phone, ...currentReport }),
+        });
+        if (!res.ok) throw new Error('request failed');
+
+        leadgen.setAttribute('data-sent', 'true');
+        leadgenStatus.className = 'checker__leadgen-status show success';
+        leadgenStatus.textContent = `Report sent! Check ${email} — we'll be in touch shortly.`;
+      } catch (err) {
+        leadgenSubmit.disabled = false;
+        leadgenSubmit.textContent = 'Email me the report';
+        leadgenStatus.className = 'checker__leadgen-status show error';
+        leadgenStatus.textContent = "Something went wrong sending your report. Please try again.";
+      }
+    });
+
+    again.addEventListener('click', () => {
+      result.hidden = true;
+      form.reset();
+      leadgenForm.reset();
+      leadgen.removeAttribute('data-sent');
+      leadgenSubmit.disabled = false;
+      leadgenSubmit.textContent = 'Email me the report';
+      leadgenStatus.className = 'checker__leadgen-status';
+      leadgenStatus.textContent = '';
+      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  })();
+
+  /* ── SHOWCASE ── */
+  gsap.from('.showcase__header > *', {
+    opacity: 0, y: 24, stagger: 0.14, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: { trigger: '.showcase__header', start: 'top 82%', once: true }
+  });
+  gsap.from('.showcase__window', {
+    opacity: 0, y: 52, scale: 0.975, duration: 1.1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.showcase__window', start: 'top 84%', once: true }
+  });
+  const chartPath = document.querySelector('.sc-chart path[stroke="#5B5BF7"]');
+  if (chartPath) {
+    const len = chartPath.getTotalLength();
+    gsap.set(chartPath, { strokeDasharray: len, strokeDashoffset: len });
+    gsap.to(chartPath, {
+      strokeDashoffset: 0, duration: 2.2, ease: 'power2.inOut',
+      scrollTrigger: { trigger: '.showcase__window', start: 'top 74%', once: true }
+    });
+  }
+  gsap.set('.sc-vis-fill', { scaleX: 0, transformOrigin: 'left center' });
+  gsap.to('.sc-vis-fill', {
+    scaleX: 1, duration: 1.2, stagger: 0.18, ease: 'power2.out',
+    scrollTrigger: { trigger: '.sc-vis', start: 'top 78%', once: true }
+  });
+  gsap.from('.sc-metric', {
+    opacity: 0, y: 18, stagger: 0.1, duration: 0.65, ease: 'power2.out',
+    scrollTrigger: { trigger: '.sc-metrics', start: 'top 78%', once: true }
+  });
+  gsap.from('.sc-kw-row', {
+    opacity: 0, x: -14, stagger: 0.09, duration: 0.55, ease: 'power2.out',
+    scrollTrigger: { trigger: '.sc-kw', start: 'top 78%', once: true }
+  });
+
+  /* ── WHY ── */
+  gsap.from('.why__inner > :first-child > *', {
+    opacity: 0, y: 22, stagger: 0.12, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: { trigger: '.why__inner', start: 'top 82%', once: true }
+  });
+  gsap.from('.why-card', {
+    opacity: 0, y: 22, stagger: 0.1, duration: 0.7, ease: 'power2.out',
+    scrollTrigger: { trigger: '.why__cards', start: 'top 82%', once: true }
+  });
+
+  /* ── PRICING ── */
+  gsap.from('.pricing .container > div:first-child > *', {
+    opacity: 0, y: 22, stagger: 0.12, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: { trigger: '.pricing', start: 'top 82%', once: true }
+  });
+  gsap.from('.plan', {
+    opacity: 0, y: 32, stagger: 0.13, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: { trigger: '.pricing__grid', start: 'top 82%', once: true }
+  });
+
+  /* ── FAQ ── */
+  gsap.from('.faq__inner > :first-child > *', {
+    opacity: 0, y: 22, stagger: 0.12, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: { trigger: '.faq__inner', start: 'top 82%', once: true }
+  });
+  gsap.from('.faq-q', {
+    opacity: 0, y: 14, stagger: 0.08, duration: 0.6, ease: 'power2.out',
+    scrollTrigger: { trigger: '.faq__list', start: 'top 82%', once: true }
+  });
+
+  /* ── CTA ── */
+  gsap.from('.cta-section .eyebrow', {
+    opacity: 0, y: 14, duration: 0.75, ease: 'power2.out',
+    scrollTrigger: { trigger: '.cta-section', start: 'top 76%', once: true }
+  });
+  gsap.from('.cta-section .h2 .line', {
+    y: '105%', duration: 1.05, stagger: 0.15, ease: 'power3.out',
+    scrollTrigger: { trigger: '.cta-section', start: 'top 72%', once: true }
+  });
+  gsap.from('.cta-section__sub, .cta-section .btn, .cta-section__note', {
+    opacity: 0, y: 22, stagger: 0.1, duration: 0.75, ease: 'power2.out',
+    scrollTrigger: { trigger: '.cta-section', start: 'top 68%', once: true }
+  });
+
+  /* ── SMOOTH SCROLL ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -72 }); }
+    });
+  });
+</script>
+</body>
+</html>

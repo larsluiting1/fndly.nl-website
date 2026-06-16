@@ -1,0 +1,7 @@
+{
+  "name": "fndly-website",
+  "private": true,
+  "engines": {
+    "node": "18.x"
+  }
+}
