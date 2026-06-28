@@ -1475,52 +1475,53 @@
 
     </div>
 
-    <!-- CREDIT CALCULATOR -->
+    <!-- FNDLY CREDITS -->
     <div class="credits reveal">
-      <div class="credits__inner">
-        <div class="credits__header">
-          <div>
-            <div class="credits__title">Credit Calculator</div>
-            <div class="credits__desc">Plan your monthly improvements. Pick tasks, adjust quantities, and see which plan fits your needs.</div>
-          </div>
-          <div class="credits__total-wrap">
-            <div class="credits__total-label">Credits needed</div>
-            <div class="credits__total-num" id="creditTotal">0</div>
-            <div class="credits__total-plan" id="creditPlan" style="color: var(--success);">Covered by Starter</div>
-          </div>
-        </div>
+      <div class="credits__inner" style="text-align: center;">
+        <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(79,70,229,0.06); border: 1px solid rgba(79,70,229,0.1); border-radius: 100px; padding: 4px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 18px;">⚡ FNDLY Credits</div>
+        <div class="credits__title" style="font-size: 22px; margin-bottom: 8px;">Your website, always evolving</div>
+        <div class="credits__desc" style="max-width: 520px; margin: 0 auto 32px; text-align: center;">Every plan includes monthly credits you can use to make changes, improvements, and additions to your website — whenever you want. Use them as you go, or stack them up for up to 3 months to make bigger updates all at once.</div>
 
-        <div class="credits__add">
-          <select class="credits__select" id="creditSelect">
-            <option value="" disabled selected>Select a task to add...</option>
-            <option value="text|10">Update existing text — 10 credits</option>
-            <option value="image|10">Replace an image — 10 credits</option>
-            <option value="blog|25">Publish AI-generated blog post — 25 credits</option>
-            <option value="section|25">Add a new section — 25 credits</option>
-            <option value="form|30">New contact form — 30 credits</option>
-            <option value="landing|75">Create a new landing page — 75 credits</option>
-          </select>
-          <button class="credits__add-btn" id="creditAddBtn">+ Add task</button>
-        </div>
-
-        <div class="credits__list" id="creditList">
-          <div class="credits__empty">Add tasks above to calculate your monthly credit usage</div>
-        </div>
-
-        <!-- Gauge -->
-        <div class="credits__gauge">
-          <div class="credits__gauge-bar">
-            <div class="credits__gauge-fill" id="creditGauge" style="width: 0%"></div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px;">
+          <div style="padding: 20px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center;">
+            <div style="font-size: 28px; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); line-height: 1;">100</div>
+            <div style="font-size: 12px; color: var(--ink-muted); margin-top: 4px;">credits / month</div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px;">Starter</div>
           </div>
-          <div class="credits__gauge-markers">
-            <div class="credits__gauge-mark">0</div>
-            <div class="credits__gauge-mark" style="position:absolute;left:20%;">100 <span>Starter</span></div>
-            <div class="credits__gauge-mark" style="position:absolute;left:50%;">250 <span>Growth</span></div>
-            <div class="credits__gauge-mark" style="position:absolute;left:100%;">500 <span>Scale</span></div>
+          <div style="padding: 20px; background: var(--bg-dark); border: 1px solid var(--bg-dark); border-radius: var(--radius-lg); text-align: center;">
+            <div style="font-size: 28px; font-weight: 800; letter-spacing: -0.04em; color: #fff; line-height: 1;">250</div>
+            <div style="font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px;">credits / month</div>
+            <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px;">Growth</div>
+          </div>
+          <div style="padding: 20px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center;">
+            <div style="font-size: 28px; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); line-height: 1;">500</div>
+            <div style="font-size: 12px; color: var(--ink-muted); margin-top: 4px;">credits / month</div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px;">Scale</div>
           </div>
         </div>
 
-        <div class="credits__rollover">Credits roll over for up to 3 months — save them for bigger improvements when you need them.</div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; text-align: left; margin-bottom: 28px;">
+          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink-soft);">
+            <span style="font-weight: 800; color: var(--ink); min-width: 28px;">10</span> Update text
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink-soft);">
+            <span style="font-weight: 800; color: var(--ink); min-width: 28px;">10</span> Replace image
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink-soft);">
+            <span style="font-weight: 800; color: var(--ink); min-width: 28px;">25</span> New blog post
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink-soft);">
+            <span style="font-weight: 800; color: var(--ink); min-width: 28px;">25</span> Add section
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink-soft);">
+            <span style="font-weight: 800; color: var(--ink); min-width: 28px;">30</span> Contact form
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink-soft);">
+            <span style="font-weight: 800; color: var(--ink); min-width: 28px;">75</span> Landing page
+          </div>
+        </div>
+
+        <div class="credits__rollover" style="max-width: 480px; margin: 0 auto;">Unused credits roll over for up to 3 months — stack them up for bigger improvements whenever you're ready.</div>
       </div>
     </div>
 
@@ -1983,101 +1984,6 @@
     opacity: 0, y: 22, stagger: 0.1, duration: 0.75, ease: 'power2.out',
     scrollTrigger: { trigger: '.cta-section', start: 'top 68%', once: true }
   });
-
-  /* ── CREDIT CALCULATOR ── */
-  (function () {
-    const TASKS = {
-      text:    { name: 'Update existing text', cost: 10 },
-      image:   { name: 'Replace an image', cost: 10 },
-      blog:    { name: 'AI-generated blog post', cost: 25 },
-      section: { name: 'Add a new section', cost: 25 },
-      form:    { name: 'New contact form', cost: 30 },
-      landing: { name: 'New landing page', cost: 75 },
-    };
-    const PLANS = [
-      { name: 'Starter', credits: 100, color: 'var(--success)' },
-      { name: 'Growth',  credits: 250, color: 'var(--accent)' },
-      { name: 'Scale',   credits: 500, color: 'var(--violet)' },
-    ];
-
-    const list = document.getElementById('creditList');
-    const totalEl = document.getElementById('creditTotal');
-    const planEl = document.getElementById('creditPlan');
-    const gauge = document.getElementById('creditGauge');
-    const select = document.getElementById('creditSelect');
-    const addBtn = document.getElementById('creditAddBtn');
-    let items = [];
-
-    function render() {
-      const total = items.reduce((s, i) => s + i.cost * i.qty, 0);
-      totalEl.textContent = total;
-
-      let plan = PLANS[2];
-      for (const p of PLANS) { if (total <= p.credits) { plan = p; break; } }
-      if (total === 0) {
-        planEl.textContent = 'Covered by Starter';
-        planEl.style.color = PLANS[0].color;
-      } else if (total > 500) {
-        planEl.textContent = 'Exceeds Scale — credits roll over!';
-        planEl.style.color = 'var(--warning)';
-      } else {
-        planEl.textContent = 'Fits the ' + plan.name + ' plan';
-        planEl.style.color = plan.color;
-      }
-      totalEl.style.color = total > 500 ? 'var(--warning)' : 'var(--ink)';
-
-      const pct = Math.min((total / 500) * 100, 100);
-      gauge.style.width = pct + '%';
-
-      if (items.length === 0) {
-        list.innerHTML = '<div class="credits__empty">Add tasks above to calculate your monthly credit usage</div>';
-        return;
-      }
-
-      list.innerHTML = items.map((item, idx) => `
-        <div class="credits__item" data-idx="${idx}">
-          <div class="credits__item-name">${item.name}</div>
-          <div class="credits__item-cost">${item.cost} ea</div>
-          <div class="credits__qty">
-            <button class="credits__qty-btn" data-action="dec" data-idx="${idx}">−</button>
-            <span class="credits__qty-val">${item.qty}</span>
-            <button class="credits__qty-btn" data-action="inc" data-idx="${idx}">+</button>
-          </div>
-          <div class="credits__item-subtotal">${item.cost * item.qty}</div>
-          <button class="credits__item-remove" data-action="remove" data-idx="${idx}">×</button>
-        </div>
-      `).join('');
-    }
-
-    addBtn.addEventListener('click', () => {
-      const val = select.value;
-      if (!val) return;
-      const [key] = val.split('|');
-      const task = TASKS[key];
-      const existing = items.find(i => i.key === key);
-      if (existing) { existing.qty++; }
-      else { items.push({ key, name: task.name, cost: task.cost, qty: 1 }); }
-      select.value = '';
-      render();
-    });
-
-    select.addEventListener('change', () => {
-      if (select.value) addBtn.click();
-    });
-
-    list.addEventListener('click', e => {
-      const btn = e.target.closest('[data-action]');
-      if (!btn) return;
-      const idx = parseInt(btn.dataset.idx);
-      const action = btn.dataset.action;
-      if (action === 'inc') items[idx].qty++;
-      else if (action === 'dec') { items[idx].qty--; if (items[idx].qty < 1) items.splice(idx, 1); }
-      else if (action === 'remove') items.splice(idx, 1);
-      render();
-    });
-
-    render();
-  })();
 
   /* ── SMOOTH SCROLL ── */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
