@@ -18,12 +18,14 @@
       --ink-faint: #BBBBBB;
       --bg: #FFFFFF;
       --bg-soft: #F7F7F5;
-      --bg-dark: #0F0F0F;
-      --bg-dark-2: #161616;
-      --accent: #5B5BF7;
+      --bg-dark: #0B0B0E;
+      --bg-dark-2: #131316;
+      --accent: #4F46E5;
+      --accent-2: #B6FF3C;
+      --accent-2-ink: #1A2B00;
       --border: #E8E8E5;
       --border-dark: rgba(255,255,255,0.09);
-      --success: #16A34A;
+      --success: #65A30D;
       --radius: 10px;
       --radius-lg: 16px;
       --radius-xl: 24px;
@@ -32,7 +34,7 @@
     html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
 
-    ::selection { background: rgba(91,91,247,0.12); }
+    ::selection { background: rgba(79,70,229,0.12); }
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
 
@@ -111,6 +113,18 @@
     .nav__links a:hover { color: var(--ink); background: var(--bg-soft); }
     .nav__actions { display: flex; align-items: center; gap: 10px; margin-left: 24px; }
     @media (max-width: 768px) { .nav__links { display: none; } }
+
+    /* ── SCROLL PROGRESS ── */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 101;
+      height: 3px; background: transparent; pointer-events: none;
+    }
+    .scroll-progress__bar {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 0 2px 2px 0;
+      transition: width 0.08s linear;
+    }
 
     /* ── HERO ── */
     .hero {
@@ -191,7 +205,7 @@
     .ui-score-info { flex: 1; }
     .ui-score-title { font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; }
     .ui-score-desc { font-size: 13px; font-weight: 600; color: var(--ink); margin-top: 2px; }
-    .ui-score-tag { font-size: 11px; font-weight: 700; color: var(--success); background: rgba(22,163,74,0.08); padding: 3px 9px; border-radius: 100px; border: 1px solid rgba(22,163,74,0.15); }
+    .ui-score-tag { font-size: 11px; font-weight: 700; color: var(--success); background: rgba(101,163,13,0.08); padding: 3px 9px; border-radius: 100px; border: 1px solid rgba(101,163,13,0.15); }
 
     /* Floating chips */
     .chip {
@@ -248,10 +262,15 @@
     }
     .svc:hover { background: var(--bg-soft); }
     .svc__icon {
-      width: 40px; height: 40px; margin-bottom: 20px;
+      width: 42px; height: 42px; margin-bottom: 20px;
       display: flex; align-items: center; justify-content: center;
       font-size: 20px;
     }
+    .svc__icon--cobalt { color: #4F46E5; background: rgba(79,70,229,0.10); }
+    .svc__icon--cyan   { color: #06B6D4; background: rgba(6,182,212,0.12); }
+    .svc__icon--lime   { color: #65A30D; background: rgba(182,255,60,0.18); }
+    .svc__icon--violet { color: #7C3AED; background: rgba(124,58,237,0.10); }
+    .svc__icon--amber  { color: #D97706; background: rgba(245,158,11,0.12); }
     .svc__title { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.02em; }
     .svc__desc { font-size: 14px; color: var(--ink-soft); line-height: 1.72; margin-bottom: 14px; }
     .svc__outcome { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 18px; }
@@ -296,7 +315,7 @@
     .sc-title { font-size: 11px; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.06em; }
     .sc-value { font-size: 38px; font-weight: 800; color: var(--ink); letter-spacing: -0.05em; line-height: 1; margin-top: 6px; }
     .sc-sub { font-size: 13px; color: var(--success); font-weight: 600; margin-top: 4px; }
-    .sc-badge { font-size: 12px; font-weight: 700; color: var(--success); background: rgba(22,163,74,0.08); padding: 5px 12px; border-radius: 100px; border: 1px solid rgba(22,163,74,0.15); }
+    .sc-badge { font-size: 12px; font-weight: 700; color: var(--success); background: rgba(101,163,13,0.08); padding: 5px 12px; border-radius: 100px; border: 1px solid rgba(101,163,13,0.15); }
     .sc-chart { height: 88px; position: relative; }
     .sc-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
     .sc-metric { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
@@ -308,7 +327,7 @@
     .sc-kw__title { font-size: 11px; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
     .sc-kw-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
     .sc-kw-row:last-child { border: none; padding-bottom: 0; }
-    .sc-kw-pos { width: 24px; height: 24px; border-radius: 5px; background: rgba(91,91,247,0.07); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+    .sc-kw-pos { width: 24px; height: 24px; border-radius: 5px; background: rgba(79,70,229,0.07); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
     .sc-kw-term { flex: 1; color: var(--ink-soft); }
     .sc-kw-delta { font-size: 12px; font-weight: 600; color: var(--success); }
     .sc-vis { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
@@ -348,8 +367,8 @@
       background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
       opacity: 0.45; transition: opacity 0.3s, border-color 0.3s, background 0.3s;
     }
-    .checker__row.active { opacity: 1; border-color: rgba(91,91,247,0.25); }
-    .checker__row.done { opacity: 1; border-color: rgba(22,163,74,0.18); background: #fff; }
+    .checker__row.active { opacity: 1; border-color: rgba(79,70,229,0.25); }
+    .checker__row.done { opacity: 1; border-color: rgba(101,163,13,0.18); background: #fff; }
     .checker__row-icon { font-size: 18px; width: 24px; text-align: center; flex-shrink: 0; }
     .checker__row-label { flex: 1; font-size: 14px; font-weight: 600; color: var(--ink); }
     .checker__row-finding { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
@@ -513,9 +532,78 @@
     .marquee:hover .marquee__track { animation-play-state: paused; }
     @keyframes mscroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .clients__sep { color: var(--ink-faint); font-size: 20px; font-weight: 300; }
+
+    /* ── HERO GLOWS ── */
+    .hero__glow {
+      position: absolute; border-radius: 50%; pointer-events: none; z-index: 0;
+      filter: blur(90px); opacity: 0.18;
+    }
+    .hero__glow--cobalt {
+      width: 560px; height: 480px; top: -80px; right: -60px;
+      background: radial-gradient(ellipse, #4F46E5 0%, transparent 70%);
+    }
+    .hero__glow--lime {
+      width: 420px; height: 360px; bottom: -40px; left: -80px;
+      background: radial-gradient(ellipse, #B6FF3C 0%, transparent 70%);
+      opacity: 0.13;
+    }
+
+    /* ── SERVICE ICON TILES ── */
+    .svc__icon { border-radius: 10px; }
+
+    /* ── PROCESS STEP NUMBERS ── */
+    .step-row__num { color: var(--accent) !important; }
+
+    /* ── VALUE BAND BORDER ── */
+    .value-item:nth-child(2) { border-left-color: var(--accent); }
+    .value-item:nth-child(3) { border-left-color: var(--accent-2); }
+
+    /* ── FEATURED PLAN LIME GLOW ── */
+    .plan--featured:hover {
+      border-color: rgba(182,255,60,0.35) !important;
+      box-shadow: 0 0 0 1px rgba(182,255,60,0.2), 0 12px 48px rgba(79,70,229,0.35) !important;
+    }
+    .plan__chip { background: linear-gradient(135deg, var(--accent), #7C3AED); }
+
+    /* ── CTA GLOW ── */
+    .cta-section { position: relative; overflow: hidden; }
+    .cta-section::before {
+      content: ''; position: absolute; pointer-events: none;
+      width: 600px; height: 500px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(79,70,229,0.22) 0%, transparent 70%);
+      top: -100px; left: 50%; transform: translateX(-50%); filter: blur(60px);
+    }
+    .cta-section::after {
+      content: ''; position: absolute; pointer-events: none;
+      width: 300px; height: 260px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(182,255,60,0.15) 0%, transparent 70%);
+      bottom: -40px; right: 10%; filter: blur(50px);
+    }
+
+    /* ── NUMBERS ACCENT ── */
+    .number-cell:nth-child(1) .number-cell__value { color: var(--accent); }
+    .number-cell:nth-child(3) .number-cell__value { color: var(--accent); }
+
+    /* ── NAV BOOK BUTTON ── */
+    .nav__cta-accent { background: var(--accent) !important; color: #fff !important; }
+    .nav__cta-accent:hover { background: #4338CA !important; }
+
+    /* ── BUTTON ACCENT GLOW ── */
+    .btn--accent:hover { background: #4338CA; box-shadow: 0 0 0 3px rgba(79,70,229,0.18); }
+
+    /* ── LIME TAG/BADGE ── */
+    .tag--lime {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-2); color: var(--accent-2-ink);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 100px;
+    }
   </style>
 </head>
 <body>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress"><div class="scroll-progress__bar" id="scrollBar"></div></div>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
@@ -533,20 +621,22 @@
     </div>
     <div class="nav__actions">
       <a href="#" class="btn btn--outline btn--sm" style="font-size:13px;padding:9px 18px;">Log in</a>
-      <a href="#contact" class="btn btn--dark" style="font-size:13px;padding:9px 18px;">Book a call</a>
+      <a href="#contact" class="btn btn--accent nav__cta-accent" style="font-size:13px;padding:9px 18px;">Book a call</a>
     </div>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero__glow hero__glow--cobalt"></div>
+  <div class="hero__glow hero__glow--lime"></div>
   <div class="hero__grid-bg"></div>
   <div class="container">
     <div class="hero__inner">
       <div class="hero__content">
         <div class="hero__tag">
-          <div class="hero__tag-dot"></div>
-          <span class="hero__tag-text">Serving 250+ businesses across Europe</span>
+          <span class="tag--lime">New</span>
+          <span class="hero__tag-text">AI Search Optimization — now live</span>
         </div>
         <h1 class="h1 hero__title">
           <div class="line-wrap"><span class="line">Get Found Before Your</span></div>
@@ -617,7 +707,7 @@
               <div class="ui-score-ring">
                 <svg viewBox="0 0 48 48">
                   <circle cx="24" cy="24" r="19" fill="none" stroke="#EBEBEB" stroke-width="5"/>
-                  <circle cx="24" cy="24" r="19" fill="none" stroke="#5B5BF7" stroke-width="5" stroke-dasharray="119.4" stroke-dashoffset="19" stroke-linecap="round"/>
+                  <circle cx="24" cy="24" r="19" fill="none" stroke="#4F46E5" stroke-width="5" stroke-dasharray="119.4" stroke-dashoffset="19" stroke-linecap="round"/>
                 </svg>
                 <div class="ui-score-num">84</div>
               </div>
@@ -728,42 +818,42 @@
     </div>
     <div class="services__grid">
       <div class="svc reveal">
-        <div class="svc__icon">🔍</div>
+        <div class="svc__icon svc__icon--cobalt"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
         <div class="svc__title">SEO Optimization</div>
         <div class="svc__desc">Improve your search rankings and drive consistent, high-intent organic traffic that converts into real customers.</div>
         <div class="svc__outcome">→ Result: more qualified organic traffic, month over month</div>
         <a href="#" class="svc__link">Learn more →</a>
       </div>
       <div class="svc reveal d1">
-        <div class="svc__icon">🤖</div>
+        <div class="svc__icon svc__icon--cyan"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4z"/><circle cx="9" cy="7" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="7" r="1" fill="currentColor" stroke="none"/></svg></div>
         <div class="svc__title">AI Search Optimization</div>
         <div class="svc__desc">Get visible in ChatGPT, Gemini, Claude, and Perplexity—the AI tools redefining how people discover businesses.</div>
         <div class="svc__outcome">→ Result: recommended by AI, not just search engines</div>
         <a href="#" class="svc__link">Learn more →</a>
       </div>
       <div class="svc reveal d2">
-        <div class="svc__icon">📍</div>
+        <div class="svc__icon svc__icon--lime"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
         <div class="svc__title">Local SEO</div>
         <div class="svc__desc">Dominate local search results and Google Maps so nearby customers find you first—not your competitors.</div>
         <div class="svc__outcome">→ Result: more calls, visits, and direction requests</div>
         <a href="#" class="svc__link">Learn more →</a>
       </div>
       <div class="svc reveal">
-        <div class="svc__icon">✍️</div>
+        <div class="svc__icon svc__icon--violet"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
         <div class="svc__title">Content Strategy</div>
         <div class="svc__desc">Create content engineered for discoverability, authority, and engagement that attracts the right audience.</div>
         <div class="svc__outcome">→ Result: content that ranks and builds lasting authority</div>
         <a href="#" class="svc__link">Learn more →</a>
       </div>
       <div class="svc reveal d1">
-        <div class="svc__icon">⭐</div>
+        <div class="svc__icon svc__icon--amber"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
         <div class="svc__title">Reputation Management</div>
         <div class="svc__desc">Build trust through strategic review management and online authority building across all platforms.</div>
         <div class="svc__outcome">→ Result: more 5-star reviews, less reputation risk</div>
         <a href="#" class="svc__link">Learn more →</a>
       </div>
       <div class="svc reveal d2">
-        <div class="svc__icon">📊</div>
+        <div class="svc__icon svc__icon--cobalt"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
         <div class="svc__title">Digital Presence Audit</div>
         <div class="svc__desc">A comprehensive analysis of your online visibility, uncovering gaps that are costing you customers and revenue.</div>
         <div class="svc__outcome">→ Result: a clear roadmap of your biggest visibility gaps</div>
@@ -827,7 +917,7 @@
 
       <div class="checker__scan" id="checkerScan" hidden>
         <div class="checker__row" data-row>
-          <div class="checker__row-icon">🔍</div>
+          <div class="checker__row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
           <div style="flex:1;">
             <div class="checker__row-label">Google Search Visibility</div>
             <div class="checker__row-finding"></div>
@@ -835,7 +925,7 @@
           <div class="checker__row-status"><span class="checker__spinner"></span></div>
         </div>
         <div class="checker__row" data-row>
-          <div class="checker__row-icon">📍</div>
+          <div class="checker__row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <div style="flex:1;">
             <div class="checker__row-label">Google Maps &amp; Local</div>
             <div class="checker__row-finding"></div>
@@ -843,7 +933,7 @@
           <div class="checker__row-status"><span class="checker__spinner"></span></div>
         </div>
         <div class="checker__row" data-row>
-          <div class="checker__row-icon">🤖</div>
+          <div class="checker__row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4z"/><circle cx="9" cy="7" r="1" fill="#06B6D4" stroke="none"/><circle cx="15" cy="7" r="1" fill="#06B6D4" stroke="none"/></svg></div>
           <div style="flex:1;">
             <div class="checker__row-label">AI Search Mentions</div>
             <div class="checker__row-finding"></div>
@@ -851,7 +941,7 @@
           <div class="checker__row-status"><span class="checker__spinner"></span></div>
         </div>
         <div class="checker__row" data-row>
-          <div class="checker__row-icon">⭐</div>
+          <div class="checker__row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
           <div style="flex:1;">
             <div class="checker__row-label">Reviews &amp; Reputation</div>
             <div class="checker__row-finding"></div>
@@ -859,7 +949,7 @@
           <div class="checker__row-status"><span class="checker__spinner"></span></div>
         </div>
         <div class="checker__row" data-row>
-          <div class="checker__row-icon">📂</div>
+          <div class="checker__row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
           <div style="flex:1;">
             <div class="checker__row-label">Directories &amp; Citations</div>
             <div class="checker__row-finding"></div>
@@ -867,7 +957,7 @@
           <div class="checker__row-status"><span class="checker__spinner"></span></div>
         </div>
         <div class="checker__row" data-row>
-          <div class="checker__row-icon">🎨</div>
+          <div class="checker__row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
           <div style="flex:1;">
             <div class="checker__row-label">Website Design &amp; UX</div>
             <div class="checker__row-finding"></div>
@@ -881,7 +971,7 @@
           <div class="checker__ring">
             <svg viewBox="0 0 96 96">
               <circle cx="48" cy="48" r="42" fill="none" stroke="#EBEBEB" stroke-width="7"/>
-              <circle class="checker__ring-fill" cx="48" cy="48" r="42" fill="none" stroke="#5B5BF7" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
+              <circle class="checker__ring-fill" cx="48" cy="48" r="42" fill="none" stroke="#4F46E5" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
             </svg>
             <div class="checker__ring-num">0</div>
           </div>
@@ -894,27 +984,27 @@
         <div class="checker__breakdown">
           <div class="checker__bd-row">
             <div class="checker__bd-head"><span class="checker__bd-name">Google Search</span><span class="checker__bd-score">0</span></div>
-            <div class="checker__bd-bar"><div class="checker__bd-fill"></div></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill" style="background:#4F46E5;opacity:0.85"></div></div>
           </div>
           <div class="checker__bd-row">
             <div class="checker__bd-head"><span class="checker__bd-name">Google Maps &amp; Local</span><span class="checker__bd-score">0</span></div>
-            <div class="checker__bd-bar"><div class="checker__bd-fill"></div></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill" style="background:#B6FF3C;opacity:0.9"></div></div>
           </div>
           <div class="checker__bd-row">
             <div class="checker__bd-head"><span class="checker__bd-name">AI Search</span><span class="checker__bd-score">0</span></div>
-            <div class="checker__bd-bar"><div class="checker__bd-fill"></div></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill" style="background:#06B6D4;opacity:0.85"></div></div>
           </div>
           <div class="checker__bd-row">
             <div class="checker__bd-head"><span class="checker__bd-name">Reviews &amp; Reputation</span><span class="checker__bd-score">0</span></div>
-            <div class="checker__bd-bar"><div class="checker__bd-fill"></div></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill" style="background:#7C3AED;opacity:0.85"></div></div>
           </div>
           <div class="checker__bd-row">
             <div class="checker__bd-head"><span class="checker__bd-name">Directories &amp; Citations</span><span class="checker__bd-score">0</span></div>
-            <div class="checker__bd-bar"><div class="checker__bd-fill"></div></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill" style="background:#3B82F6;opacity:0.85"></div></div>
           </div>
           <div class="checker__bd-row">
             <div class="checker__bd-head"><span class="checker__bd-name">Website Design &amp; UX</span><span class="checker__bd-score">0</span></div>
-            <div class="checker__bd-bar"><div class="checker__bd-fill"></div></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill" style="background:#B6FF3C;opacity:0.9"></div></div>
           </div>
         </div>
         <div class="checker__leadgen" id="checkerLeadgen">
@@ -974,12 +1064,12 @@
             <svg width="100%" height="88" viewBox="0 0 800 88" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#5B5BF7" stop-opacity="0.12"/>
-                  <stop offset="100%" stop-color="#5B5BF7" stop-opacity="0"/>
+                  <stop offset="0%" stop-color="#4F46E5" stop-opacity="0.12"/>
+                  <stop offset="100%" stop-color="#4F46E5" stop-opacity="0"/>
                 </linearGradient>
               </defs>
               <path d="M0,80 L70,72 L140,65 L210,58 L280,50 L350,40 L420,32 L490,22 L560,14 L630,8 L700,4 L800,1 L800,88 L0,88Z" fill="url(#g1)"/>
-              <path d="M0,80 L70,72 L140,65 L210,58 L280,50 L350,40 L420,32 L490,22 L560,14 L630,8 L700,4 L800,1" fill="none" stroke="#5B5BF7" stroke-width="2" stroke-linecap="round"/>
+              <path d="M0,80 L70,72 L140,65 L210,58 L280,50 L350,40 L420,32 L490,22 L560,14 L630,8 L700,4 L800,1" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </div>
         </div>
@@ -1036,15 +1126,15 @@
             </div>
             <div class="sc-vis-item">
               <div class="sc-vis-row"><span class="sc-vis-name">Google Maps</span><span class="sc-vis-score">87</span></div>
-              <div class="sc-vis-bar"><div class="sc-vis-fill" style="width:87%;background:#16A34A;opacity:0.7"></div></div>
+              <div class="sc-vis-bar"><div class="sc-vis-fill" style="width:87%;background:var(--accent-2);opacity:0.85"></div></div>
             </div>
             <div class="sc-vis-item">
               <div class="sc-vis-row"><span class="sc-vis-name">AI Search (ChatGPT)</span><span class="sc-vis-score">71</span></div>
-              <div class="sc-vis-bar"><div class="sc-vis-fill" style="width:71%;background:#2563EB;opacity:0.7"></div></div>
+              <div class="sc-vis-bar"><div class="sc-vis-fill" style="width:71%;background:#06B6D4;opacity:0.75"></div></div>
             </div>
             <div class="sc-vis-item">
               <div class="sc-vis-row"><span class="sc-vis-name">Directories & Citations</span><span class="sc-vis-score">84</span></div>
-              <div class="sc-vis-bar"><div class="sc-vis-fill" style="width:84%;background:#D97706;opacity:0.7"></div></div>
+              <div class="sc-vis-bar"><div class="sc-vis-fill" style="width:84%;background:#7C3AED;opacity:0.75"></div></div>
             </div>
           </div>
         </div>
@@ -1297,9 +1387,14 @@
   gsap.ticker.add(time => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
 
-  /* ── NAVBAR ── */
+  /* ── NAVBAR + SCROLL PROGRESS ── */
   const nav = document.getElementById('nav');
-  lenis.on('scroll', ({ scroll }) => nav.classList.toggle('scrolled', scroll > 16));
+  const scrollBar = document.getElementById('scrollBar');
+  lenis.on('scroll', ({ scroll }) => {
+    nav.classList.toggle('scrolled', scroll > 16);
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    scrollBar.style.width = docH > 0 ? (scroll / docH * 100) + '%' : '0%';
+  });
 
   /* ── COUNTER HELPER ── */
   function countUp(id, to, delay) {
@@ -1538,7 +1633,7 @@
     opacity: 0, y: 52, scale: 0.975, duration: 1.1, ease: 'power3.out',
     scrollTrigger: { trigger: '.showcase__window', start: 'top 84%', once: true }
   });
-  const chartPath = document.querySelector('.sc-chart path[stroke="#5B5BF7"]');
+  const chartPath = document.querySelector('.sc-chart path[stroke="#4F46E5"]');
   if (chartPath) {
     const len = chartPath.getTotalLength();
     gsap.set(chartPath, { strokeDasharray: len, strokeDashoffset: len });
