@@ -280,104 +280,126 @@
     @media (max-width: 600px) { .services__grid { grid-template-columns: 1fr; } }
 
     /* ── PROCESS ── */
-    .process { background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .process__header { text-align: center; max-width: 620px; margin: 0 auto 64px; }
+    .process { background: var(--bg-dark); border: none; color: #fff; position: relative; overflow: hidden; padding: 120px 0 100px; }
+    .process__glow-1 { position: absolute; width: 600px; height: 500px; top: -100px; left: -100px; background: radial-gradient(ellipse, rgba(79,70,229,0.18) 0%, transparent 70%); border-radius: 50%; filter: blur(60px); pointer-events: none; }
+    .process__glow-2 { position: absolute; width: 400px; height: 400px; bottom: -80px; right: -60px; background: radial-gradient(ellipse, rgba(182,255,60,0.08) 0%, transparent 70%); border-radius: 50%; filter: blur(50px); pointer-events: none; }
+    .process__header { text-align: center; max-width: 620px; margin: 0 auto 72px; position: relative; }
     .process__badge {
       display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(79,70,229,0.06); border: 1px solid rgba(79,70,229,0.1);
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
       border-radius: 100px; padding: 5px 16px; font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 20px;
+      text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 20px;
     }
+    .process .h2 { color: #fff; }
+    .process .body { color: rgba(255,255,255,0.4); }
 
-    /* Timeline */
-    .process__timeline { position: relative; max-width: 760px; margin: 0 auto; }
-    .process__line {
-      position: absolute; left: 27px; top: 0; bottom: 0; width: 2px;
-      background: linear-gradient(180deg, var(--accent), var(--accent-2));
-      border-radius: 1px;
-    }
+    /* Steps grid */
+    .psteps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; position: relative; }
+    .psteps--two { grid-template-columns: repeat(2, 1fr); max-width: 760px; margin-left: auto; margin-right: auto; }
     .pstep {
-      display: flex; gap: 28px; position: relative; padding-bottom: 48px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-xl); padding: 32px 28px;
+      transition: all 0.3s ease; position: relative; overflow: hidden;
     }
-    .pstep:last-child { padding-bottom: 0; }
-    .pstep__marker {
-      width: 56px; height: 56px; border-radius: 14px; flex-shrink: 0;
+    .pstep:hover {
+      background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.12);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .pstep__glow {
+      position: absolute; width: 200px; height: 200px; border-radius: 50%;
+      top: -80px; right: -60px; filter: blur(50px); pointer-events: none; opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .pstep:hover .pstep__glow { opacity: 1; }
+    .pstep__glow--accent { background: rgba(79,70,229,0.15); }
+    .pstep__glow--cyan { background: rgba(6,182,212,0.12); }
+    .pstep__glow--violet { background: rgba(124,58,237,0.12); }
+    .pstep__glow--success { background: rgba(101,163,13,0.12); }
+    .pstep__glow--lime { background: rgba(182,255,60,0.1); }
+    .pstep__num {
+      font-size: 64px; font-weight: 900; letter-spacing: -0.06em;
+      line-height: 1; margin-bottom: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.03) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pstep__icon {
+      width: 44px; height: 44px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
-      position: relative; z-index: 1;
-      transition: box-shadow 0.3s;
+      margin-bottom: 18px;
     }
-    .pstep__marker--accent { background: rgba(79,70,229,0.08); color: var(--accent); border: 1px solid rgba(79,70,229,0.15); }
-    .pstep__marker--cyan { background: rgba(6,182,212,0.08); color: #06B6D4; border: 1px solid rgba(6,182,212,0.15); }
-    .pstep__marker--violet { background: rgba(124,58,237,0.08); color: #7C3AED; border: 1px solid rgba(124,58,237,0.15); }
-    .pstep__marker--success { background: rgba(101,163,13,0.08); color: var(--success); border: 1px solid rgba(101,163,13,0.15); }
-    .pstep__marker--lime { background: rgba(182,255,60,0.12); color: #4D7C0F; border: 1px solid rgba(182,255,60,0.25); }
-    .pstep:hover .pstep__marker { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-    .pstep__content { flex: 1; padding-top: 6px; }
-    .pstep__num { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); margin-bottom: 4px; }
-    .pstep__title { font-size: 20px; font-weight: 800; color: var(--ink); letter-spacing: -0.03em; margin-bottom: 6px; }
-    .pstep__subtitle { font-size: 14px; color: var(--ink-muted); margin-bottom: 14px; font-weight: 500; }
-    .pstep__desc { font-size: 14px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 16px; }
-    .pstep__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pstep__icon--accent { background: rgba(79,70,229,0.12); color: #818CF8; border: 1px solid rgba(79,70,229,0.2); }
+    .pstep__icon--cyan { background: rgba(6,182,212,0.12); color: #22D3EE; border: 1px solid rgba(6,182,212,0.2); }
+    .pstep__icon--violet { background: rgba(124,58,237,0.12); color: #A78BFA; border: 1px solid rgba(124,58,237,0.2); }
+    .pstep__icon--success { background: rgba(101,163,13,0.12); color: #84CC16; border: 1px solid rgba(101,163,13,0.2); }
+    .pstep__icon--lime { background: rgba(182,255,60,0.1); color: var(--accent-2); border: 1px solid rgba(182,255,60,0.2); }
+    .pstep__title { font-size: 19px; font-weight: 800; color: #fff; letter-spacing: -0.03em; margin-bottom: 4px; }
+    .pstep__subtitle { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 14px; font-weight: 500; }
+    .pstep__desc { font-size: 13.5px; color: rgba(255,255,255,0.45); line-height: 1.65; margin-bottom: 18px; }
+    .pstep__tags { display: flex; flex-wrap: wrap; gap: 5px; }
     .pstep__tag {
-      padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;
-      background: var(--bg-soft); color: var(--ink-soft); border: 1px solid var(--border);
+      padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;
+      background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.06);
     }
 
     /* Delivery timeline */
-    .process__delivery {
-      max-width: 760px; margin: 64px auto 0; padding: 36px 40px;
-      background: var(--bg-dark); border-radius: var(--radius-xl);
-      position: relative; overflow: hidden;
+    .process__delivery { max-width: 880px; margin: 56px auto 0; position: relative; }
+    .process__delivery-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); margin-bottom: 28px; text-align: center; }
+    .process__tl {
+      display: flex; align-items: flex-start; position: relative;
+      padding: 0 20px;
     }
-    .process__delivery::before {
-      content: ''; position: absolute; top: -40px; right: -20px;
-      width: 260px; height: 200px; border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(79,70,229,0.2) 0%, transparent 70%);
-      pointer-events: none;
+    .process__tl::before {
+      content: ''; position: absolute; top: 16px; left: 20px; right: 20px; height: 2px;
+      background: rgba(255,255,255,0.06);
     }
-    .process__delivery-title { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.02em; margin-bottom: 6px; position: relative; }
-    .process__delivery-sub { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 28px; position: relative; }
-    .process__tl { display: flex; gap: 0; position: relative; }
-    .process__tl-step { flex: 1; text-align: center; position: relative; }
+    .process__tl::after {
+      content: ''; position: absolute; top: 16px; left: 20px; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 1px; width: 0%;
+    }
+    .process__tl.animated::after { width: calc(100% - 40px); transition: width 2s ease; }
+    .process__tl-step { flex: 1; text-align: center; position: relative; z-index: 1; }
     .process__tl-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      margin: 0 auto 10px; position: relative; z-index: 1;
+      width: 14px; height: 14px; border-radius: 50%;
+      margin: 9px auto 14px; position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .process__tl-dot--accent { background: var(--accent); box-shadow: 0 0 0 4px rgba(79,70,229,0.2); }
+    .process__tl-dot--accent { background: var(--accent); box-shadow: 0 0 0 4px rgba(79,70,229,0.25); }
     .process__tl-dot--lime { background: var(--accent-2); box-shadow: 0 0 0 4px rgba(182,255,60,0.15); }
-    .process__tl-step::before {
-      content: ''; position: absolute; top: 4px; left: 0; right: 0; height: 2px;
-      background: rgba(255,255,255,0.08);
-    }
-    .process__tl-step:first-child::before { left: 50%; }
-    .process__tl-step:last-child::before { right: 50%; }
-    .process__tl-day { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
-    .process__tl-label { font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.4; }
+    .process__tl-step:hover .process__tl-dot { transform: scale(1.3); }
+    .process__tl-day { font-size: 13px; font-weight: 800; color: #fff; letter-spacing: -0.01em; margin-bottom: 3px; }
+    .process__tl-label { font-size: 11.5px; color: rgba(255,255,255,0.3); line-height: 1.4; }
 
     /* Dashboard callout */
     .process__dashboard {
-      max-width: 760px; margin: 28px auto 0; padding: 28px 36px;
-      background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-xl);
+      max-width: 760px; margin: 48px auto 0; padding: 28px 36px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-xl);
       display: flex; align-items: center; gap: 24px;
     }
+    .process__dashboard:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
     .process__dashboard-icon {
       width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
-      background: var(--accent-light); border: 1px solid rgba(79,70,229,0.12);
-      display: flex; align-items: center; justify-content: center; color: var(--accent);
+      background: rgba(79,70,229,0.12); border: 1px solid rgba(79,70,229,0.2);
+      display: flex; align-items: center; justify-content: center; color: #818CF8;
     }
     .process__dashboard-text { flex: 1; }
-    .process__dashboard-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
-    .process__dashboard-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.55; }
-    @media (max-width: 768px) {
-      .process__tl { flex-direction: column; gap: 16px; }
-      .process__tl-step { text-align: left; display: flex; align-items: center; gap: 12px; }
-      .process__tl-step::before { display: none; }
+    .process__dashboard-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .process__dashboard-desc { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.55; }
+    .process__dashboard .btn--outline { background: transparent; color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.12); }
+    .process__dashboard .btn--outline:hover { background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.2); }
+
+    @media (max-width: 900px) { .psteps { grid-template-columns: 1fr 1fr; } .psteps--two { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) {
+      .psteps { grid-template-columns: 1fr; }
+      .process__tl { flex-direction: column; gap: 18px; padding: 0; }
+      .process__tl::before, .process__tl::after { display: none; }
+      .process__tl-step { text-align: left; display: flex; align-items: center; gap: 14px; }
       .process__tl-dot { margin: 0; }
       .process__dashboard { flex-direction: column; text-align: center; }
-      .process__delivery { padding: 28px 24px; }
-      .pstep { gap: 18px; }
-      .pstep__marker { width: 44px; height: 44px; border-radius: 11px; }
-      .process__line { left: 21px; }
+      .process { padding: 80px 0 72px; }
     }
 
     /* ── SHOWCASE / DASHBOARD ── */
@@ -1095,148 +1117,136 @@
 </section>
 
 <!-- HOW FNDLY WORKS -->
-<section class="section process" id="process">
+<section class="process" id="process">
+  <div class="process__glow-1"></div>
+  <div class="process__glow-2"></div>
   <div class="container">
 
     <div class="process__header reveal">
       <div class="process__badge">How FNDLY works</div>
       <h2 class="h2">From idea to a fully managed<br>website in two weeks</h2>
-      <p class="body" style="margin-top: 16px;">A simple, stress-free process — we handle everything so you can focus on running your business.</p>
+      <p class="body" style="margin-top: 16px;">A simple, stress-free process. We handle everything so you can focus on running your business.</p>
     </div>
 
-    <!-- TIMELINE -->
-    <div class="process__timeline">
-      <div class="process__line"></div>
-
-      <!-- Step 1 -->
+    <!-- TOP 3 STEPS -->
+    <div class="psteps">
       <div class="pstep reveal">
-        <div class="pstep__marker pstep__marker--accent">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <div class="pstep__glow pstep__glow--accent"></div>
+        <div class="pstep__num">01</div>
+        <div class="pstep__icon pstep__icon--accent">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         </div>
-        <div class="pstep__content">
-          <div class="pstep__num">Step 1</div>
-          <div class="pstep__title">Discovery</div>
-          <div class="pstep__subtitle">Let's get to know your business</div>
-          <div class="pstep__desc">Every project starts with understanding your company, services, customers, goals and brand identity. If you already have a website, we analyze it first — there's no need to start over unless it creates a better result.</div>
-          <div class="pstep__tags">
-            <span class="pstep__tag">Your company</span>
-            <span class="pstep__tag">Services</span>
-            <span class="pstep__tag">Customers</span>
-            <span class="pstep__tag">Goals</span>
-            <span class="pstep__tag">Brand identity</span>
-          </div>
+        <div class="pstep__title">Discovery</div>
+        <div class="pstep__subtitle">Let's get to know your business</div>
+        <div class="pstep__desc">We learn about your company, services, customers, goals and brand. Already have a website? We'll analyze it — no need to start over unless it creates a better result.</div>
+        <div class="pstep__tags">
+          <span class="pstep__tag">Company</span>
+          <span class="pstep__tag">Services</span>
+          <span class="pstep__tag">Goals</span>
+          <span class="pstep__tag">Brand</span>
         </div>
       </div>
 
-      <!-- Step 2 -->
       <div class="pstep reveal">
-        <div class="pstep__marker pstep__marker--cyan">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        <div class="pstep__glow pstep__glow--cyan"></div>
+        <div class="pstep__num">02</div>
+        <div class="pstep__icon pstep__icon--cyan">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
         </div>
-        <div class="pstep__content">
-          <div class="pstep__num">Step 2</div>
-          <div class="pstep__title">Design & Build</div>
-          <div class="pstep__subtitle">We create your new website</div>
-          <div class="pstep__desc">Using AI-powered workflows combined with human creativity, we design a modern website tailored to your business. You don't have to worry about any technical details — we take care of everything.</div>
-          <div class="pstep__tags">
-            <span class="pstep__tag">Unique design</span>
-            <span class="pstep__tag">Fully responsive</span>
-            <span class="pstep__tag">Fast</span>
-            <span class="pstep__tag">SEO-ready</span>
-            <span class="pstep__tag">Conversion optimized</span>
-          </div>
+        <div class="pstep__title">Design & Build</div>
+        <div class="pstep__subtitle">We create your new website</div>
+        <div class="pstep__desc">AI-powered workflows combined with human creativity. A modern, fully responsive website tailored to your business. You don't worry about technical details — we handle everything.</div>
+        <div class="pstep__tags">
+          <span class="pstep__tag">Unique</span>
+          <span class="pstep__tag">Responsive</span>
+          <span class="pstep__tag">Fast</span>
+          <span class="pstep__tag">SEO-ready</span>
         </div>
       </div>
 
-      <!-- Step 3 -->
       <div class="pstep reveal">
-        <div class="pstep__marker pstep__marker--violet">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <div class="pstep__glow pstep__glow--violet"></div>
+        <div class="pstep__num">03</div>
+        <div class="pstep__icon pstep__icon--violet">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
-        <div class="pstep__content">
-          <div class="pstep__num">Step 3</div>
-          <div class="pstep__title">Review</div>
-          <div class="pstep__subtitle">Review your new website</div>
-          <div class="pstep__desc">Once the first version is ready, you receive a private preview. Review everything before launch — text, images, branding, layout, colors. Our goal is to make sure the website accurately represents your business.</div>
-          <div class="pstep__tags">
-            <span class="pstep__tag">Private preview</span>
-            <span class="pstep__tag">Unlimited feedback</span>
-            <span class="pstep__tag">Quick revisions</span>
-          </div>
+        <div class="pstep__title">Review</div>
+        <div class="pstep__subtitle">Preview before you go live</div>
+        <div class="pstep__desc">You receive a private preview. Review text, images, layout, colors — everything. We refine until the website accurately represents your business.</div>
+        <div class="pstep__tags">
+          <span class="pstep__tag">Private preview</span>
+          <span class="pstep__tag">Feedback</span>
+          <span class="pstep__tag">Revisions</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM 2 STEPS -->
+    <div class="psteps psteps--two">
+      <div class="pstep reveal">
+        <div class="pstep__glow pstep__glow--success"></div>
+        <div class="pstep__num">04</div>
+        <div class="pstep__icon pstep__icon--success">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="pstep__title">Launch</div>
+        <div class="pstep__subtitle">Your business goes live</div>
+        <div class="pstep__desc">We handle hosting, domain, SSL, performance, security and backups. Your business is now online with a professional digital presence — no technical work from your side.</div>
+        <div class="pstep__tags">
+          <span class="pstep__tag">Hosting</span>
+          <span class="pstep__tag">SSL</span>
+          <span class="pstep__tag">Domain</span>
+          <span class="pstep__tag">Security</span>
+          <span class="pstep__tag">Backups</span>
         </div>
       </div>
 
-      <!-- Step 4 -->
       <div class="pstep reveal">
-        <div class="pstep__marker pstep__marker--success">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div class="pstep__glow pstep__glow--lime"></div>
+        <div class="pstep__num">05</div>
+        <div class="pstep__icon pstep__icon--lime">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
         </div>
-        <div class="pstep__content">
-          <div class="pstep__num">Step 4</div>
-          <div class="pstep__title">Launch</div>
-          <div class="pstep__subtitle">Go live</div>
-          <div class="pstep__desc">Once approved, we launch your website. FNDLY handles hosting, domain connection, SSL, performance optimization, security, backups and the complete technical setup. Your business is now online.</div>
-          <div class="pstep__tags">
-            <span class="pstep__tag">Hosting</span>
-            <span class="pstep__tag">SSL</span>
-            <span class="pstep__tag">Domain</span>
-            <span class="pstep__tag">Security</span>
-            <span class="pstep__tag">Backups</span>
-          </div>
+        <div class="pstep__title">Grow with FNDLY</div>
+        <div class="pstep__subtitle">Your website keeps improving</div>
+        <div class="pstep__desc">This is where FNDLY becomes different. Your subscription gives you AI recommendations, analytics, SEO monitoring, support and website improvements through FNDLY Credits. The relationship starts at launch.</div>
+        <div class="pstep__tags">
+          <span class="pstep__tag">AI insights</span>
+          <span class="pstep__tag">Analytics</span>
+          <span class="pstep__tag">SEO</span>
+          <span class="pstep__tag">Credits</span>
+          <span class="pstep__tag">Support</span>
         </div>
       </div>
-
-      <!-- Step 5 -->
-      <div class="pstep reveal">
-        <div class="pstep__marker pstep__marker--lime">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-        </div>
-        <div class="pstep__content">
-          <div class="pstep__num">Step 5</div>
-          <div class="pstep__title">Grow with FNDLY</div>
-          <div class="pstep__subtitle">Your website keeps improving</div>
-          <div class="pstep__desc">This is where FNDLY becomes different from traditional web agencies. After launch, your monthly subscription gives you continuous hosting, maintenance, AI-powered recommendations, analytics, SEO monitoring, support and website improvements through FNDLY Credits. The relationship doesn't end at launch — it starts there.</div>
-          <div class="pstep__tags">
-            <span class="pstep__tag">AI insights</span>
-            <span class="pstep__tag">Analytics</span>
-            <span class="pstep__tag">SEO monitoring</span>
-            <span class="pstep__tag">FNDLY Credits</span>
-            <span class="pstep__tag">Priority support</span>
-            <span class="pstep__tag">Monthly reports</span>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <!-- DELIVERY TIMELINE -->
     <div class="process__delivery reveal">
       <div class="process__delivery-title">Average delivery timeline</div>
-      <div class="process__delivery-sub">From first contact to a live website — typically within two weeks.</div>
-      <div class="process__tl">
+      <div class="process__tl" id="processTl">
         <div class="process__tl-step">
           <div class="process__tl-dot process__tl-dot--accent"></div>
-          <div><div class="process__tl-day">Day 1</div><div class="process__tl-label">Discovery &amp; intake</div></div>
+          <div><div class="process__tl-day">Day 1</div><div class="process__tl-label">Discovery</div></div>
         </div>
         <div class="process__tl-step">
           <div class="process__tl-dot process__tl-dot--accent"></div>
-          <div><div class="process__tl-day">Day 2–5</div><div class="process__tl-label">Research, planning &amp; design</div></div>
+          <div><div class="process__tl-day">Day 2–5</div><div class="process__tl-label">Research &amp; design</div></div>
         </div>
         <div class="process__tl-step">
           <div class="process__tl-dot process__tl-dot--accent"></div>
-          <div><div class="process__tl-day">Day 6–10</div><div class="process__tl-label">Website development</div></div>
+          <div><div class="process__tl-day">Day 6–10</div><div class="process__tl-label">Development</div></div>
         </div>
         <div class="process__tl-step">
           <div class="process__tl-dot process__tl-dot--accent"></div>
-          <div><div class="process__tl-day">Day 11–13</div><div class="process__tl-label">Review &amp; revisions</div></div>
+          <div><div class="process__tl-day">Day 11–13</div><div class="process__tl-label">Review</div></div>
         </div>
         <div class="process__tl-step">
           <div class="process__tl-dot process__tl-dot--lime"></div>
-          <div><div class="process__tl-day">Within 2 weeks</div><div class="process__tl-label">Website goes live</div></div>
+          <div><div class="process__tl-day">2 weeks</div><div class="process__tl-label">Go live</div></div>
         </div>
         <div class="process__tl-step">
           <div class="process__tl-dot process__tl-dot--lime"></div>
-          <div><div class="process__tl-day">Ongoing</div><div class="process__tl-label">Monthly optimisation &amp; growth</div></div>
+          <div><div class="process__tl-day">Ongoing</div><div class="process__tl-label">Growth</div></div>
         </div>
       </div>
     </div>
@@ -1248,7 +1258,7 @@
       </div>
       <div class="process__dashboard-text">
         <div class="process__dashboard-title">Your FNDLY Dashboard</div>
-        <div class="process__dashboard-desc">After launch, you get access to your personal dashboard — monitor performance, track analytics, view website health, contact support, chat with the AI assistant, redeem credits and manage everything in one place.</div>
+        <div class="process__dashboard-desc">After launch, manage everything in one place — analytics, SEO, support, AI assistant, credits and monthly reports.</div>
       </div>
       <a href="/dashboard/login.html" class="btn btn--outline" style="flex-shrink:0;font-size:13px;padding:9px 18px;">Explore dashboard →</a>
     </div>
@@ -1955,17 +1965,24 @@
     opacity: 0, y: 24, stagger: 0.12, duration: 0.85, ease: 'power2.out',
     scrollTrigger: { trigger: '.process__header', start: 'top 82%', once: true }
   });
-  gsap.from('.pstep', {
-    opacity: 0, y: 28, stagger: 0.18, duration: 0.85, ease: 'power2.out',
-    scrollTrigger: { trigger: '.process__timeline', start: 'top 80%', once: true }
+  gsap.from('.psteps:first-of-type .pstep', {
+    opacity: 0, y: 40, scale: 0.96, stagger: 0.15, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '.psteps', start: 'top 80%', once: true }
   });
-  gsap.from('.process__line', {
-    scaleY: 0, transformOrigin: 'top center', duration: 1.8, ease: 'power2.out',
-    scrollTrigger: { trigger: '.process__timeline', start: 'top 78%', once: true }
+  gsap.from('.psteps--two .pstep', {
+    opacity: 0, y: 40, scale: 0.96, stagger: 0.15, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '.psteps--two', start: 'top 82%', once: true }
   });
   gsap.from('.process__delivery', {
     opacity: 0, y: 32, duration: 0.9, ease: 'power2.out',
-    scrollTrigger: { trigger: '.process__delivery', start: 'top 85%', once: true }
+    scrollTrigger: {
+      trigger: '.process__delivery', start: 'top 85%', once: true,
+      onEnter: () => document.getElementById('processTl')?.classList.add('animated')
+    }
+  });
+  gsap.from('.process__tl-step', {
+    opacity: 0, y: 14, stagger: 0.1, duration: 0.6, ease: 'power2.out',
+    scrollTrigger: { trigger: '.process__tl', start: 'top 85%', once: true }
   });
   gsap.from('.process__dashboard', {
     opacity: 0, y: 24, duration: 0.8, ease: 'power2.out',
