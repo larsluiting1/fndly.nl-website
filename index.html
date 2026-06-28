@@ -422,35 +422,106 @@
 
     /* ── PRICING ── */
     .pricing { background: var(--bg-soft); border-top: 1px solid var(--border); }
-    .pricing__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 64px; }
+    .pricing__dev {
+      max-width: 800px; margin: 0 auto 56px; padding: 36px 40px;
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-xl);
+      display: flex; align-items: center; gap: 32px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.04);
+    }
+    .pricing__dev-info { flex: 1; }
+    .pricing__dev-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 6px; }
+    .pricing__dev-title { font-size: 18px; font-weight: 800; color: var(--ink); letter-spacing: -0.03em; margin-bottom: 4px; }
+    .pricing__dev-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+    .pricing__dev-price { text-align: right; flex-shrink: 0; }
+    .pricing__dev-amount { font-size: 36px; font-weight: 800; letter-spacing: -0.05em; color: var(--ink); line-height: 1; }
+    .pricing__dev-sub { font-size: 12px; color: var(--ink-faint); margin-top: 4px; }
+    @media (max-width: 600px) {
+      .pricing__dev { flex-direction: column; text-align: center; gap: 18px; padding: 28px 24px; }
+      .pricing__dev-price { text-align: center; }
+    }
+
+    .pricing__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
     .plan {
       background: var(--bg); border: 1px solid var(--border);
       border-radius: var(--radius-xl); padding: 32px;
-      transition: border-color 0.2s, box-shadow 0.2s; position: relative;
+      transition: all 0.25s ease; position: relative;
+      display: flex; flex-direction: column;
     }
-    .plan:hover { border-color: #ccc; box-shadow: 0 8px 32px rgba(0,0,0,0.07); }
-    .plan--featured { background: var(--bg-dark); border-color: var(--bg-dark); }
-    .plan--featured:hover { border-color: #2a2a2a; box-shadow: 0 12px 48px rgba(0,0,0,0.3); }
+    .plan:hover { border-color: #ccc; box-shadow: 0 8px 32px rgba(0,0,0,0.07); transform: translateY(-2px); }
+    .plan--featured {
+      background: var(--bg-dark); border-color: transparent;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 16px 48px rgba(0,0,0,0.18);
+      transform: scale(1.03);
+    }
+    .plan--featured:hover {
+      border-color: rgba(182,255,60,0.3);
+      box-shadow: 0 0 0 1px rgba(182,255,60,0.2), 0 12px 48px rgba(79,70,229,0.3);
+      transform: scale(1.03) translateY(-2px);
+    }
     .plan__chip {
-      position: absolute; top: -12px; left: 28px;
-      background: var(--accent); color: #fff;
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--accent), #7C3AED); color: #fff;
       font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-      padding: 4px 12px; border-radius: 100px;
+      padding: 5px 16px; border-radius: 100px; white-space: nowrap;
     }
-    .plan__tier { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 6px; }
+    .plan__tier { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 8px; }
     .plan--featured .plan__tier { color: rgba(255,255,255,0.4); }
-    .plan__price { font-size: 40px; font-weight: 800; letter-spacing: -0.05em; color: var(--ink); line-height: 1; }
+    .plan__price-row { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
+    .plan__price { font-size: 44px; font-weight: 800; letter-spacing: -0.05em; color: var(--ink); line-height: 1; }
     .plan--featured .plan__price { color: #fff; }
-    .plan__note { font-size: 13px; color: var(--ink-muted); margin-top: 4px; margin-bottom: 28px; }
-    .plan--featured .plan__note { color: rgba(255,255,255,0.3); }
-    .plan__hr { height: 1px; background: var(--border); margin: 24px 0; }
+    .plan__period { font-size: 15px; font-weight: 500; color: var(--ink-faint); }
+    .plan--featured .plan__period { color: rgba(255,255,255,0.3); }
+    .plan__tagline { font-size: 13px; color: var(--ink-muted); margin-bottom: 24px; line-height: 1.55; }
+    .plan--featured .plan__tagline { color: rgba(255,255,255,0.35); }
+    .plan__credits {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; border-radius: var(--radius);
+      margin-bottom: 24px; font-size: 13px; font-weight: 600;
+    }
+    .plan__credits { background: var(--bg-soft); color: var(--ink-soft); border: 1px solid var(--border); }
+    .plan--featured .plan__credits { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.08); }
+    .plan__credits-icon { font-size: 15px; }
+    .plan__hr { height: 1px; background: var(--border); margin: 0 0 20px; }
     .plan--featured .plan__hr { background: rgba(255,255,255,0.08); }
-    .plan__features { display: flex; flex-direction: column; gap: 11px; margin-bottom: 32px; }
-    .plan__feat { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--ink-soft); }
-    .plan--featured .plan__feat { color: rgba(255,255,255,0.65); }
-    .plan__feat-icon { color: var(--success); flex-shrink: 0; margin-top: 1px; font-size: 14px; }
+    .plan__section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); margin-bottom: 12px; }
+    .plan--featured .plan__section-label { color: rgba(255,255,255,0.25); }
+    .plan__features { display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; }
+    .plan__feat { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.45; }
+    .plan--featured .plan__feat { color: rgba(255,255,255,0.6); }
+    .plan__feat svg { flex-shrink: 0; margin-top: 2px; }
+    .plan__feat--em { font-weight: 600; color: var(--ink); }
+    .plan--featured .plan__feat--em { color: rgba(255,255,255,0.85); }
+    .plan__cta { margin-top: auto; }
     .plan .btn { width: 100%; justify-content: center; }
-    @media (max-width: 900px) { .pricing__grid { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) {
+      .pricing__grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .plan--featured { transform: none; }
+      .plan--featured:hover { transform: translateY(-2px); }
+    }
+
+    /* ── CREDITS TABLE ── */
+    .credits { margin-top: 56px; }
+    .credits__inner {
+      max-width: 680px; margin: 0 auto;
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-xl);
+      padding: 36px 40px; box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+    .credits__title { font-size: 16px; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 4px; }
+    .credits__desc { font-size: 13px; color: var(--ink-muted); margin-bottom: 20px; line-height: 1.6; }
+    .credits__grid { display: grid; grid-template-columns: 1fr auto; gap: 0; }
+    .credits__row {
+      display: contents;
+    }
+    .credits__row > * { padding: 9px 0; border-bottom: 1px solid var(--border); }
+    .credits__row:last-child > * { border-bottom: none; }
+    .credits__item { font-size: 13.5px; color: var(--ink-soft); }
+    .credits__cost { font-size: 13.5px; font-weight: 700; color: var(--ink); text-align: right; }
+    .credits__rollover {
+      margin-top: 18px; padding: 12px 16px; border-radius: var(--radius);
+      background: rgba(79,70,229,0.06); border: 1px solid rgba(79,70,229,0.1);
+      font-size: 12.5px; color: var(--accent); font-weight: 600; text-align: center;
+    }
+    @media (max-width: 600px) { .credits__inner { padding: 24px 20px; } }
 
     /* ── FAQ ── */
     .faq { border-top: 1px solid var(--border); }
@@ -1184,62 +1255,168 @@
 <!-- PRICING -->
 <section class="section pricing" id="pricing">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:0;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:48px;">
       <div class="reveal">
         <span class="eyebrow" style="margin-bottom:18px;display:inline-flex;">Pricing</span>
-        <h2 class="h2">Choose your<br>growth plan</h2>
+        <h2 class="h2">Invest in your<br>digital growth</h2>
       </div>
       <div class="reveal d1">
-        <p class="body">Transparent pricing. No hidden fees. Cancel any time. All plans include a dedicated point of contact.</p>
+        <p class="body">Transparent pricing. No hidden fees. Cancel any time. Every plan includes your complete digital infrastructure platform — not just hosting.</p>
       </div>
     </div>
+
+    <!-- ONE-TIME DEVELOPMENT FEE -->
+    <div class="pricing__dev reveal">
+      <div class="pricing__dev-info">
+        <div class="pricing__dev-label">Website Development</div>
+        <div class="pricing__dev-title">Premium custom AI-built website</div>
+        <div class="pricing__dev-desc">Fully responsive design, SEO-ready foundation, contact forms, performance optimization, SSL, domain connection, Google Analytics integration, and professional UI/UX — delivered fast.</div>
+      </div>
+      <div class="pricing__dev-price">
+        <div class="pricing__dev-amount">€799</div>
+        <div class="pricing__dev-sub">one-time investment</div>
+      </div>
+    </div>
+
+    <!-- MONTHLY PLANS -->
     <div class="pricing__grid">
+
+      <!-- STARTER -->
       <div class="plan reveal">
         <div class="plan__tier">Starter</div>
-        <div class="plan__price">Custom</div>
-        <div class="plan__note">Tailored to your business</div>
+        <div class="plan__price-row">
+          <div class="plan__price">€99</div>
+          <div class="plan__period">/month</div>
+        </div>
+        <div class="plan__tagline">Perfect for small businesses that want a professional online presence without worrying about maintenance.</div>
+        <div class="plan__credits">
+          <span class="plan__credits-icon">⚡</span>
+          100 FNDLY Credits / month
+        </div>
         <div class="plan__hr"></div>
+        <div class="plan__section-label">Platform & Infrastructure</div>
         <ul class="plan__features">
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Visibility Audit</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>SEO Health Check</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Local Listings Review</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Competitor Analysis</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Action Plan Report</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Secure managed hosting</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>SSL certificate</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Daily backups</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Security monitoring</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Performance monitoring</li>
         </ul>
-        <a href="#contact" class="btn btn--outline">Get started</a>
+        <div class="plan__section-label">AI & Analytics</div>
+        <ul class="plan__features">
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>FNDLY Dashboard</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>AI Website Health Scan</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>AI recommendations</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Website analytics</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>SEO monitoring</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly health report</li>
+        </ul>
+        <div class="plan__section-label">Support</div>
+        <ul class="plan__features" style="margin-bottom:32px;">
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Standard support</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>48-hour response time</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Knowledge Base access</li>
+        </ul>
+        <div class="plan__cta">
+          <a href="#contact" class="btn btn--outline">Get started</a>
+        </div>
       </div>
+
+      <!-- GROWTH (FEATURED) -->
       <div class="plan plan--featured reveal d1">
-        <div class="plan__chip">Most popular</div>
+        <div class="plan__chip">Most Popular</div>
         <div class="plan__tier">Growth</div>
-        <div class="plan__price" style="color:#fff">Custom</div>
-        <div class="plan__note">Tailored to your business</div>
+        <div class="plan__price-row">
+          <div class="plan__price">€149</div>
+          <div class="plan__period">/month</div>
+        </div>
+        <div class="plan__tagline">Designed for growing businesses that want continuous improvements and stronger online visibility.</div>
+        <div class="plan__credits" style="background:rgba(182,255,60,0.08);border-color:rgba(182,255,60,0.15);color:var(--accent-2);">
+          <span class="plan__credits-icon">⚡</span>
+          250 FNDLY Credits / month
+        </div>
         <div class="plan__hr"></div>
+        <div class="plan__section-label">Everything in Starter, plus</div>
         <ul class="plan__features">
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Everything in Starter</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>SEO Optimization</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>AI Search Optimization</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Content Strategy</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Monthly Reporting</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Priority Support</li>
+          <li class="plan__feat plan__feat--em"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority support</li>
+          <li class="plan__feat plan__feat--em"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>24-hour response time</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Advanced AI Assistant</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>AI content generation</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>AI SEO optimization</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>AI copy improvements</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly SEO audit</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Google Business optimization</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly performance review</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Conversion recommendations</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Enhanced analytics dashboard</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority implementation queue</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Early access to new features</li>
         </ul>
-        <a href="#contact" class="btn btn--accent">Book a strategy call</a>
+        <div class="plan__cta">
+          <a href="#contact" class="btn btn--accent" style="background:var(--accent-2);color:var(--accent-2-ink);">Book a strategy call</a>
+        </div>
       </div>
+
+      <!-- SCALE -->
       <div class="plan reveal d2">
         <div class="plan__tier">Scale</div>
-        <div class="plan__price">Custom</div>
-        <div class="plan__note">For ambitious growth goals</div>
+        <div class="plan__price-row">
+          <div class="plan__price">€299</div>
+          <div class="plan__period">/month</div>
+        </div>
+        <div class="plan__tagline">For ambitious businesses that want FNDLY to become their complete digital growth partner.</div>
+        <div class="plan__credits">
+          <span class="plan__credits-icon">⚡</span>
+          500 FNDLY Credits / month
+        </div>
         <div class="plan__hr"></div>
+        <div class="plan__section-label">Everything in Growth, plus</div>
         <ul class="plan__features">
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Everything in Growth</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Reputation Management</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Full Content Strategy</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Dedicated Specialist</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Weekly Check-ins</li>
-          <li class="plan__feat"><span class="plan__feat-icon">✓</span>Custom Integrations</li>
+          <li class="plan__feat plan__feat--em"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Highest priority support</li>
+          <li class="plan__feat plan__feat--em"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Same-business-day response</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Dedicated Customer Success Manager</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly strategy consultation</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Advanced AI optimization</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Continuous website optimization</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Quarterly conversion audit</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Advanced SEO strategy</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Premium analytics</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Competitor monitoring</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Quarterly content creation session</li>
         </ul>
-        <a href="#contact" class="btn btn--dark">Contact us</a>
+        <div class="plan__section-label">Content Creation</div>
+        <ul class="plan__features" style="margin-bottom:32px;">
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Professional photography</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Short-form social content</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Promotional video content</li>
+          <li class="plan__feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Website imagery &amp; branding</li>
+        </ul>
+        <div class="plan__cta">
+          <a href="#contact" class="btn btn--dark">Contact us</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CREDITS EXPLANATION -->
+    <div class="credits reveal">
+      <div class="credits__inner">
+        <div class="credits__title">How FNDLY Credits work</div>
+        <div class="credits__desc">Every plan includes monthly credits you can spend on website improvements. No more vague "one small change per month" — you decide exactly where your credits go.</div>
+        <div class="credits__grid">
+          <div class="credits__row"><div class="credits__item">Update existing text</div><div class="credits__cost">10 credits</div></div>
+          <div class="credits__row"><div class="credits__item">Replace an image</div><div class="credits__cost">10 credits</div></div>
+          <div class="credits__row"><div class="credits__item">Publish AI-generated blog post</div><div class="credits__cost">25 credits</div></div>
+          <div class="credits__row"><div class="credits__item">Add a new section</div><div class="credits__cost">25 credits</div></div>
+          <div class="credits__row"><div class="credits__item">New contact form</div><div class="credits__cost">30 credits</div></div>
+          <div class="credits__row"><div class="credits__item">Create a new landing page</div><div class="credits__cost">75 credits</div></div>
+          <div class="credits__row"><div class="credits__item">New integration</div><div class="credits__cost">Custom quote</div></div>
+          <div class="credits__row"><div class="credits__item">Custom development</div><div class="credits__cost">Custom quote</div></div>
+        </div>
+        <div class="credits__rollover">Credits roll over for up to 3 months — save them for bigger improvements when you need them.</div>
       </div>
     </div>
+
   </div>
 </section>
 
