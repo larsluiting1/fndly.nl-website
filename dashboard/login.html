@@ -57,10 +57,9 @@
       letter-spacing: -0.04em; text-decoration: none; margin-bottom: 48px;
     }
     .login__logo-mark {
-      width: 32px; height: 32px; border-radius: 8px; background: #fff;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--bg-dark); font-size: 14px; font-weight: 900;
+      width: 32px; height: 32px; border-radius: 8px; overflow: hidden; flex-shrink: 0;
     }
+    .login__logo-mark img { width: 100%; height: 100%; object-fit: cover; }
     .login__brand h1 {
       font-size: 36px; font-weight: 800; color: #fff;
       letter-spacing: -0.04em; line-height: 1.15; margin-bottom: 16px;
@@ -197,7 +196,7 @@
     <div class="login__brand-glow-2"></div>
     <div class="login__brand-content">
       <a href="/" class="login__logo">
-        <div class="login__logo-mark">F</div>
+        <div class="login__logo-mark"><img src="/fndly-logo.png" alt="FNDLY"></div>
         FNDLY
       </a>
       <h1>Your entire digital presence, <em>in one place.</em></h1>

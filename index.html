@@ -101,9 +101,9 @@
     }
     .nav__logo-mark {
       width: 30px; height: 30px; border-radius: 7px;
-      background: var(--ink); display: flex; align-items: center;
-      justify-content: center; color: #fff; font-size: 13px; font-weight: 900;
+      overflow: hidden; flex-shrink: 0;
     }
+    .nav__logo-mark img { width: 100%; height: 100%; object-fit: cover; }
     .nav__links { display: flex; align-items: center; gap: 2px; }
     .nav__links a {
       font-size: 14px; font-weight: 500; color: var(--ink-soft);
@@ -825,7 +825,8 @@
     .footer { background: var(--bg-dark-2); padding: 72px 0 40px; border-top: 1px solid rgba(255,255,255,0.05); }
     .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
     .footer__logo { font-size: 17px; font-weight: 900; color: #fff; letter-spacing: -0.04em; display: flex; align-items: center; gap: 7px; margin-bottom: 14px; text-decoration: none; }
-    .footer__logo-mark { width: 26px; height: 26px; border-radius: 6px; background: #fff; display: flex; align-items: center; justify-content: center; color: var(--bg-dark-2); font-size: 12px; font-weight: 900; }
+    .footer__logo-mark { width: 26px; height: 26px; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
+    .footer__logo-mark img { width: 100%; height: 100%; object-fit: cover; }
     .footer__blurb { font-size: 14px; color: rgba(255,255,255,0.3); line-height: 1.7; max-width: 220px; margin-bottom: 22px; }
     .footer__socials { display: flex; gap: 8px; }
     .footer__s {
@@ -941,7 +942,7 @@
 <nav class="nav" id="nav">
   <div class="nav__inner">
     <a href="#" class="nav__logo">
-      <div class="nav__logo-mark">F</div>
+      <div class="nav__logo-mark"><img src="/fndly-logo.png" alt="FNDLY"></div>
       FNDLY
     </a>
     <div class="nav__links">
@@ -1875,7 +1876,7 @@
     <div class="footer__grid">
       <div class="footer__brand">
         <a href="#" class="footer__logo">
-          <div class="footer__logo-mark">F</div>
+          <div class="footer__logo-mark"><img src="/fndly-logo.png" alt="FNDLY"></div>
           FNDLY
         </a>
         <p class="footer__blurb">Findability Made Simple. We help businesses get found by the customers already searching for them.</p>
