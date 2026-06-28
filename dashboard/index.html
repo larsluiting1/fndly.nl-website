@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FNDLY — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="dash">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <a href="/dashboard/" class="sidebar__logo">
+    <div class="sidebar__logo-mark">F</div>
+    FNDLY
+  </a>
+  <nav class="sidebar__nav">
+    <a href="/dashboard/" class="sidebar__link active">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="website.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website
+    </a>
+    <a href="analytics.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      Analytics
+    </a>
+    <a href="seo.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      SEO Center
+    </a>
+    <a href="ai.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4z"/></svg>
+      AI Assistant
+      <span class="sidebar__badge">New</span>
+    </a>
+    <a href="support.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Support
+    </a>
+
+    <div class="sidebar__section"><span class="sidebar__section-label">Platform</span></div>
+    <a href="addons.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+      Add-ons
+    </a>
+    <a href="knowledge.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Knowledge Base
+    </a>
+
+    <div class="sidebar__section"><span class="sidebar__section-label">Account</span></div>
+    <a href="invoices.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+      Invoices
+    </a>
+    <a href="settings.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1.08 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1.08 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.77 1.02 1.51 1.08H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1.08z"/></svg>
+      Settings
+    </a>
+  </nav>
+  <div class="sidebar__user">
+    <div class="sidebar__avatar">L</div>
+    <div class="sidebar__user-info">
+      <div class="sidebar__user-name">Lars Luiting</div>
+      <div class="sidebar__user-plan">Growth Plan</div>
+    </div>
+  </div>
+</aside>
+<div class="sidebar-overlay"></div>
+
+<!-- MAIN -->
+<div class="main">
+  <header class="topbar">
+    <button class="sidebar-toggle" id="sidebarToggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+    <div class="topbar__title">Dashboard</div>
+    <div class="topbar__search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      Search...
+      <kbd>⌘K</kbd>
+    </div>
+    <button class="topbar__btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="topbar__dot"></span>
+    </button>
+    <div class="topbar__user">L</div>
+  </header>
+
+  <div class="content">
+
+    <!-- WELCOME BANNER -->
+    <div class="card mb-24" style="background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a2e 100%); border-color: var(--border-dark); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -40px; right: -20px; width: 300px; height: 250px; background: radial-gradient(ellipse, rgba(79,70,229,0.25) 0%, transparent 70%); pointer-events: none;"></div>
+      <div style="position: absolute; bottom: -30px; right: 120px; width: 200px; height: 200px; background: radial-gradient(ellipse, rgba(182,255,60,0.12) 0%, transparent 70%); pointer-events: none;"></div>
+      <div style="position: relative; z-index: 1;">
+        <p style="font-size: 13px; color: rgba(255,255,255,0.35); font-weight: 600; margin-bottom: 6px;">Good morning</p>
+        <h2 style="font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.03em; margin-bottom: 6px;">Welcome back, Lars</h2>
+        <p style="font-size: 14px; color: rgba(255,255,255,0.4); max-width: 440px; line-height: 1.6;">Your website is performing well. You have 3 new AI recommendations and 2 unread support messages.</p>
+        <div style="display: flex; gap: 10px; margin-top: 18px;">
+          <a href="ai.html" class="btn btn--primary btn--sm">View AI insights</a>
+          <a href="support.html" class="btn btn--sm" style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.1);">Open support</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEBSITE STATUS -->
+    <div class="grid grid-5 mb-24">
+      <div class="stat">
+        <div class="stat__label">
+          <span class="status status--online"><span class="status__dot"></span></span>
+          Website Status
+        </div>
+        <div class="stat__value" style="font-size: 22px;">Online</div>
+        <div class="stat__delta stat__delta--up">99.99% uptime</div>
+      </div>
+      <div class="stat">
+        <div class="stat__label">SSL Status</div>
+        <div class="stat__value" style="font-size: 22px;">Active</div>
+        <div class="stat__delta stat__delta--up">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Valid until Dec 2026
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat__label">Domain</div>
+        <div class="stat__value" style="font-size: 22px;">fndly.nl</div>
+        <div class="stat__delta stat__delta--up">Connected</div>
+      </div>
+      <div class="stat">
+        <div class="stat__label">Last Backup</div>
+        <div class="stat__value" style="font-size: 22px;">Today</div>
+        <div class="stat__delta stat__delta--neutral">06:00 AM</div>
+      </div>
+      <div class="stat">
+        <div class="stat__label">Health Score</div>
+        <div class="stat__value" style="font-size: 22px; color: var(--success);">94/100</div>
+        <div class="stat__delta stat__delta--up">+3 this month</div>
+      </div>
+    </div>
+
+    <!-- TRAFFIC + FNDLY SCORE -->
+    <div class="grid grid-3-2 mb-24">
+
+      <!-- Traffic -->
+      <div class="card card--flush">
+        <div class="card__header">
+          <div>
+            <div class="card__title">Traffic Overview</div>
+            <div class="card__subtitle">Last 30 days</div>
+          </div>
+          <button class="card__action">View details →</button>
+        </div>
+        <div class="card__body">
+          <div class="grid grid-4" style="padding: 0 0 20px; gap: 12px;">
+            <div style="padding: 0 0 0 24px;">
+              <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 4px;">Visitors</div>
+              <div style="font-size: 22px; font-weight: 800; letter-spacing: -0.04em;" data-count="4821">0</div>
+              <div class="stat__delta stat__delta--up" style="margin-top: 2px;">↑ 18.3%</div>
+            </div>
+            <div>
+              <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 4px;">Sessions</div>
+              <div style="font-size: 22px; font-weight: 800; letter-spacing: -0.04em;" data-count="6342">0</div>
+              <div class="stat__delta stat__delta--up" style="margin-top: 2px;">↑ 12.1%</div>
+            </div>
+            <div>
+              <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 4px;">Conv. Rate</div>
+              <div style="font-size: 22px; font-weight: 800; letter-spacing: -0.04em;">3.2%</div>
+              <div class="stat__delta stat__delta--up" style="margin-top: 2px;">↑ 0.4%</div>
+            </div>
+            <div>
+              <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 4px;">Bounce</div>
+              <div style="font-size: 22px; font-weight: 800; letter-spacing: -0.04em;">38%</div>
+              <div class="stat__delta stat__delta--down" style="margin-top: 2px;">↓ 2.1%</div>
+            </div>
+          </div>
+          <div class="chart-container" style="height: 200px; padding: 0 24px 24px;">
+            <canvas id="trafficChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- FNDLY Score -->
+      <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 18px;">FNDLY Score</div>
+        <div class="score-ring" style="width: 140px; height: 140px;">
+          <svg viewBox="0 0 140 140" width="140" height="140">
+            <circle cx="70" cy="70" r="58" fill="none" stroke="#F0F0EE" stroke-width="8"/>
+            <circle cx="70" cy="70" r="58" fill="none" stroke="url(#scoreGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="364.4" stroke-dashoffset="54.7"/>
+            <defs><linearGradient id="scoreGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4F46E5"/><stop offset="100%" stop-color="#B6FF3C"/></linearGradient></defs>
+          </svg>
+          <div class="score-ring__num">
+            <div class="score-ring__value">85</div>
+            <div class="score-ring__label">/ 100</div>
+          </div>
+        </div>
+        <p style="font-size: 13px; color: var(--ink-muted); margin-top: 14px; max-width: 200px; line-height: 1.55;">Your digital presence is <strong style="color: var(--success);">strong</strong>. 3 areas need attention.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 14px;">
+          <span class="badge badge--success">Performance A</span>
+          <span class="badge badge--success">SEO A</span>
+          <span class="badge badge--success">Security A</span>
+          <span class="badge badge--warning">Content B</span>
+          <span class="badge badge--accent">Accessibility B+</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK ACTIONS + ACTIVITY -->
+    <div class="grid grid-2 mb-24">
+
+      <!-- Quick Actions -->
+      <div class="card">
+        <div class="card__title mb-16">Quick Actions</div>
+        <div class="actions-grid">
+          <a href="website.html" class="action-btn">
+            <div class="action-btn__icon" style="background: var(--accent-light); color: var(--accent);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+            </div>
+            <span class="action-btn__label">Edit Website</span>
+          </a>
+          <a href="ai.html" class="action-btn">
+            <div class="action-btn__icon" style="background: rgba(6,182,212,0.08); color: var(--cyan);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4z"/></svg>
+            </div>
+            <span class="action-btn__label">Ask AI</span>
+          </a>
+          <a href="support.html" class="action-btn">
+            <div class="action-btn__icon" style="background: var(--success-bg); color: var(--success);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <span class="action-btn__label">Get Support</span>
+          </a>
+          <a href="addons.html" class="action-btn">
+            <div class="action-btn__icon" style="background: rgba(124,58,237,0.08); color: var(--violet);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+            </div>
+            <span class="action-btn__label">Add Feature</span>
+          </a>
+          <a href="mailto:hello@fndly.nl" class="action-btn">
+            <div class="action-btn__icon" style="background: var(--warning-bg); color: var(--warning);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+            </div>
+            <span class="action-btn__label">Book Call</span>
+          </a>
+          <a href="support.html" class="action-btn">
+            <div class="action-btn__icon" style="background: rgba(79,70,229,0.08); color: var(--accent);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+            </div>
+            <span class="action-btn__label">Create Ticket</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="card">
+        <div class="flex items-center justify-between mb-16">
+          <div class="card__title">Recent Activity</div>
+          <button class="card__action">View all</button>
+        </div>
+        <div class="timeline">
+          <div class="timeline__item">
+            <div class="timeline__dot-col"><div class="timeline__dot timeline__dot--accent"></div></div>
+            <div class="timeline__body">
+              <div class="timeline__title">Website updated</div>
+              <div class="timeline__desc">Homepage content refreshed with new copy and images</div>
+              <div class="timeline__time">2 hours ago</div>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__dot-col"><div class="timeline__dot timeline__dot--success"></div></div>
+            <div class="timeline__body">
+              <div class="timeline__title">Backup created</div>
+              <div class="timeline__desc">Automatic daily backup completed successfully</div>
+              <div class="timeline__time">6 hours ago</div>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__dot-col"><div class="timeline__dot timeline__dot--warning"></div></div>
+            <div class="timeline__body">
+              <div class="timeline__title">Plugin updated</div>
+              <div class="timeline__desc">Contact Form plugin updated to v3.2.1</div>
+              <div class="timeline__time">Yesterday, 4:30 PM</div>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__dot-col"><div class="timeline__dot timeline__dot--success"></div></div>
+            <div class="timeline__body">
+              <div class="timeline__title">Support ticket resolved</div>
+              <div class="timeline__desc">Mobile menu alignment issue fixed</div>
+              <div class="timeline__time">2 days ago</div>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__dot-col"><div class="timeline__dot timeline__dot--accent"></div></div>
+            <div class="timeline__body">
+              <div class="timeline__title">SEO scan completed</div>
+              <div class="timeline__desc">Weekly scan found 2 new optimization opportunities</div>
+              <div class="timeline__time">3 days ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MONTHLY SUMMARY + AI RECOMMENDATIONS -->
+    <div class="grid grid-2 mb-24">
+
+      <!-- Monthly Summary -->
+      <div class="card">
+        <div class="card__title mb-16">Monthly Summary — June 2026</div>
+        <div class="grid grid-2" style="gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: var(--success-bg); border-radius: var(--radius); border: 1px solid rgba(101,163,13,0.12);">
+            <div style="font-size: 22px; font-weight: 800; color: var(--success); letter-spacing: -0.04em;">+18%</div>
+            <div style="font-size: 12px; color: var(--ink-muted); line-height: 1.4;">More visitors<br>vs last month</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: var(--accent-light); border-radius: var(--radius); border: 1px solid rgba(79,70,229,0.12);">
+            <div style="font-size: 22px; font-weight: 800; color: var(--accent); letter-spacing: -0.04em;">+6</div>
+            <div style="font-size: 12px; color: var(--ink-muted); line-height: 1.4;">Google positions<br>improved</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: rgba(6,182,212,0.06); border-radius: var(--radius); border: 1px solid rgba(6,182,212,0.12);">
+            <div style="font-size: 22px; font-weight: 800; color: var(--cyan); letter-spacing: -0.04em;">99.99%</div>
+            <div style="font-size: 12px; color: var(--ink-muted); line-height: 1.4;">Uptime<br>guaranteed</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: rgba(124,58,237,0.06); border-radius: var(--radius); border: 1px solid rgba(124,58,237,0.12);">
+            <div style="font-size: 22px; font-weight: 800; color: var(--violet); letter-spacing: -0.04em;">2</div>
+            <div style="font-size: 12px; color: var(--ink-muted); line-height: 1.4;">New AI<br>recommendations</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Recommendations -->
+      <div class="card">
+        <div class="flex items-center justify-between mb-16">
+          <div class="card__title">AI Recommendations</div>
+          <span class="badge badge--lime">3 new</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="rec">
+            <div class="rec__icon" style="background: var(--warning-bg); color: var(--warning);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div class="rec__body">
+              <div class="rec__title">Improve page speed</div>
+              <div class="rec__desc">Compress 4 images to reduce load time by ~1.2s</div>
+              <div class="rec__meta">
+                <span class="rec__meta-item"><strong>Impact:</strong> High</span>
+                <span class="rec__meta-item"><strong>Effort:</strong> Low</span>
+              </div>
+            </div>
+            <button class="btn btn--primary btn--sm">Fix</button>
+          </div>
+          <div class="rec">
+            <div class="rec__icon" style="background: var(--accent-light); color: var(--accent);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <div class="rec__body">
+              <div class="rec__title">Missing meta descriptions</div>
+              <div class="rec__desc">3 pages have no meta description set</div>
+              <div class="rec__meta">
+                <span class="rec__meta-item"><strong>Impact:</strong> Medium</span>
+                <span class="rec__meta-item"><strong>Effort:</strong> Low</span>
+              </div>
+            </div>
+            <button class="btn btn--primary btn--sm">Fix</button>
+          </div>
+          <div class="rec">
+            <div class="rec__icon" style="background: rgba(6,182,212,0.08); color: var(--cyan);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="rec__body">
+              <div class="rec__title">Add FAQ schema</div>
+              <div class="rec__desc">Structured data missing on FAQ section — add for rich snippets</div>
+              <div class="rec__meta">
+                <span class="rec__meta-item"><strong>Impact:</strong> Medium</span>
+                <span class="rec__meta-item"><strong>Effort:</strong> Medium</span>
+              </div>
+            </div>
+            <button class="btn btn--primary btn--sm">Fix</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP PAGES -->
+    <div class="card mb-24">
+      <div class="flex items-center justify-between mb-16">
+        <div class="card__title">Top Pages</div>
+        <button class="card__action">View all →</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Page</th>
+              <th>Visitors</th>
+              <th>Bounce Rate</th>
+              <th>Avg. Time</th>
+              <th>Conversions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>/</strong> <span class="text-muted" style="font-size: 12px;">Homepage</span></td>
+              <td>2,841</td>
+              <td>32%</td>
+              <td>2m 14s</td>
+              <td><span class="badge badge--success">4.1%</span></td>
+            </tr>
+            <tr>
+              <td><strong>/services</strong> <span class="text-muted" style="font-size: 12px;">Services</span></td>
+              <td>892</td>
+              <td>41%</td>
+              <td>1m 52s</td>
+              <td><span class="badge badge--success">3.8%</span></td>
+            </tr>
+            <tr>
+              <td><strong>/about</strong> <span class="text-muted" style="font-size: 12px;">About us</span></td>
+              <td>634</td>
+              <td>38%</td>
+              <td>1m 38s</td>
+              <td><span class="badge badge--accent">2.4%</span></td>
+            </tr>
+            <tr>
+              <td><strong>/contact</strong> <span class="text-muted" style="font-size: 12px;">Contact</span></td>
+              <td>421</td>
+              <td>22%</td>
+              <td>3m 05s</td>
+              <td><span class="badge badge--success">8.2%</span></td>
+            </tr>
+            <tr>
+              <td><strong>/blog</strong> <span class="text-muted" style="font-size: 12px;">Blog</span></td>
+              <td>287</td>
+              <td>54%</td>
+              <td>4m 12s</td>
+              <td><span class="badge badge--neutral">1.1%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /dash -->
+
+<script src="shared.js"></script>
+<script>
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const last30 = Array.from({length: 30}, (_, i) => {
+    const d = new Date(); d.setDate(d.getDate() - 29 + i);
+    return d.getDate() + ' ' + months[d.getMonth()].slice(0, 3);
+  });
+
+  createLineChart(document.getElementById('trafficChart'), last30, [
+    { label: 'Visitors', data: [98,112,87,134,156,142,128,167,178,152,189,201,176,195,211,188,223,198,245,232,267,248,289,275,301,284,312,298,334,321], borderColor: FNDLY_COLORS.accent, backgroundColor: 'rgba(79,70,229,0.06)', fill: true },
+    { label: 'Sessions', data: [124,148,112,168,192,178,164,209,218,196,234,251,224,248,268,239,279,252,308,291,336,312,362,348,378,359,392,376,421,404], borderColor: FNDLY_COLORS.limeText, backgroundColor: 'rgba(101,163,13,0.04)', fill: true },
+  ], { legend: true });
+</script>
+</body>
+</html>

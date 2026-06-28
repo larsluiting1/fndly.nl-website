@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FNDLY — SEO Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="dash">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <a href="/dashboard/" class="sidebar__logo">
+    <div class="sidebar__logo-mark">F</div>
+    FNDLY
+  </a>
+  <nav class="sidebar__nav">
+    <a href="/dashboard/" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="website.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website
+    </a>
+    <a href="analytics.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      Analytics
+    </a>
+    <a href="seo.html" class="sidebar__link active">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      SEO Center
+    </a>
+    <a href="ai.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4z"/></svg>
+      AI Assistant
+      <span class="sidebar__badge">New</span>
+    </a>
+    <a href="support.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Support
+    </a>
+
+    <div class="sidebar__section"><span class="sidebar__section-label">Platform</span></div>
+    <a href="addons.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+      Add-ons
+    </a>
+    <a href="knowledge.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Knowledge Base
+    </a>
+
+    <div class="sidebar__section"><span class="sidebar__section-label">Account</span></div>
+    <a href="invoices.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+      Invoices
+    </a>
+    <a href="settings.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1.08 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1.08 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.77 1.02 1.51 1.08H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1.08z"/></svg>
+      Settings
+    </a>
+  </nav>
+  <div class="sidebar__user">
+    <div class="sidebar__avatar">L</div>
+    <div class="sidebar__user-info">
+      <div class="sidebar__user-name">Lars Luiting</div>
+      <div class="sidebar__user-plan">Growth Plan</div>
+    </div>
+  </div>
+</aside>
+<div class="sidebar-overlay"></div>
+
+<!-- MAIN -->
+<div class="main">
+  <header class="topbar">
+    <button class="sidebar-toggle" id="sidebarToggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+    <div class="topbar__title">SEO Center</div>
+    <div class="topbar__search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      Search...
+      <kbd>&#8984;K</kbd>
+    </div>
+    <button class="topbar__btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="topbar__dot"></span>
+    </button>
+    <div class="topbar__user">L</div>
+  </header>
+
+  <div class="content">
+
+    <!-- PAGE HEADER -->
+    <div class="flex items-center justify-between mb-24">
+      <div>
+        <h1 style="font-size: 22px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 4px;">SEO Center</h1>
+        <p style="font-size: 14px; color: var(--ink-muted);">AI-powered SEO analysis and optimization</p>
+      </div>
+      <button class="btn btn--primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        Run SEO Scan
+      </button>
+    </div>
+
+    <!-- SEO SCORE + STATS -->
+    <div class="grid grid-3-2 mb-24">
+
+      <!-- SEO Score Ring -->
+      <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 18px;">SEO Score</div>
+        <div class="score-ring" style="width: 160px; height: 160px;">
+          <svg viewBox="0 0 160 160" width="160" height="160">
+            <circle cx="80" cy="80" r="66" fill="none" stroke="#F0F0EE" stroke-width="9"/>
+            <circle cx="80" cy="80" r="66" fill="none" stroke="url(#seoScoreGrad)" stroke-width="9" stroke-linecap="round" stroke-dasharray="414.7" stroke-dashoffset="91.2"/>
+            <defs><linearGradient id="seoScoreGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4F46E5"/><stop offset="100%" stop-color="#B6FF3C"/></linearGradient></defs>
+          </svg>
+          <div class="score-ring__num">
+            <div class="score-ring__value">78</div>
+            <div class="score-ring__label">/ 100</div>
+          </div>
+        </div>
+        <p style="font-size: 13px; color: var(--ink-muted); margin-top: 14px; line-height: 1.55;">Last scanned: 2 hours ago</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 14px;">
+          <span class="badge badge--success">Performance A</span>
+          <span class="badge badge--warning">Content B</span>
+          <span class="badge badge--accent">Technical B+</span>
+        </div>
+      </div>
+
+      <!-- Stats + Core Web Vitals stacked -->
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <!-- SEO Stats Row -->
+        <div class="grid grid-2" style="gap: 12px;">
+          <div class="stat">
+            <div class="stat__label">Broken Links</div>
+            <div class="stat__value" style="font-size: 22px;">2</div>
+            <div><span class="badge badge--danger">Needs fix</span></div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Missing Meta Titles</div>
+            <div class="stat__value" style="font-size: 22px;">1</div>
+            <div><span class="badge badge--warning">Warning</span></div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Missing Descriptions</div>
+            <div class="stat__value" style="font-size: 22px;">3</div>
+            <div><span class="badge badge--warning">Warning</span></div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Optimized Images</div>
+            <div class="stat__value" style="font-size: 22px;">84%</div>
+            <div><span class="badge badge--success">Good</span></div>
+          </div>
+        </div>
+
+        <!-- Core Web Vitals -->
+        <div class="card">
+          <div class="card__title mb-16">Core Web Vitals</div>
+          <div class="grid grid-3" style="gap: 16px;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <div style="font-size: 12px; font-weight: 600; color: var(--ink-muted);">LCP</div>
+                <span class="badge badge--success">Good</span>
+              </div>
+              <div style="font-size: 20px; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 8px;">1.4s</div>
+              <div class="progress" style="height: 6px; border-radius: 3px; background: var(--bg-darker);">
+                <div style="width: 56%; height: 100%; border-radius: 3px; background: var(--success);"></div>
+              </div>
+              <div style="font-size: 11px; color: var(--ink-muted); margin-top: 4px;">Target: &lt; 2.5s</div>
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <div style="font-size: 12px; font-weight: 600; color: var(--ink-muted);">FID</div>
+                <span class="badge badge--success">Good</span>
+              </div>
+              <div style="font-size: 20px; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 8px;">12ms</div>
+              <div class="progress" style="height: 6px; border-radius: 3px; background: var(--bg-darker);">
+                <div style="width: 12%; height: 100%; border-radius: 3px; background: var(--success);"></div>
+              </div>
+              <div style="font-size: 11px; color: var(--ink-muted); margin-top: 4px;">Target: &lt; 100ms</div>
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <div style="font-size: 12px; font-weight: 600; color: var(--ink-muted);">CLS</div>
+                <span class="badge badge--success">Good</span>
+              </div>
+              <div style="font-size: 20px; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 8px;">0.05</div>
+              <div class="progress" style="height: 6px; border-radius: 3px; background: var(--bg-darker);">
+                <div style="width: 50%; height: 100%; border-radius: 3px; background: var(--success);"></div>
+              </div>
+              <div style="font-size: 11px; color: var(--ink-muted); margin-top: 4px;">Target: &lt; 0.1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO ISSUES TABLE -->
+    <div class="card mb-24">
+      <div class="flex items-center justify-between mb-16">
+        <div class="card__title">SEO Issues</div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <span class="badge badge--danger">2 High</span>
+          <span class="badge badge--warning">2 Medium</span>
+          <span class="badge badge--neutral">2 Low</span>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Issue</th>
+              <th>Page</th>
+              <th>Severity</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Missing meta description</strong></td>
+              <td>/blog</td>
+              <td><span class="badge badge--danger">High</span></td>
+              <td><span class="badge badge--warning">Open</span></td>
+            </tr>
+            <tr>
+              <td><strong>Missing alt text</strong></td>
+              <td>/services</td>
+              <td><span class="badge badge--warning">Medium</span></td>
+              <td><span class="badge badge--warning">Open</span></td>
+            </tr>
+            <tr>
+              <td><strong>Broken link</strong></td>
+              <td>/about</td>
+              <td><span class="badge badge--danger">High</span></td>
+              <td><span class="badge badge--warning">Open</span></td>
+            </tr>
+            <tr>
+              <td><strong>Slow loading image</strong></td>
+              <td>/</td>
+              <td><span class="badge badge--warning">Medium</span></td>
+              <td><span class="badge badge--accent">In Progress</span></td>
+            </tr>
+            <tr>
+              <td><strong>Missing H1</strong></td>
+              <td>/terms</td>
+              <td><span class="badge badge--neutral">Low</span></td>
+              <td><span class="badge badge--warning">Open</span></td>
+            </tr>
+            <tr>
+              <td><strong>Duplicate title</strong></td>
+              <td>/privacy</td>
+              <td><span class="badge badge--neutral">Low</span></td>
+              <td><span class="badge badge--success">Fixed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SUGGESTED IMPROVEMENTS -->
+    <div class="card mb-24">
+      <div class="flex items-center justify-between mb-16">
+        <div class="card__title">Suggested Improvements</div>
+        <span class="badge badge--lime">4 suggestions</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="rec">
+          <div class="rec__icon" style="background: var(--accent-light); color: var(--accent);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          </div>
+          <div class="rec__body">
+            <div class="rec__title">Add meta descriptions to 3 pages</div>
+            <div class="rec__desc">Pages /blog, /services, and /terms are missing meta descriptions which hurts click-through rates</div>
+            <div class="rec__meta">
+              <span class="rec__meta-item"><strong>Impact:</strong> High</span>
+              <span class="rec__meta-item"><strong>Effort:</strong> Low</span>
+              <span class="rec__meta-item"><strong>Est:</strong> 5 min</span>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--sm">Implement Automatically</button>
+        </div>
+        <div class="rec">
+          <div class="rec__icon" style="background: var(--warning-bg); color: var(--warning);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="rec__body">
+            <div class="rec__title">Compress hero images</div>
+            <div class="rec__desc">Homepage hero images are 2.4MB total — compressing to WebP can reduce by 70%</div>
+            <div class="rec__meta">
+              <span class="rec__meta-item"><strong>Impact:</strong> High</span>
+              <span class="rec__meta-item"><strong>Effort:</strong> Low</span>
+              <span class="rec__meta-item"><strong>Est:</strong> 2 min</span>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--sm">Implement Automatically</button>
+        </div>
+        <div class="rec">
+          <div class="rec__icon" style="background: var(--success-bg); color: var(--success);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <div class="rec__body">
+            <div class="rec__title">Fix broken outbound link on About page</div>
+            <div class="rec__desc">External link to partner website returns 404 — update or remove the reference</div>
+            <div class="rec__meta">
+              <span class="rec__meta-item"><strong>Impact:</strong> Medium</span>
+              <span class="rec__meta-item"><strong>Effort:</strong> Low</span>
+              <span class="rec__meta-item"><strong>Est:</strong> 1 min</span>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--sm">Implement Automatically</button>
+        </div>
+        <div class="rec">
+          <div class="rec__icon" style="background: rgba(6,182,212,0.08); color: var(--cyan);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+          </div>
+          <div class="rec__body">
+            <div class="rec__title">Add FAQ schema markup</div>
+            <div class="rec__desc">Adding structured data to your FAQ section enables rich snippets in Google search results</div>
+            <div class="rec__meta">
+              <span class="rec__meta-item"><strong>Impact:</strong> Medium</span>
+              <span class="rec__meta-item"><strong>Effort:</strong> Medium</span>
+              <span class="rec__meta-item"><strong>Est:</strong> 15 min</span>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--sm">Implement Automatically</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO SCORE HISTORY -->
+    <div class="card card--flush mb-24">
+      <div class="card__header">
+        <div>
+          <div class="card__title">SEO Score History</div>
+          <div class="card__subtitle">Last 6 months</div>
+        </div>
+        <button class="card__action">View details &rarr;</button>
+      </div>
+      <div class="card__body">
+        <div class="chart-container" style="height: 240px; padding: 0 24px 24px;">
+          <canvas id="seoScoreChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /dash -->
+
+<script src="shared.js"></script>
+<script>
+  createLineChart(document.getElementById('seoScoreChart'), ['Jan','Feb','Mar','Apr','May','Jun'], [
+    {
+      label: 'SEO Score',
+      data: [62, 67, 71, 74, 76, 78],
+      borderColor: FNDLY_COLORS.accent,
+      backgroundColor: 'rgba(79,70,229,0.06)',
+      fill: true
+    }
+  ], { legend: false });
+</script>
+</body>
+</html>

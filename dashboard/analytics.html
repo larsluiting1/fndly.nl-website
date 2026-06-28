@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FNDLY — Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="dash">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <a href="/dashboard/" class="sidebar__logo">
+    <div class="sidebar__logo-mark">F</div>
+    FNDLY
+  </a>
+  <nav class="sidebar__nav">
+    <a href="/dashboard/" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="website.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website
+    </a>
+    <a href="analytics.html" class="sidebar__link active">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      Analytics
+    </a>
+    <a href="seo.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      SEO Center
+    </a>
+    <a href="ai.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4z"/></svg>
+      AI Assistant
+      <span class="sidebar__badge">New</span>
+    </a>
+    <a href="support.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Support
+    </a>
+
+    <div class="sidebar__section"><span class="sidebar__section-label">Platform</span></div>
+    <a href="addons.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+      Add-ons
+    </a>
+    <a href="knowledge.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Knowledge Base
+    </a>
+
+    <div class="sidebar__section"><span class="sidebar__section-label">Account</span></div>
+    <a href="invoices.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+      Invoices
+    </a>
+    <a href="settings.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1.08 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1.08 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.77 1.02 1.51 1.08H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1.08z"/></svg>
+      Settings
+    </a>
+  </nav>
+  <div class="sidebar__user">
+    <div class="sidebar__avatar">L</div>
+    <div class="sidebar__user-info">
+      <div class="sidebar__user-name">Lars Luiting</div>
+      <div class="sidebar__user-plan">Growth Plan</div>
+    </div>
+  </div>
+</aside>
+<div class="sidebar-overlay"></div>
+
+<!-- MAIN -->
+<div class="main">
+  <header class="topbar">
+    <button class="sidebar-toggle" id="sidebarToggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+    <div class="topbar__title">Analytics</div>
+    <div class="topbar__search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      Search...
+      <kbd>&#8984;K</kbd>
+    </div>
+    <button class="topbar__btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="topbar__dot"></span>
+    </button>
+    <div class="topbar__user">L</div>
+  </header>
+
+  <div class="content">
+
+    <!-- 1. STATS ROW -->
+    <div class="grid grid-4 mb-24">
+      <div class="stat">
+        <div class="stat__label">Visitors</div>
+        <div class="stat__value" data-count="4821">0</div>
+        <div class="stat__delta stat__delta--up">&#8593; 18%</div>
+      </div>
+      <div class="stat">
+        <div class="stat__label">Sessions</div>
+        <div class="stat__value" data-count="6342">0</div>
+        <div class="stat__delta stat__delta--up">&#8593; 12%</div>
+      </div>
+      <div class="stat">
+        <div class="stat__label">Conversions</div>
+        <div class="stat__value" data-count="154">0</div>
+        <div class="stat__delta stat__delta--up">&#8593; 24%</div>
+      </div>
+      <div class="stat">
+        <div class="stat__label">Avg. Session</div>
+        <div class="stat__value">2m 34s</div>
+        <div class="stat__delta stat__delta--up">&#8593; 8%</div>
+      </div>
+    </div>
+
+    <!-- 2. VISITORS CHART -->
+    <div class="card card--flush mb-24">
+      <div class="card__header">
+        <div>
+          <div class="card__title">Visitors</div>
+          <div class="card__subtitle">Daily visitors over the last 30 days</div>
+        </div>
+        <button class="card__action">Export CSV &#8594;</button>
+      </div>
+      <div class="card__body">
+        <div class="chart-container" style="height: 280px; padding: 0 24px 24px;">
+          <canvas id="visitorsChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 & 4. TRAFFIC SOURCES + DEVICES -->
+    <div class="grid grid-2 mb-24">
+
+      <!-- Traffic Sources -->
+      <div class="card card--flush">
+        <div class="card__header">
+          <div class="card__title">Traffic Sources</div>
+        </div>
+        <div class="card__body" style="padding: 0 24px 24px;">
+          <div class="chart-container" style="height: 240px;">
+            <canvas id="trafficSourcesChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Devices -->
+      <div class="card card--flush">
+        <div class="card__header">
+          <div class="card__title">Devices</div>
+        </div>
+        <div class="card__body" style="padding: 0 24px 24px;">
+          <div class="chart-container" style="height: 240px;">
+            <canvas id="devicesChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 & 6. COUNTRIES + LANDING PAGES -->
+    <div class="grid grid-2 mb-24">
+
+      <!-- Countries -->
+      <div class="card">
+        <div class="card__title mb-16">Top Countries</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Country</th>
+                <th>Visitors</th>
+                <th>%</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&#127475;&#127473; Netherlands</td>
+                <td>2,025</td>
+                <td><span class="badge badge--success">42%</span></td>
+              </tr>
+              <tr>
+                <td>&#127468;&#127463; United Kingdom</td>
+                <td>723</td>
+                <td><span class="badge badge--accent">15%</span></td>
+              </tr>
+              <tr>
+                <td>&#127465;&#127466; Germany</td>
+                <td>868</td>
+                <td><span class="badge badge--accent">18%</span></td>
+              </tr>
+              <tr>
+                <td>&#127463;&#127466; Belgium</td>
+                <td>578</td>
+                <td><span class="badge badge--neutral">12%</span></td>
+              </tr>
+              <tr>
+                <td>&#127482;&#127480; United States</td>
+                <td>627</td>
+                <td><span class="badge badge--neutral">13%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Landing Pages -->
+      <div class="card">
+        <div class="card__title mb-16">Top Landing Pages</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Page</th>
+                <th>Visitors</th>
+                <th>Bounce</th>
+                <th>Conv.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>/</strong> <span class="text-muted" style="font-size: 12px;">Homepage</span></td>
+                <td>2,841</td>
+                <td>32%</td>
+                <td><span class="badge badge--success">4.1%</span></td>
+              </tr>
+              <tr>
+                <td><strong>/services</strong> <span class="text-muted" style="font-size: 12px;">Services</span></td>
+                <td>892</td>
+                <td>41%</td>
+                <td><span class="badge badge--success">3.8%</span></td>
+              </tr>
+              <tr>
+                <td><strong>/about</strong> <span class="text-muted" style="font-size: 12px;">About us</span></td>
+                <td>634</td>
+                <td>38%</td>
+                <td><span class="badge badge--accent">2.4%</span></td>
+              </tr>
+              <tr>
+                <td><strong>/contact</strong> <span class="text-muted" style="font-size: 12px;">Contact</span></td>
+                <td>421</td>
+                <td>22%</td>
+                <td><span class="badge badge--success">8.2%</span></td>
+              </tr>
+              <tr>
+                <td><strong>/blog</strong> <span class="text-muted" style="font-size: 12px;">Blog</span></td>
+                <td>287</td>
+                <td>54%</td>
+                <td><span class="badge badge--neutral">1.1%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. SEARCH CONSOLE OVERVIEW -->
+    <div class="card mb-24">
+      <div class="card__title mb-16">Search Console Overview</div>
+      <div class="grid grid-4">
+        <div>
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 4px;">Total Clicks</div>
+          <div style="font-size: 22px; font-weight: 800; letter-spacing: -0.04em;" data-count="3420">0</div>
+          <div class="stat__delta stat__delta--up" style="margin-top: 2px;">&#8593; 14.2%</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 4px;">Impressions</div>
+          <div style="font-size: 22px; font-weight: 800; letter-spacing: -0.04em;" data-count="48200">0</div>
+          <div class="stat__delta stat__delta--up" style="margin-top: 2px;">&#8593; 22.6%</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 4px;">Average CTR</div>
+          <div style="font-size: 22px; font-weight: 800; letter-spacing: -0.04em;">7.1%</div>
+          <div class="stat__delta stat__delta--up" style="margin-top: 2px;">&#8593; 1.3%</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 4px;">Average Position</div>
+          <div style="font-size: 22px; font-weight: 800; letter-spacing: -0.04em;">12.4</div>
+          <div class="stat__delta stat__delta--up" style="margin-top: 2px;">&#8593; 2.1 positions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. TOP KEYWORDS -->
+    <div class="card mb-24">
+      <div class="flex items-center justify-between mb-16">
+        <div class="card__title">Top Keywords</div>
+        <button class="card__action">View all &#8594;</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Keyword</th>
+              <th>Position</th>
+              <th>Clicks</th>
+              <th>Impressions</th>
+              <th>CTR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>online visibility agency</strong></td>
+              <td><span class="badge badge--success">3</span></td>
+              <td>842</td>
+              <td>6,210</td>
+              <td>13.6%</td>
+            </tr>
+            <tr>
+              <td><strong>AI search optimization</strong></td>
+              <td><span class="badge badge--success">5</span></td>
+              <td>614</td>
+              <td>8,430</td>
+              <td>7.3%</td>
+            </tr>
+            <tr>
+              <td><strong>local SEO Netherlands</strong></td>
+              <td><span class="badge badge--accent">8</span></td>
+              <td>528</td>
+              <td>9,120</td>
+              <td>5.8%</td>
+            </tr>
+            <tr>
+              <td><strong>findability</strong></td>
+              <td><span class="badge badge--accent">11</span></td>
+              <td>412</td>
+              <td>7,840</td>
+              <td>5.3%</td>
+            </tr>
+            <tr>
+              <td><strong>seo agency amsterdam</strong></td>
+              <td><span class="badge badge--warning">14</span></td>
+              <td>384</td>
+              <td>10,200</td>
+              <td>3.8%</td>
+            </tr>
+            <tr>
+              <td><strong>digital presence audit</strong></td>
+              <td><span class="badge badge--warning">18</span></td>
+              <td>276</td>
+              <td>6,400</td>
+              <td>4.3%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 9. MONTHLY REPORTS -->
+    <div class="card mb-24">
+      <div class="card__title mb-16">Monthly Reports</div>
+      <div style="display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden;">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--bg);">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div>
+              <div style="font-weight: 700; font-size: 14px;">June 2026</div>
+              <div style="font-size: 12px; color: var(--ink-muted); margin-top: 2px;">4,821 visitors</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div class="stat__delta stat__delta--up">&#8593; 18%</div>
+            <button class="btn btn--sm" style="background: rgba(79,70,229,0.08); color: var(--accent); border: 1px solid rgba(79,70,229,0.15);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="margin-right: 4px; vertical-align: -2px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download PDF
+            </button>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--bg);">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div>
+              <div style="font-weight: 700; font-size: 14px;">May 2026</div>
+              <div style="font-size: 12px; color: var(--ink-muted); margin-top: 2px;">4,087 visitors</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div class="stat__delta stat__delta--up">&#8593; 11%</div>
+            <button class="btn btn--sm" style="background: rgba(79,70,229,0.08); color: var(--accent); border: 1px solid rgba(79,70,229,0.15);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="margin-right: 4px; vertical-align: -2px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download PDF
+            </button>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--bg);">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div>
+              <div style="font-weight: 700; font-size: 14px;">April 2026</div>
+              <div style="font-size: 12px; color: var(--ink-muted); margin-top: 2px;">3,682 visitors</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div class="stat__delta stat__delta--up">&#8593; 9%</div>
+            <button class="btn btn--sm" style="background: rgba(79,70,229,0.08); color: var(--accent); border: 1px solid rgba(79,70,229,0.15);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="margin-right: 4px; vertical-align: -2px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /dash -->
+
+<script src="shared.js"></script>
+<script>
+  /* ── DATE LABELS ── */
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const last30 = Array.from({length: 30}, (_, i) => {
+    const d = new Date(); d.setDate(d.getDate() - 29 + i);
+    return d.getDate() + ' ' + months[d.getMonth()].slice(0, 3);
+  });
+
+  /* ── VISITORS LINE CHART ── */
+  createLineChart(document.getElementById('visitorsChart'), last30, [
+    {
+      label: 'Visitors',
+      data: [112,128,98,145,162,148,137,172,186,158,198,214,184,205,224,196,238,212,258,244,278,262,298,286,318,302,328,314,348,334],
+      borderColor: FNDLY_COLORS.accent,
+      backgroundColor: 'rgba(79,70,229,0.06)',
+      fill: true
+    },
+    {
+      label: 'Previous Period',
+      data: [84,96,78,108,122,112,104,130,142,120,152,162,138,156,168,148,180,160,194,184,210,198,224,216,240,228,248,236,264,252],
+      borderColor: '#ccc',
+      borderDash: [5, 4],
+      backgroundColor: 'transparent',
+      fill: false
+    },
+  ], { legend: true });
+
+  /* ── TRAFFIC SOURCES DOUGHNUT ── */
+  createDoughnutChart(
+    document.getElementById('trafficSourcesChart'),
+    ['Organic Search', 'Direct', 'Social', 'Referral', 'Email'],
+    [48, 22, 16, 10, 4],
+    [FNDLY_COLORS.accent, FNDLY_COLORS.limeText, FNDLY_COLORS.cyan, FNDLY_COLORS.violet, FNDLY_COLORS.warning]
+  );
+
+  /* ── DEVICES DOUGHNUT ── */
+  createDoughnutChart(
+    document.getElementById('devicesChart'),
+    ['Desktop', 'Mobile', 'Tablet'],
+    [58, 36, 6],
+    [FNDLY_COLORS.accent, FNDLY_COLORS.cyan, FNDLY_COLORS.violet]
+  );
+</script>
+</body>
+</html>

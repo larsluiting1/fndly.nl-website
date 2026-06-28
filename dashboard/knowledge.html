@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FNDLY — Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* Knowledge Base page styles */
+    .kb-header { margin-bottom: 28px; }
+    .kb-header__title { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 4px; }
+    .kb-header__subtitle { font-size: 14px; color: var(--ink-muted); margin-bottom: 18px; }
+    .kb-search {
+      width: 100%; padding: 12px 16px 12px 42px; font-size: 14px; font-family: inherit;
+      border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg);
+      color: var(--ink); outline: none; transition: border-color 0.15s ease;
+    }
+    .kb-search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,70,229,0.08); }
+    .kb-search-wrap { position: relative; }
+    .kb-search-wrap svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--ink-muted); }
+
+    .section-title { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 16px; }
+
+    /* Category cards */
+    .cat-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px; display: flex; align-items: center; gap: 14px;
+      cursor: pointer; transition: all 0.15s ease; text-decoration: none; color: inherit;
+    }
+    .cat-card:hover { border-color: var(--accent); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+    .cat-card__icon {
+      width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .cat-card__info { display: flex; flex-direction: column; gap: 2px; }
+    .cat-card__title { font-size: 14px; font-weight: 600; color: var(--ink); }
+    .cat-card__count { font-size: 12px; color: var(--ink-muted); }
+
+    /* KB article cards */
+    .kb-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 22px; display: flex; flex-direction: column; gap: 10px;
+      transition: all 0.15s ease; cursor: pointer;
+    }
+    .kb-card:hover { border-color: var(--accent); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+    .kb-card__cat {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .kb-card__title { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.4; }
+    .kb-card__desc { font-size: 13px; color: var(--ink-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .kb-card__meta {
+      display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 6px;
+      font-size: 12px; color: var(--ink-muted);
+    }
+    .kb-card__type {
+      font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 100px;
+      background: var(--bg-soft); color: var(--ink-soft); border: 1px solid var(--border);
+    }
+
+    /* Video cards */
+    .vid-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; cursor: pointer; transition: all 0.15s ease;
+    }
+    .vid-card:hover { border-color: var(--accent); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+    .vid-card__thumb {
+      aspect-ratio: 16 / 9; background: var(--bg-dark); display: flex; align-items: center;
+      justify-content: center; position: relative;
+    }
+    .vid-card__play {
+      width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center;
+      border: 2px solid rgba(255,255,255,0.3); transition: all 0.15s ease;
+    }
+    .vid-card:hover .vid-card__play { background: rgba(79,70,229,0.8); border-color: rgba(79,70,229,0.9); }
+    .vid-card__info { padding: 14px 18px; }
+    .vid-card__title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+    .vid-card__dur { font-size: 12px; color: var(--ink-muted); }
+
+    /* Templates table */
+    .dl-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .dl-row:last-child { border-bottom: none; }
+    .dl-row__info { display: flex; align-items: center; gap: 12px; }
+    .dl-row__icon {
+      width: 32px; height: 32px; border-radius: 8px; display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .dl-row__title { font-size: 14px; font-weight: 600; color: var(--ink); }
+    .dl-row__type { font-size: 12px; color: var(--ink-muted); }
+  </style>
+</head>
+<body>
+<div class="dash">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <a href="/dashboard/" class="sidebar__logo">
+    <div class="sidebar__logo-mark">F</div>
+    FNDLY
+  </a>
+  <nav class="sidebar__nav">
+    <a href="/dashboard/" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="website.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website
+    </a>
+    <a href="analytics.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      Analytics
+    </a>
+    <a href="seo.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      SEO Center
+    </a>
+    <a href="ai.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4z"/></svg>
+      AI Assistant
+      <span class="sidebar__badge">New</span>
+    </a>
+    <a href="support.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Support
+    </a>
+
+    <div class="sidebar__section"><span class="sidebar__section-label">Platform</span></div>
+    <a href="addons.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+      Add-ons
+    </a>
+    <a href="knowledge.html" class="sidebar__link active">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Knowledge Base
+    </a>
+
+    <div class="sidebar__section"><span class="sidebar__section-label">Account</span></div>
+    <a href="invoices.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+      Invoices
+    </a>
+    <a href="settings.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1.08 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1.08 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.77 1.02 1.51 1.08H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1.08z"/></svg>
+      Settings
+    </a>
+  </nav>
+  <div class="sidebar__user">
+    <div class="sidebar__avatar">L</div>
+    <div class="sidebar__user-info">
+      <div class="sidebar__user-name">Lars Luiting</div>
+      <div class="sidebar__user-plan">Growth Plan</div>
+    </div>
+  </div>
+</aside>
+<div class="sidebar-overlay"></div>
+
+<!-- MAIN -->
+<div class="main">
+  <header class="topbar">
+    <button class="sidebar-toggle" id="sidebarToggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+    <div class="topbar__title">Knowledge Base</div>
+    <div class="topbar__search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      Search...
+      <kbd>&#8984;K</kbd>
+    </div>
+    <button class="topbar__btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="topbar__dot"></span>
+    </button>
+    <div class="topbar__user">L</div>
+  </header>
+
+  <div class="content">
+
+    <!-- PAGE HEADER -->
+    <div class="kb-header">
+      <h1 class="kb-header__title">Knowledge Base</h1>
+      <p class="kb-header__subtitle">Learn everything about growing your digital presence</p>
+      <div class="kb-search-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" class="kb-search" placeholder="Search articles, guides, and tutorials...">
+      </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="section-title">Categories</div>
+    <div class="grid grid-4 mb-24">
+      <a href="#" class="cat-card">
+        <div class="cat-card__icon" style="background: rgba(79,70,229,0.08); color: var(--accent);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </div>
+        <div class="cat-card__info">
+          <div class="cat-card__title">SEO</div>
+          <div class="cat-card__count">12 articles</div>
+        </div>
+      </a>
+      <a href="#" class="cat-card">
+        <div class="cat-card__icon" style="background: rgba(6,182,212,0.08); color: var(--cyan);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="cat-card__info">
+          <div class="cat-card__title">Websites</div>
+          <div class="cat-card__count">8 articles</div>
+        </div>
+      </a>
+      <a href="#" class="cat-card">
+        <div class="cat-card__icon" style="background: var(--success-bg); color: var(--success);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div class="cat-card__info">
+          <div class="cat-card__title">Google Business</div>
+          <div class="cat-card__count">6 articles</div>
+        </div>
+      </a>
+      <a href="#" class="cat-card">
+        <div class="cat-card__icon" style="background: rgba(124,58,237,0.08); color: var(--violet);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="cat-card__info">
+          <div class="cat-card__title">Marketing</div>
+          <div class="cat-card__count">10 articles</div>
+        </div>
+      </a>
+      <a href="#" class="cat-card">
+        <div class="cat-card__icon" style="background: rgba(6,182,212,0.08); color: var(--cyan);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4z"/></svg>
+        </div>
+        <div class="cat-card__info">
+          <div class="cat-card__title">AI & Automation</div>
+          <div class="cat-card__count">7 articles</div>
+        </div>
+      </a>
+      <a href="#" class="cat-card">
+        <div class="cat-card__icon" style="background: var(--warning-bg); color: var(--warning);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+        </div>
+        <div class="cat-card__info">
+          <div class="cat-card__title">Domains & Hosting</div>
+          <div class="cat-card__count">5 articles</div>
+        </div>
+      </a>
+      <a href="#" class="cat-card">
+        <div class="cat-card__icon" style="background: var(--danger-bg); color: var(--danger);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="cat-card__info">
+          <div class="cat-card__title">Security</div>
+          <div class="cat-card__count">4 articles</div>
+        </div>
+      </a>
+      <a href="#" class="cat-card">
+        <div class="cat-card__icon" style="background: rgba(79,70,229,0.08); color: var(--accent);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        </div>
+        <div class="cat-card__info">
+          <div class="cat-card__title">Content Marketing</div>
+          <div class="cat-card__count">9 articles</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- FEATURED ARTICLES -->
+    <div class="section-title">Featured Articles</div>
+    <div class="grid grid-3 mb-24">
+      <div class="kb-card">
+        <div class="kb-card__cat" style="color: var(--accent);">SEO</div>
+        <div class="kb-card__title">How to Rank #1 on Google in 2026</div>
+        <div class="kb-card__desc">A step-by-step breakdown of the ranking factors that matter most this year, from content quality to technical performance.</div>
+        <div class="kb-card__meta">
+          <span>8 min read</span>
+          <span class="kb-card__type">Article</span>
+        </div>
+      </div>
+      <div class="kb-card">
+        <div class="kb-card__cat" style="color: var(--success);">Google Business</div>
+        <div class="kb-card__title">Setting Up Google Business Profile</div>
+        <div class="kb-card__desc">Complete walkthrough for claiming, verifying, and optimizing your Google Business Profile to attract local customers.</div>
+        <div class="kb-card__meta">
+          <span>12 min read</span>
+          <span class="kb-card__type">Guide</span>
+        </div>
+      </div>
+      <div class="kb-card">
+        <div class="kb-card__cat" style="color: var(--cyan);">Websites</div>
+        <div class="kb-card__title">Understanding Core Web Vitals</div>
+        <div class="kb-card__desc">Learn what LCP, INP, and CLS mean for your website and how to improve each metric for better user experience.</div>
+        <div class="kb-card__meta">
+          <span>6 min read</span>
+          <span class="kb-card__type">Article</span>
+        </div>
+      </div>
+      <div class="kb-card">
+        <div class="kb-card__cat" style="color: var(--cyan);">AI</div>
+        <div class="kb-card__title">AI Search Optimization: Complete Guide</div>
+        <div class="kb-card__desc">How to optimize your content for AI-powered search engines and ensure your business appears in AI-generated answers.</div>
+        <div class="kb-card__meta">
+          <span>15 min read</span>
+          <span class="kb-card__type">Guide</span>
+        </div>
+      </div>
+      <div class="kb-card">
+        <div class="kb-card__cat" style="color: var(--accent);">Content Marketing</div>
+        <div class="kb-card__title">Writing Content That Converts</div>
+        <div class="kb-card__desc">Proven copywriting frameworks and strategies to turn website visitors into paying customers.</div>
+        <div class="kb-card__meta">
+          <span>10 min read</span>
+          <span class="kb-card__type">Article</span>
+        </div>
+      </div>
+      <div class="kb-card">
+        <div class="kb-card__cat" style="color: var(--danger);">Security</div>
+        <div class="kb-card__title">SSL Certificates Explained</div>
+        <div class="kb-card__desc">Everything you need to know about SSL certificates, HTTPS, and why they matter for your website security and SEO.</div>
+        <div class="kb-card__meta">
+          <span>5 min read</span>
+          <span class="kb-card__type">Article</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO TUTORIALS -->
+    <div class="section-title">Video Tutorials</div>
+    <div class="grid grid-3 mb-24">
+      <div class="vid-card">
+        <div class="vid-card__thumb">
+          <div class="vid-card__play">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+        </div>
+        <div class="vid-card__info">
+          <div class="vid-card__title">Getting Started with FNDLY</div>
+          <div class="vid-card__dur">4:32</div>
+        </div>
+      </div>
+      <div class="vid-card">
+        <div class="vid-card__thumb">
+          <div class="vid-card__play">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+        </div>
+        <div class="vid-card__info">
+          <div class="vid-card__title">SEO Basics for Beginners</div>
+          <div class="vid-card__dur">8:15</div>
+        </div>
+      </div>
+      <div class="vid-card">
+        <div class="vid-card__thumb">
+          <div class="vid-card__play">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+        </div>
+        <div class="vid-card__info">
+          <div class="vid-card__title">Using the AI Assistant</div>
+          <div class="vid-card__dur">6:48</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEMPLATES & CHECKLISTS -->
+    <div class="section-title">Templates & Checklists</div>
+    <div class="card mb-24">
+      <div class="dl-row">
+        <div class="dl-row__info">
+          <div class="dl-row__icon" style="background: var(--accent-light); color: var(--accent);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div>
+            <div class="dl-row__title">SEO Audit Checklist</div>
+            <div class="dl-row__type">Checklist</div>
+          </div>
+        </div>
+        <button class="btn btn--primary btn--sm">Download</button>
+      </div>
+      <div class="dl-row">
+        <div class="dl-row__info">
+          <div class="dl-row__icon" style="background: rgba(124,58,237,0.08); color: var(--violet);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          </div>
+          <div>
+            <div class="dl-row__title">Content Calendar Template</div>
+            <div class="dl-row__type">Template</div>
+          </div>
+        </div>
+        <button class="btn btn--primary btn--sm">Download</button>
+      </div>
+      <div class="dl-row">
+        <div class="dl-row__info">
+          <div class="dl-row__icon" style="background: var(--success-bg); color: var(--success);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div>
+            <div class="dl-row__title">Website Launch Checklist</div>
+            <div class="dl-row__type">Checklist</div>
+          </div>
+        </div>
+        <button class="btn btn--primary btn--sm">Download</button>
+      </div>
+      <div class="dl-row">
+        <div class="dl-row__info">
+          <div class="dl-row__icon" style="background: rgba(6,182,212,0.08); color: var(--cyan);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          </div>
+          <div>
+            <div class="dl-row__title">Brand Guidelines Template</div>
+            <div class="dl-row__type">Template</div>
+          </div>
+        </div>
+        <button class="btn btn--primary btn--sm">Download</button>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /dash -->
+
+<script src="shared.js"></script>
+</body>
+</html>

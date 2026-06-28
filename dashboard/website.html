@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FNDLY — Website</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="dash">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <a href="/dashboard/" class="sidebar__logo">
+    <div class="sidebar__logo-mark">F</div>
+    FNDLY
+  </a>
+  <nav class="sidebar__nav">
+    <a href="/dashboard/" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="website.html" class="sidebar__link active">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website
+    </a>
+    <a href="analytics.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      Analytics
+    </a>
+    <a href="seo.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      SEO Center
+    </a>
+    <a href="ai.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4z"/></svg>
+      AI Assistant
+      <span class="sidebar__badge">New</span>
+    </a>
+    <a href="support.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Support
+    </a>
+
+    <div class="sidebar__section"><span class="sidebar__section-label">Platform</span></div>
+    <a href="addons.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+      Add-ons
+    </a>
+    <a href="knowledge.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Knowledge Base
+    </a>
+
+    <div class="sidebar__section"><span class="sidebar__section-label">Account</span></div>
+    <a href="invoices.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+      Invoices
+    </a>
+    <a href="settings.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1.08 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1.08 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.77 1.02 1.51 1.08H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1.08z"/></svg>
+      Settings
+    </a>
+  </nav>
+  <div class="sidebar__user">
+    <div class="sidebar__avatar">L</div>
+    <div class="sidebar__user-info">
+      <div class="sidebar__user-name">Lars Luiting</div>
+      <div class="sidebar__user-plan">Growth Plan</div>
+    </div>
+  </div>
+</aside>
+<div class="sidebar-overlay"></div>
+
+<!-- MAIN -->
+<div class="main">
+  <header class="topbar">
+    <button class="sidebar-toggle" id="sidebarToggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+    <div class="topbar__title">Website</div>
+    <div class="topbar__search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      Search...
+      <kbd>&#8984;K</kbd>
+    </div>
+    <button class="topbar__btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="topbar__dot"></span>
+    </button>
+    <div class="topbar__user">L</div>
+  </header>
+
+  <div class="content">
+
+    <!-- PAGE HEADER -->
+    <div style="margin-bottom: 24px;">
+      <h1 style="font-size: 24px; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 4px;">Website Overview</h1>
+      <p style="font-size: 14px; color: var(--ink-muted); line-height: 1.5;">Manage your website, pages, and digital assets</p>
+    </div>
+
+    <!-- WEBSITE INFO CARD (dark banner) -->
+    <div class="card mb-24" style="background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a2e 100%); border-color: var(--border-dark); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -40px; right: -20px; width: 300px; height: 250px; background: radial-gradient(ellipse, rgba(79,70,229,0.25) 0%, transparent 70%); pointer-events: none;"></div>
+      <div style="position: absolute; bottom: -30px; right: 120px; width: 200px; height: 200px; background: radial-gradient(ellipse, rgba(182,255,60,0.12) 0%, transparent 70%); pointer-events: none;"></div>
+      <div style="position: relative; z-index: 1;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span style="font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.03em;">fndly.nl</span>
+          <span style="display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; background: rgba(101,163,13,0.15); color: #84cc16; font-size: 11px; font-weight: 600;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #84cc16; display: inline-block;"></span>
+            Online
+          </span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-top: 16px;">
+          <div>
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.35); margin-bottom: 4px;">CMS Version</div>
+            <div style="font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85);">FNDLY CMS 2.4</div>
+          </div>
+          <div>
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.35); margin-bottom: 4px;">SSL Certificate</div>
+            <div style="font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85);">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#84cc16" stroke-width="2.5" style="vertical-align: -1px; margin-right: 4px;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Active
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.35); margin-bottom: 4px;">Hosting</div>
+            <div style="font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85);">Vercel Edge Network</div>
+          </div>
+          <div>
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.35); margin-bottom: 4px;">Runtime</div>
+            <div style="font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85);">Node 24.x</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS ROW -->
+    <div class="grid grid-4 mb-24">
+      <div class="stat">
+        <div class="stat__label">Pages</div>
+        <div class="stat__value" style="font-size: 22px;">12</div>
+        <div class="stat__delta stat__delta--up">All published</div>
+      </div>
+      <div class="stat">
+        <div class="stat__label">Forms</div>
+        <div class="stat__value" style="font-size: 22px;">3</div>
+        <div class="stat__delta stat__delta--up">252 total submissions</div>
+      </div>
+      <div class="stat">
+        <div class="stat__label">Media Files</div>
+        <div class="stat__value" style="font-size: 22px;">847</div>
+        <div class="stat__delta stat__delta--neutral">2.4 GB used</div>
+      </div>
+      <div class="stat">
+        <div class="stat__label">Domains</div>
+        <div class="stat__value" style="font-size: 22px;">2</div>
+        <div class="stat__delta stat__delta--up">fndly.nl + www</div>
+      </div>
+    </div>
+
+    <!-- WEBSITE PAGES TABLE -->
+    <div class="card card--flush mb-24">
+      <div class="card__header">
+        <div>
+          <div class="card__title">Website Pages</div>
+          <div class="card__subtitle">All pages on your website</div>
+        </div>
+        <button class="btn btn--primary btn--sm">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          Add Page
+        </button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Page</th>
+              <th>Status</th>
+              <th>Last Modified</th>
+              <th>Views</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>/</strong> <span class="text-muted" style="font-size: 12px;">Homepage</span></td>
+              <td><span class="badge badge--success">Published</span></td>
+              <td>26 Jun 2026</td>
+              <td>2,841</td>
+            </tr>
+            <tr>
+              <td><strong>/services</strong> <span class="text-muted" style="font-size: 12px;">Services</span></td>
+              <td><span class="badge badge--success">Published</span></td>
+              <td>22 Jun 2026</td>
+              <td>892</td>
+            </tr>
+            <tr>
+              <td><strong>/about</strong> <span class="text-muted" style="font-size: 12px;">About</span></td>
+              <td><span class="badge badge--success">Published</span></td>
+              <td>18 Jun 2026</td>
+              <td>634</td>
+            </tr>
+            <tr>
+              <td><strong>/contact</strong> <span class="text-muted" style="font-size: 12px;">Contact</span></td>
+              <td><span class="badge badge--success">Published</span></td>
+              <td>20 Jun 2026</td>
+              <td>421</td>
+            </tr>
+            <tr>
+              <td><strong>/blog</strong> <span class="text-muted" style="font-size: 12px;">Blog</span></td>
+              <td><span class="badge badge--success">Published</span></td>
+              <td>27 Jun 2026</td>
+              <td>287</td>
+            </tr>
+            <tr>
+              <td><strong>/privacy</strong> <span class="text-muted" style="font-size: 12px;">Privacy Policy</span></td>
+              <td><span class="badge badge--success">Published</span></td>
+              <td>3 Mar 2026</td>
+              <td>64</td>
+            </tr>
+            <tr>
+              <td><strong>/terms</strong> <span class="text-muted" style="font-size: 12px;">Terms</span></td>
+              <td><span class="badge badge--success">Published</span></td>
+              <td>3 Mar 2026</td>
+              <td>41</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PERFORMANCE + WEBSITE SPEED -->
+    <div class="grid grid-2 mb-24">
+
+      <!-- Performance Card -->
+      <div class="card">
+        <div class="card__title mb-16">Lighthouse Performance</div>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Performance</span>
+              <span style="font-size: 13px; font-weight: 700; color: var(--success);">94 / 100</span>
+            </div>
+            <div class="progress">
+              <div class="progress__bar" style="width: 94%; background: var(--success);"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Accessibility</span>
+              <span style="font-size: 13px; font-weight: 700; color: var(--success);">89 / 100</span>
+            </div>
+            <div class="progress">
+              <div class="progress__bar" style="width: 89%; background: var(--success);"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Best Practices</span>
+              <span style="font-size: 13px; font-weight: 700; color: var(--success);">92 / 100</span>
+            </div>
+            <div class="progress">
+              <div class="progress__bar" style="width: 92%; background: var(--success);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Website Speed Card -->
+      <div class="card">
+        <div class="card__title mb-16">Website Speed</div>
+        <div class="grid grid-2" style="gap: 12px;">
+          <div style="padding: 14px; background: var(--accent-light); border-radius: var(--radius); border: 1px solid rgba(79,70,229,0.12);">
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 4px;">Desktop Speed</div>
+            <div style="font-size: 24px; font-weight: 800; color: var(--accent); letter-spacing: -0.04em;">1.2s</div>
+          </div>
+          <div style="padding: 14px; background: rgba(6,182,212,0.06); border-radius: var(--radius); border: 1px solid rgba(6,182,212,0.12);">
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 4px;">Mobile Speed</div>
+            <div style="font-size: 24px; font-weight: 800; color: var(--cyan); letter-spacing: -0.04em;">2.1s</div>
+          </div>
+          <div style="padding: 14px; background: var(--success-bg); border-radius: var(--radius); border: 1px solid rgba(101,163,13,0.12);">
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 4px;">First Contentful Paint</div>
+            <div style="font-size: 24px; font-weight: 800; color: var(--success); letter-spacing: -0.04em;">0.8s</div>
+          </div>
+          <div style="padding: 14px; background: rgba(124,58,237,0.06); border-radius: var(--radius); border: 1px solid rgba(124,58,237,0.12);">
+            <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 4px;">Largest Contentful Paint</div>
+            <div style="font-size: 24px; font-weight: 800; color: var(--violet); letter-spacing: -0.04em;">1.4s</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECURITY + FORMS -->
+    <div class="grid grid-2 mb-24">
+
+      <!-- Security Card -->
+      <div class="card">
+        <div class="card__title mb-16">Security</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: var(--success-bg); border-radius: var(--radius); border: 1px solid rgba(101,163,13,0.12);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Security Headers</span>
+            </div>
+            <span class="badge badge--success">A+</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: var(--success-bg); border-radius: var(--radius); border: 1px solid rgba(101,163,13,0.12);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span style="font-size: 13px; font-weight: 600; color: var(--ink);">HTTPS</span>
+            </div>
+            <span class="badge badge--success">Enforced</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: var(--success-bg); border-radius: var(--radius); border: 1px solid rgba(101,163,13,0.12);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="font-size: 13px; font-weight: 600; color: var(--ink);">HSTS</span>
+            </div>
+            <span class="badge badge--success">Enabled</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: var(--success-bg); border-radius: var(--radius); border: 1px solid rgba(101,163,13,0.12);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Content Security Policy</span>
+            </div>
+            <span class="badge badge--success">Active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Forms Card -->
+      <div class="card">
+        <div class="flex items-center justify-between mb-16">
+          <div class="card__title">Forms</div>
+          <button class="card__action">Manage forms &rarr;</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px; border-radius: var(--radius); border: 1px solid var(--border);">
+            <div>
+              <div style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 2px;">Contact Form</div>
+              <div style="font-size: 12px; color: var(--ink-muted);">Last submission: 27 Jun 2026</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 20px; font-weight: 800; color: var(--accent); letter-spacing: -0.04em;">47</div>
+              <div style="font-size: 11px; color: var(--ink-muted); font-weight: 500;">submissions</div>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px; border-radius: var(--radius); border: 1px solid var(--border);">
+            <div>
+              <div style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 2px;">Newsletter Signup</div>
+              <div style="font-size: 12px; color: var(--ink-muted);">Last submission: 28 Jun 2026</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 20px; font-weight: 800; color: var(--success); letter-spacing: -0.04em;">182</div>
+              <div style="font-size: 11px; color: var(--ink-muted); font-weight: 500;">subscribers</div>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px; border-radius: var(--radius); border: 1px solid var(--border);">
+            <div>
+              <div style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 2px;">Free Audit Request</div>
+              <div style="font-size: 12px; color: var(--ink-muted);">Last submission: 25 Jun 2026</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 20px; font-weight: 800; color: var(--cyan); letter-spacing: -0.04em;">23</div>
+              <div style="font-size: 11px; color: var(--ink-muted); font-weight: 500;">requests</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOMAINS TABLE -->
+    <div class="card card--flush mb-24">
+      <div class="card__header">
+        <div>
+          <div class="card__title">Domains</div>
+          <div class="card__subtitle">Connected domains and SSL status</div>
+        </div>
+        <button class="btn btn--sm" style="background: rgba(79,70,229,0.08); color: var(--accent); border: 1px solid rgba(79,70,229,0.15);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          Add Domain
+        </button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th>Status</th>
+              <th>SSL</th>
+              <th>Expires</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>fndly.nl</strong> <span class="text-muted" style="font-size: 12px;">Primary</span></td>
+              <td><span class="badge badge--success">Connected</span></td>
+              <td><span class="badge badge--success">Active</span></td>
+              <td>14 Dec 2026</td>
+            </tr>
+            <tr>
+              <td><strong>www.fndly.nl</strong> <span class="text-muted" style="font-size: 12px;">Redirect</span></td>
+              <td><span class="badge badge--success">Active</span></td>
+              <td><span class="badge badge--success">Active</span></td>
+              <td>14 Dec 2026</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /dash -->
+
+<script src="shared.js"></script>
+</body>
+</html>

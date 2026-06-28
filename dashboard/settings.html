@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FNDLY — Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="dash">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <a href="/dashboard/" class="sidebar__logo">
+    <div class="sidebar__logo-mark">F</div>
+    FNDLY
+  </a>
+  <nav class="sidebar__nav">
+    <a href="/dashboard/" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="website.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website
+    </a>
+    <a href="analytics.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      Analytics
+    </a>
+    <a href="seo.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      SEO Center
+    </a>
+    <a href="ai.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14H8a4 4 0 0 0-4 4v2h16v-2a4 4 0 0 0-4-4z"/></svg>
+      AI Assistant
+      <span class="sidebar__badge">New</span>
+    </a>
+    <a href="support.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Support
+    </a>
+
+    <div class="sidebar__section"><span class="sidebar__section-label">Platform</span></div>
+    <a href="addons.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+      Add-ons
+    </a>
+    <a href="knowledge.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Knowledge Base
+    </a>
+
+    <div class="sidebar__section"><span class="sidebar__section-label">Account</span></div>
+    <a href="invoices.html" class="sidebar__link">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+      Invoices
+    </a>
+    <a href="settings.html" class="sidebar__link active">
+      <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1.08 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1.08 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.77 1.02 1.51 1.08H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1.08z"/></svg>
+      Settings
+    </a>
+  </nav>
+  <div class="sidebar__user">
+    <div class="sidebar__avatar">L</div>
+    <div class="sidebar__user-info">
+      <div class="sidebar__user-name">Lars Luiting</div>
+      <div class="sidebar__user-plan">Growth Plan</div>
+    </div>
+  </div>
+</aside>
+<div class="sidebar-overlay"></div>
+
+<!-- MAIN -->
+<div class="main">
+  <header class="topbar">
+    <button class="sidebar-toggle" id="sidebarToggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+    <div class="topbar__title">Settings</div>
+    <div class="topbar__search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      Search...
+      <kbd>⌘K</kbd>
+    </div>
+    <button class="topbar__btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="topbar__dot"></span>
+    </button>
+    <div class="topbar__user">L</div>
+  </header>
+
+  <div class="content">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="page-header__row">
+        <div>
+          <h1 class="page-title">Settings</h1>
+          <p class="page-subtitle">Manage your account, integrations, and preferences</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. COMPANY DETAILS -->
+    <div class="settings-section">
+      <div class="settings-section__title">Company Details</div>
+      <div class="settings-section__desc">Your business information used across the platform</div>
+      <div class="card">
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">Company Name</div>
+          </div>
+          <span style="font-size: 13.5px; color: var(--ink-soft);">FNDLY B.V.</span>
+          <a href="#" style="font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; margin-left: 16px;">Edit</a>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">Email</div>
+          </div>
+          <span style="font-size: 13.5px; color: var(--ink-soft);">hello@fndly.nl</span>
+          <a href="#" style="font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; margin-left: 16px;">Edit</a>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">Phone</div>
+          </div>
+          <span style="font-size: 13.5px; color: var(--ink-soft);">+31 6 12345678</span>
+          <a href="#" style="font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; margin-left: 16px;">Edit</a>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">Address</div>
+          </div>
+          <span style="font-size: 13.5px; color: var(--ink-soft);">Amsterdam, Netherlands</span>
+          <a href="#" style="font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; margin-left: 16px;">Edit</a>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">Website</div>
+          </div>
+          <span style="font-size: 13.5px; color: var(--ink-soft);">fndly.nl</span>
+          <a href="#" style="font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; margin-left: 16px;">Edit</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. USERS -->
+    <div class="settings-section">
+      <div class="settings-section__title">Users</div>
+      <div class="settings-section__desc">Manage team members who have access to this dashboard</div>
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Email</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Lars Luiting</strong></td>
+                <td>Owner</td>
+                <td>larsluiting1@gmail.com</td>
+                <td><span class="badge badge--success">Active</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding-top: 16px; border-top: 1px solid var(--border); margin-top: 4px;">
+          <button class="btn btn--outline btn--sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            Invite User
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. NOTIFICATIONS -->
+    <div class="settings-section">
+      <div class="settings-section__title">Notifications</div>
+      <div class="settings-section__desc">Choose which notifications you want to receive</div>
+      <div class="card">
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">Email notifications for new leads</div>
+            <div class="settings-row__desc">Get notified when a new lead comes in via your website</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <div class="toggle__track"></div>
+            <div class="toggle__thumb"></div>
+          </label>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">Weekly performance reports</div>
+            <div class="settings-row__desc">Receive a summary of your website performance every Monday</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <div class="toggle__track"></div>
+            <div class="toggle__thumb"></div>
+          </label>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">Security alerts</div>
+            <div class="settings-row__desc">Critical alerts about SSL, uptime, and security issues</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <div class="toggle__track"></div>
+            <div class="toggle__thumb"></div>
+          </label>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">Marketing updates</div>
+            <div class="settings-row__desc">Tips, product news, and feature announcements from FNDLY</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox">
+            <div class="toggle__track"></div>
+            <div class="toggle__thumb"></div>
+          </label>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">AI recommendation alerts</div>
+            <div class="settings-row__desc">Get notified when new AI-powered suggestions are available</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <div class="toggle__track"></div>
+            <div class="toggle__thumb"></div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. CONNECTED SERVICES -->
+    <div class="settings-section">
+      <div class="settings-section__title">Connected Services</div>
+      <div class="settings-section__desc">Manage your third-party integrations</div>
+      <div class="grid grid-3">
+        <div class="integ" style="flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px;">
+          <div style="display: flex; align-items: center; gap: 12px; width: 100%;">
+            <div class="integ__icon" style="background: rgba(234,67,53,0.08); color: #EA4335; font-size: 14px; font-weight: 800;">G</div>
+            <div class="integ__info">
+              <div class="integ__name">Google Analytics</div>
+              <div class="integ__status" style="color: var(--success); font-weight: 600; display: flex; align-items: center; gap: 5px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--success); display: inline-block;"></span>
+                Connected
+              </div>
+            </div>
+          </div>
+          <button class="btn btn--outline btn--sm" style="width: 100%; justify-content: center;">Manage</button>
+        </div>
+        <div class="integ" style="flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px;">
+          <div style="display: flex; align-items: center; gap: 12px; width: 100%;">
+            <div class="integ__icon" style="background: rgba(66,133,244,0.08); color: #4285F4; font-size: 14px; font-weight: 800;">S</div>
+            <div class="integ__info">
+              <div class="integ__name">Search Console</div>
+              <div class="integ__status" style="color: var(--success); font-weight: 600; display: flex; align-items: center; gap: 5px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--success); display: inline-block;"></span>
+                Connected
+              </div>
+            </div>
+          </div>
+          <button class="btn btn--outline btn--sm" style="width: 100%; justify-content: center;">Manage</button>
+        </div>
+        <div class="integ" style="flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px;">
+          <div style="display: flex; align-items: center; gap: 12px; width: 100%;">
+            <div class="integ__icon" style="background: rgba(99,91,255,0.08); color: #635BFF; font-size: 14px; font-weight: 800;">S</div>
+            <div class="integ__info">
+              <div class="integ__name">Stripe</div>
+              <div class="integ__status" style="color: var(--success); font-weight: 600; display: flex; align-items: center; gap: 5px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--success); display: inline-block;"></span>
+                Connected
+              </div>
+            </div>
+          </div>
+          <button class="btn btn--outline btn--sm" style="width: 100%; justify-content: center;">Manage</button>
+        </div>
+        <div class="integ" style="flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px;">
+          <div style="display: flex; align-items: center; gap: 12px; width: 100%;">
+            <div class="integ__icon" style="background: rgba(24,119,242,0.08); color: #1877F2; font-size: 14px; font-weight: 800;">M</div>
+            <div class="integ__info">
+              <div class="integ__name">Meta (Facebook)</div>
+              <div class="integ__status">Not connected</div>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--sm" style="width: 100%; justify-content: center;">Connect</button>
+        </div>
+        <div class="integ" style="flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px;">
+          <div style="display: flex; align-items: center; gap: 12px; width: 100%;">
+            <div class="integ__icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <div class="integ__info">
+              <div class="integ__name">Mail Provider</div>
+              <div class="integ__status">Not connected</div>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--sm" style="width: 100%; justify-content: center;">Connect</button>
+        </div>
+        <div class="integ" style="flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px;">
+          <div style="display: flex; align-items: center; gap: 12px; width: 100%;">
+            <div class="integ__icon" style="background: rgba(66,133,244,0.08); color: #4285F4; font-size: 14px; font-weight: 800;">G</div>
+            <div class="integ__info">
+              <div class="integ__name">Google Business</div>
+              <div class="integ__status">Not connected</div>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--sm" style="width: 100%; justify-content: center;">Connect</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. FUTURE INTEGRATIONS -->
+    <div class="settings-section">
+      <div class="settings-section__title">Future Integrations</div>
+      <div class="settings-section__desc">Upcoming integrations we are working on</div>
+      <div class="grid grid-4">
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">G</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Google Ads</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">H</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">HubSpot</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">Z</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Zapier</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">n</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">n8n</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">C</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Calendly</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">M</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Mailchimp</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">B</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Brevo</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">O</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">OpenAI</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">A</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Anthropic</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">C</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Cloudflare</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">V</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Vercel</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">G</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">GitHub</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+        <div class="integ" style="opacity: 0.6; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+            <div style="width: 30px; height: 30px; border-radius: 7px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ink-muted); flex-shrink: 0;">S</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">Supabase</span>
+            <span class="badge badge--neutral" style="margin-left: auto;">Coming Soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. API KEYS -->
+    <div class="settings-section">
+      <div class="settings-section__title">API Keys</div>
+      <div class="settings-section__desc">Manage your API credentials and webhook endpoints</div>
+      <div class="card">
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">API Key</div>
+            <div class="settings-row__desc">Use this key to authenticate API requests</div>
+          </div>
+          <code class="font-mono" style="font-size: 13px; color: var(--ink-soft); background: var(--bg-soft); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border);">fndly_live_&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;4a2b</code>
+          <div style="display: flex; gap: 6px; margin-left: 12px;">
+            <button class="btn btn--outline btn--sm">Copy</button>
+            <button class="btn btn--outline btn--sm">Regenerate</button>
+          </div>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">Webhook URL</div>
+            <div class="settings-row__desc">Incoming webhook endpoint for external services</div>
+          </div>
+          <code class="font-mono" style="font-size: 13px; color: var(--ink-soft); background: var(--bg-soft); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border);">https://fndly.nl/api/webhook</code>
+          <div style="display: flex; gap: 6px; margin-left: 12px;">
+            <button class="btn btn--outline btn--sm">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. DANGER ZONE -->
+    <div class="settings-section">
+      <div class="settings-section__title" style="color: var(--danger);">Danger Zone</div>
+      <div class="settings-section__desc">Irreversible actions that affect your account</div>
+      <div class="card" style="border-color: rgba(220,38,38,0.25);">
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">Delete Website</div>
+            <div class="settings-row__desc">Permanently delete your website and all associated data. This action cannot be undone.</div>
+          </div>
+          <button class="btn btn--sm" style="background: transparent; color: var(--danger); border: 1px solid rgba(220,38,38,0.3); font-weight: 600;">Delete Website</button>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row__label">
+            <div class="settings-row__name">Cancel Subscription</div>
+            <div class="settings-row__desc">Cancel your Growth Plan subscription. Your website will remain active until the end of the current billing period.</div>
+          </div>
+          <button class="btn btn--sm" style="background: transparent; color: var(--danger); border: 1px solid rgba(220,38,38,0.3); font-weight: 600;">Cancel Plan</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /dash -->
+
+<script src="shared.js"></script>
+</body>
+</html>
