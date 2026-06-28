@@ -280,22 +280,105 @@
     @media (max-width: 600px) { .services__grid { grid-template-columns: 1fr; } }
 
     /* ── PROCESS ── */
-    .process { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .process__inner { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
-    .process__steps { display: flex; flex-direction: column; gap: 0; }
-    .step-row {
-      display: flex; gap: 24px; padding: 32px 0;
-      border-bottom: 1px solid var(--border); position: relative;
+    .process { background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .process__header { text-align: center; max-width: 620px; margin: 0 auto 64px; }
+    .process__badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(79,70,229,0.06); border: 1px solid rgba(79,70,229,0.1);
+      border-radius: 100px; padding: 5px 16px; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 20px;
     }
-    .step-row:last-child { border-bottom: none; }
-    .step-row__num {
-      font-size: 13px; font-weight: 700; color: var(--ink-faint);
-      letter-spacing: 0.02em; min-width: 24px; padding-top: 2px;
+
+    /* Timeline */
+    .process__timeline { position: relative; max-width: 760px; margin: 0 auto; }
+    .process__line {
+      position: absolute; left: 27px; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      border-radius: 1px;
     }
-    .step-row__body { }
-    .step-row__title { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.02em; }
-    .step-row__desc { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
-    @media (max-width: 768px) { .process__inner { grid-template-columns: 1fr; gap: 40px; } }
+    .pstep {
+      display: flex; gap: 28px; position: relative; padding-bottom: 48px;
+    }
+    .pstep:last-child { padding-bottom: 0; }
+    .pstep__marker {
+      width: 56px; height: 56px; border-radius: 14px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+      transition: box-shadow 0.3s;
+    }
+    .pstep__marker--accent { background: rgba(79,70,229,0.08); color: var(--accent); border: 1px solid rgba(79,70,229,0.15); }
+    .pstep__marker--cyan { background: rgba(6,182,212,0.08); color: #06B6D4; border: 1px solid rgba(6,182,212,0.15); }
+    .pstep__marker--violet { background: rgba(124,58,237,0.08); color: #7C3AED; border: 1px solid rgba(124,58,237,0.15); }
+    .pstep__marker--success { background: rgba(101,163,13,0.08); color: var(--success); border: 1px solid rgba(101,163,13,0.15); }
+    .pstep__marker--lime { background: rgba(182,255,60,0.12); color: #4D7C0F; border: 1px solid rgba(182,255,60,0.25); }
+    .pstep:hover .pstep__marker { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .pstep__content { flex: 1; padding-top: 6px; }
+    .pstep__num { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); margin-bottom: 4px; }
+    .pstep__title { font-size: 20px; font-weight: 800; color: var(--ink); letter-spacing: -0.03em; margin-bottom: 6px; }
+    .pstep__subtitle { font-size: 14px; color: var(--ink-muted); margin-bottom: 14px; font-weight: 500; }
+    .pstep__desc { font-size: 14px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 16px; }
+    .pstep__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pstep__tag {
+      padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;
+      background: var(--bg-soft); color: var(--ink-soft); border: 1px solid var(--border);
+    }
+
+    /* Delivery timeline */
+    .process__delivery {
+      max-width: 760px; margin: 64px auto 0; padding: 36px 40px;
+      background: var(--bg-dark); border-radius: var(--radius-xl);
+      position: relative; overflow: hidden;
+    }
+    .process__delivery::before {
+      content: ''; position: absolute; top: -40px; right: -20px;
+      width: 260px; height: 200px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(79,70,229,0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .process__delivery-title { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.02em; margin-bottom: 6px; position: relative; }
+    .process__delivery-sub { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 28px; position: relative; }
+    .process__tl { display: flex; gap: 0; position: relative; }
+    .process__tl-step { flex: 1; text-align: center; position: relative; }
+    .process__tl-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      margin: 0 auto 10px; position: relative; z-index: 1;
+    }
+    .process__tl-dot--accent { background: var(--accent); box-shadow: 0 0 0 4px rgba(79,70,229,0.2); }
+    .process__tl-dot--lime { background: var(--accent-2); box-shadow: 0 0 0 4px rgba(182,255,60,0.15); }
+    .process__tl-step::before {
+      content: ''; position: absolute; top: 4px; left: 0; right: 0; height: 2px;
+      background: rgba(255,255,255,0.08);
+    }
+    .process__tl-step:first-child::before { left: 50%; }
+    .process__tl-step:last-child::before { right: 50%; }
+    .process__tl-day { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+    .process__tl-label { font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.4; }
+
+    /* Dashboard callout */
+    .process__dashboard {
+      max-width: 760px; margin: 28px auto 0; padding: 28px 36px;
+      background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-xl);
+      display: flex; align-items: center; gap: 24px;
+    }
+    .process__dashboard-icon {
+      width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+      background: var(--accent-light); border: 1px solid rgba(79,70,229,0.12);
+      display: flex; align-items: center; justify-content: center; color: var(--accent);
+    }
+    .process__dashboard-text { flex: 1; }
+    .process__dashboard-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+    .process__dashboard-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.55; }
+    @media (max-width: 768px) {
+      .process__tl { flex-direction: column; gap: 16px; }
+      .process__tl-step { text-align: left; display: flex; align-items: center; gap: 12px; }
+      .process__tl-step::before { display: none; }
+      .process__tl-dot { margin: 0; }
+      .process__dashboard { flex-direction: column; text-align: center; }
+      .process__delivery { padding: 28px 24px; }
+      .pstep { gap: 18px; }
+      .pstep__marker { width: 44px; height: 44px; border-radius: 11px; }
+      .process__line { left: 21px; }
+    }
 
     /* ── SHOWCASE / DASHBOARD ── */
     .showcase { border-top: 1px solid var(--border); }
@@ -1011,39 +1094,165 @@
   </div>
 </section>
 
-<!-- PROCESS -->
+<!-- HOW FNDLY WORKS -->
 <section class="section process" id="process">
   <div class="container">
-    <div class="process__inner">
-      <div class="reveal">
-        <span class="eyebrow" style="margin-bottom: 18px; display: inline-flex;">How it works</span>
-        <h2 class="h2">A simple process.<br>Powerful results.</h2>
-        <p class="body" style="margin-top: 20px; max-width: 300px;">We keep things clear and focused so you always know where you stand and where you're headed.</p>
+
+    <div class="process__header reveal">
+      <div class="process__badge">How FNDLY works</div>
+      <h2 class="h2">From idea to a fully managed<br>website in two weeks</h2>
+      <p class="body" style="margin-top: 16px;">A simple, stress-free process — we handle everything so you can focus on running your business.</p>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="process__timeline">
+      <div class="process__line"></div>
+
+      <!-- Step 1 -->
+      <div class="pstep reveal">
+        <div class="pstep__marker pstep__marker--accent">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </div>
+        <div class="pstep__content">
+          <div class="pstep__num">Step 1</div>
+          <div class="pstep__title">Discovery</div>
+          <div class="pstep__subtitle">Let's get to know your business</div>
+          <div class="pstep__desc">Every project starts with understanding your company, services, customers, goals and brand identity. If you already have a website, we analyze it first — there's no need to start over unless it creates a better result.</div>
+          <div class="pstep__tags">
+            <span class="pstep__tag">Your company</span>
+            <span class="pstep__tag">Services</span>
+            <span class="pstep__tag">Customers</span>
+            <span class="pstep__tag">Goals</span>
+            <span class="pstep__tag">Brand identity</span>
+          </div>
+        </div>
       </div>
-      <div class="process__steps">
-        <div class="step-row reveal d1">
-          <div class="step-row__num">01</div>
-          <div class="step-row__body">
-            <div class="step-row__title">Audit</div>
-            <div class="step-row__desc">We conduct a deep analysis of your current online visibility—identifying exactly where you stand across search engines, AI platforms, maps, and directories.</div>
+
+      <!-- Step 2 -->
+      <div class="pstep reveal">
+        <div class="pstep__marker pstep__marker--cyan">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        </div>
+        <div class="pstep__content">
+          <div class="pstep__num">Step 2</div>
+          <div class="pstep__title">Design & Build</div>
+          <div class="pstep__subtitle">We create your new website</div>
+          <div class="pstep__desc">Using AI-powered workflows combined with human creativity, we design a modern website tailored to your business. You don't have to worry about any technical details — we take care of everything.</div>
+          <div class="pstep__tags">
+            <span class="pstep__tag">Unique design</span>
+            <span class="pstep__tag">Fully responsive</span>
+            <span class="pstep__tag">Fast</span>
+            <span class="pstep__tag">SEO-ready</span>
+            <span class="pstep__tag">Conversion optimized</span>
           </div>
         </div>
-        <div class="step-row reveal d2">
-          <div class="step-row__num">02</div>
-          <div class="step-row__body">
-            <div class="step-row__title">Optimize</div>
-            <div class="step-row__desc">We implement strategic improvements across all channels: technical SEO, AI search visibility, local listings, content, and reputation signals.</div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="pstep reveal">
+        <div class="pstep__marker pstep__marker--violet">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="pstep__content">
+          <div class="pstep__num">Step 3</div>
+          <div class="pstep__title">Review</div>
+          <div class="pstep__subtitle">Review your new website</div>
+          <div class="pstep__desc">Once the first version is ready, you receive a private preview. Review everything before launch — text, images, branding, layout, colors. Our goal is to make sure the website accurately represents your business.</div>
+          <div class="pstep__tags">
+            <span class="pstep__tag">Private preview</span>
+            <span class="pstep__tag">Unlimited feedback</span>
+            <span class="pstep__tag">Quick revisions</span>
           </div>
         </div>
-        <div class="step-row reveal d3">
-          <div class="step-row__num">03</div>
-          <div class="step-row__body">
-            <div class="step-row__title">Grow</div>
-            <div class="step-row__desc">You generate more organic traffic, qualified leads, and paying customers as your visibility compounds month after month.</div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="pstep reveal">
+        <div class="pstep__marker pstep__marker--success">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="pstep__content">
+          <div class="pstep__num">Step 4</div>
+          <div class="pstep__title">Launch</div>
+          <div class="pstep__subtitle">Go live</div>
+          <div class="pstep__desc">Once approved, we launch your website. FNDLY handles hosting, domain connection, SSL, performance optimization, security, backups and the complete technical setup. Your business is now online.</div>
+          <div class="pstep__tags">
+            <span class="pstep__tag">Hosting</span>
+            <span class="pstep__tag">SSL</span>
+            <span class="pstep__tag">Domain</span>
+            <span class="pstep__tag">Security</span>
+            <span class="pstep__tag">Backups</span>
           </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="pstep reveal">
+        <div class="pstep__marker pstep__marker--lime">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        </div>
+        <div class="pstep__content">
+          <div class="pstep__num">Step 5</div>
+          <div class="pstep__title">Grow with FNDLY</div>
+          <div class="pstep__subtitle">Your website keeps improving</div>
+          <div class="pstep__desc">This is where FNDLY becomes different from traditional web agencies. After launch, your monthly subscription gives you continuous hosting, maintenance, AI-powered recommendations, analytics, SEO monitoring, support and website improvements through FNDLY Credits. The relationship doesn't end at launch — it starts there.</div>
+          <div class="pstep__tags">
+            <span class="pstep__tag">AI insights</span>
+            <span class="pstep__tag">Analytics</span>
+            <span class="pstep__tag">SEO monitoring</span>
+            <span class="pstep__tag">FNDLY Credits</span>
+            <span class="pstep__tag">Priority support</span>
+            <span class="pstep__tag">Monthly reports</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DELIVERY TIMELINE -->
+    <div class="process__delivery reveal">
+      <div class="process__delivery-title">Average delivery timeline</div>
+      <div class="process__delivery-sub">From first contact to a live website — typically within two weeks.</div>
+      <div class="process__tl">
+        <div class="process__tl-step">
+          <div class="process__tl-dot process__tl-dot--accent"></div>
+          <div><div class="process__tl-day">Day 1</div><div class="process__tl-label">Discovery &amp; intake</div></div>
+        </div>
+        <div class="process__tl-step">
+          <div class="process__tl-dot process__tl-dot--accent"></div>
+          <div><div class="process__tl-day">Day 2–5</div><div class="process__tl-label">Research, planning &amp; design</div></div>
+        </div>
+        <div class="process__tl-step">
+          <div class="process__tl-dot process__tl-dot--accent"></div>
+          <div><div class="process__tl-day">Day 6–10</div><div class="process__tl-label">Website development</div></div>
+        </div>
+        <div class="process__tl-step">
+          <div class="process__tl-dot process__tl-dot--accent"></div>
+          <div><div class="process__tl-day">Day 11–13</div><div class="process__tl-label">Review &amp; revisions</div></div>
+        </div>
+        <div class="process__tl-step">
+          <div class="process__tl-dot process__tl-dot--lime"></div>
+          <div><div class="process__tl-day">Within 2 weeks</div><div class="process__tl-label">Website goes live</div></div>
+        </div>
+        <div class="process__tl-step">
+          <div class="process__tl-dot process__tl-dot--lime"></div>
+          <div><div class="process__tl-day">Ongoing</div><div class="process__tl-label">Monthly optimisation &amp; growth</div></div>
         </div>
       </div>
     </div>
+
+    <!-- DASHBOARD CALLOUT -->
+    <div class="process__dashboard reveal">
+      <div class="process__dashboard-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      </div>
+      <div class="process__dashboard-text">
+        <div class="process__dashboard-title">Your FNDLY Dashboard</div>
+        <div class="process__dashboard-desc">After launch, you get access to your personal dashboard — monitor performance, track analytics, view website health, contact support, chat with the AI assistant, redeem credits and manage everything in one place.</div>
+      </div>
+      <a href="/dashboard/login.html" class="btn btn--outline" style="flex-shrink:0;font-size:13px;padding:9px 18px;">Explore dashboard →</a>
+    </div>
+
   </div>
 </section>
 
@@ -1742,13 +1951,25 @@
   });
 
   /* ── PROCESS ── */
-  gsap.from('.process__inner > :first-child > *', {
+  gsap.from('.process__header > *', {
     opacity: 0, y: 24, stagger: 0.12, duration: 0.85, ease: 'power2.out',
-    scrollTrigger: { trigger: '.process__inner', start: 'top 82%', once: true }
+    scrollTrigger: { trigger: '.process__header', start: 'top 82%', once: true }
   });
-  gsap.from('.step-row', {
-    opacity: 0, x: -24, stagger: 0.16, duration: 0.8, ease: 'power2.out',
-    scrollTrigger: { trigger: '.process__steps', start: 'top 80%', once: true }
+  gsap.from('.pstep', {
+    opacity: 0, y: 28, stagger: 0.18, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: { trigger: '.process__timeline', start: 'top 80%', once: true }
+  });
+  gsap.from('.process__line', {
+    scaleY: 0, transformOrigin: 'top center', duration: 1.8, ease: 'power2.out',
+    scrollTrigger: { trigger: '.process__timeline', start: 'top 78%', once: true }
+  });
+  gsap.from('.process__delivery', {
+    opacity: 0, y: 32, duration: 0.9, ease: 'power2.out',
+    scrollTrigger: { trigger: '.process__delivery', start: 'top 85%', once: true }
+  });
+  gsap.from('.process__dashboard', {
+    opacity: 0, y: 24, duration: 0.8, ease: 'power2.out',
+    scrollTrigger: { trigger: '.process__dashboard', start: 'top 85%', once: true }
   });
 
   /* ── VISIBILITY CHECKER (interactive) ── */
