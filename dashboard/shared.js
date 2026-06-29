@@ -2,6 +2,10 @@
    FNDLY Dashboard — Shared JS
    ═══════════════════════════════════════════════ */
 
+if (!sessionStorage.getItem('fndly_logged_in')) {
+  window.location.href = '/dashboard/login.html';
+}
+
 (function () {
   /* ── SIDEBAR TOGGLE (mobile) ── */
   const sidebar = document.querySelector('.sidebar');

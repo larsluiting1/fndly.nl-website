@@ -334,12 +334,13 @@
     document.title = 'FNDLY — Sign In';
   });
 
-  // Sign in (simulated — redirects to dashboard)
+  // Sign in — sets session flag and redirects to dashboard
   document.getElementById('loginForm').addEventListener('submit', e => {
     e.preventDefault();
     const btn = document.getElementById('loginBtn');
     btn.textContent = 'Signing in…';
     btn.disabled = true;
+    sessionStorage.setItem('fndly_logged_in', '1');
     setTimeout(() => { window.location.href = '/dashboard/'; }, 800);
   });
 
