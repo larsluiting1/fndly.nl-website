@@ -22,12 +22,12 @@
       --bg-soft: #F7F7F5;
       --bg-dark: #0B0B0E;
       --bg-dark-2: #131316;
-      --accent: #4F46E5;
-      --accent-2: #B6FF3C;
-      --accent-2-ink: #1A2B00;
+      --accent: #FF551D;
+      --accent-2: #FF551D;
+      --accent-2-ink: #fff;
       --border: #E8E8E5;
       --border-dark: rgba(255,255,255,0.09);
-      --success: #65A30D;
+      --success: #22C55E;
       --radius: 10px;
       --radius-lg: 16px;
       --radius-xl: 24px;
@@ -36,7 +36,7 @@
     html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
     body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; overflow-x: hidden; width: 100%; }
 
-    ::selection { background: rgba(79,70,229,0.12); }
+    ::selection { background: rgba(255,85,29,0.12); }
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
 
@@ -80,22 +80,42 @@
     .btn--outline { background: transparent; color: var(--ink); border: 1px solid var(--border); }
     .btn--outline:hover { border-color: #ccc; background: var(--bg-soft); }
     .btn--accent { background: var(--accent); color: #fff; }
-    .btn--accent:hover { background: #4a4ae0; }
+    .btn--accent:hover { background: #E0440F; }
     .btn--lg { padding: 16px 32px; font-size: 15px; border-radius: var(--radius-lg); }
     .btn svg { flex-shrink: 0; }
 
     /* ── NAV ── */
     .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 100;
+      width: calc(100% - 32px); max-width: 1140px;
       height: 64px; display: flex; align-items: center;
-      padding: 0 40px; transition: all 0.25s ease;
+      padding: 0 12px 0 24px; transition: all 0.3s ease;
+      border-radius: 100px;
+      background: rgba(255,85,29,0.08);
+      border: 1px solid rgba(255,85,29,0.18);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.06);
     }
+    .nav .nav__logo { color: #fff; }
+    .nav .nav__links a { color: rgba(255,255,255,0.55); }
+    .nav .nav__links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    .nav .btn--outline { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.15); background: transparent; }
+    .nav .btn--outline:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .nav .nav__cta-accent { background: var(--accent) !important; color: #fff !important; }
+    .nav .nav__cta-accent:hover { background: #E0440F !important; }
     .nav.scrolled {
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(16px) saturate(1.6);
-      -webkit-backdrop-filter: blur(16px) saturate(1.6);
-      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.85);
+      border-color: rgba(255,85,29,0.15);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.4);
     }
+    .nav.scrolled .nav__logo { color: var(--ink); }
+    .nav.scrolled .nav__links a { color: var(--ink-soft); }
+    .nav.scrolled .nav__links a:hover { color: var(--ink); background: rgba(0,0,0,0.04); }
+    .nav.scrolled .btn--outline { color: var(--ink); border-color: var(--border); background: rgba(255,255,255,0.6); }
+    .nav.scrolled .btn--outline:hover { background: var(--bg); }
+    .nav.scrolled .nav__cta-accent { background: var(--accent) !important; color: #fff !important; }
+    .nav.scrolled .nav__cta-accent:hover { background: #E0440F !important; }
     .nav__inner { display: flex; align-items: center; width: 100%; }
     .nav__logo {
       font-size: 18px; font-weight: 900; letter-spacing: -0.05em;
@@ -115,7 +135,7 @@
     }
     .nav__links a:hover { color: var(--ink); background: var(--bg-soft); }
     .nav__actions { display: flex; align-items: center; gap: 10px; margin-left: 24px; }
-    @media (max-width: 768px) { .nav__links { display: none; } .nav { padding: 0 20px; } .nav__actions { gap: 6px; margin-left: 12px; } }
+    @media (max-width: 768px) { .nav__links { display: none; } .nav { padding: 0 8px 0 20px; width: calc(100% - 24px); top: 12px; } .nav__actions { gap: 6px; margin-left: 12px; } }
 
     /* ── SCROLL PROGRESS ── */
     .scroll-progress {
@@ -131,35 +151,84 @@
 
     /* ── HERO ── */
     .hero {
-      padding: 160px 0 100px; position: relative; overflow: hidden;
-      border-bottom: 1px solid var(--border);
+      padding: 0; position: relative; overflow: hidden;
+      background: var(--bg-dark); border-bottom: none;
     }
-    .hero__grid-bg {
-      position: absolute; inset: 0; z-index: 0;
-      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 30%, transparent 100%);
-      opacity: 0.5;
+    .hero__inner {
+      position: relative; z-index: 2;
+      padding: 220px 0 100px; text-align: center;
+      display: flex; flex-direction: column; align-items: center;
     }
-    .hero__inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .hero__tag { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
-    .hero__tag-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
-    .hero__tag-text { font-size: 13px; color: var(--ink-soft); }
-    .hero__title { margin-bottom: 22px; }
-    .hero__title em { font-style: normal; color: var(--accent); }
-    .hero__subtitle { margin-bottom: 36px; max-width: 440px; }
-    .hero__cta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-    .hero__proof { margin-top: 52px; display: flex; align-items: center; gap: 20px; padding-top: 40px; border-top: 1px solid var(--border); }
-    .hero__proof-faces { display: flex; }
-    .hero__proof-face {
-      width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff;
-      margin-left: -7px; background: #e2e2e2; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 700; color: #888;
+    .hero__tag { display: flex; align-items: center; gap: 10px; margin-bottom: 36px; }
+    .hero__title { margin-bottom: 32px; max-width: 900px; }
+    .hero__title .h1 {
+      color: #fff; font-size: clamp(44px, 7.5vw, 88px); line-height: 1.02;
+      letter-spacing: -0.045em;
     }
-    .hero__proof-face:first-child { margin-left: 0; }
-    .hero__proof-text { font-size: 13px; color: var(--ink-muted); line-height: 1.5; }
-    .hero__proof-text strong { color: var(--ink); }
+    .hero__title em {
+      font-style: italic; color: rgba(255,255,255,0.3);
+      -webkit-text-fill-color: unset;
+    }
+    .hero__subtitle {
+      margin-bottom: 48px; max-width: 460px; text-align: center;
+      color: rgba(255,255,255,0.35); font-size: 16px; line-height: 1.7;
+    }
+    .hero__cta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 64px; }
+    .hero__cta .btn--dark { background: #fff; color: var(--ink); }
+    .hero__cta .btn--dark:hover { background: #f0f0f0; }
+    .hero__cta .btn--outline { background: transparent; color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.12); }
+    .hero__cta .btn--outline:hover { background: rgba(255,255,255,0.05); color: #fff; border-color: rgba(255,255,255,0.2); }
+    .hero__scroll {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.2); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      animation: heroFloat 2.5s ease-in-out infinite;
+    }
+    @keyframes heroFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+    /* ── SHOWCASE STRIP ── */
+    .showcase-strip {
+      background: var(--bg); padding: 100px 0; border-bottom: 1px solid var(--border);
+    }
+    .showcase-strip__inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .showcase-strip__img {
+      border-radius: var(--radius-xl); overflow: hidden;
+    }
+    .showcase-strip__img img {
+      width: 100%; display: block; filter: saturate(0.8);
+    }
+    .showcase-strip__content {}
+    .showcase-strip__eyebrow {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--ink-faint); margin-bottom: 16px;
+    }
+    .showcase-strip__title {
+      font-size: clamp(28px, 3.5vw, 42px); font-weight: 800; color: var(--ink);
+      letter-spacing: -0.04em; line-height: 1.15; margin-bottom: 16px;
+    }
+    .showcase-strip__title span { color: var(--ink-faint); }
+    .showcase-strip__desc {
+      font-size: 15px; color: var(--ink-muted); line-height: 1.75; margin-bottom: 28px;
+    }
+    .showcase-strip__stats {
+      display: flex; gap: 40px; padding-top: 28px; border-top: 1px solid var(--border);
+    }
+    .showcase-strip__stat-val {
+      font-size: 32px; font-weight: 900; letter-spacing: -0.04em; color: var(--ink); line-height: 1;
+    }
+    .showcase-strip__stat-label { font-size: 12px; color: var(--ink-faint); margin-top: 4px; }
+
+    @media (max-width: 900px) {
+      .hero__inner { padding: 170px 0 72px; }
+      .showcase-strip__inner { grid-template-columns: 1fr; gap: 40px; }
+      .showcase-strip__stats { gap: 28px; }
+    }
+    @media (max-width: 600px) {
+      .hero__inner { padding: 140px 0 56px; }
+      .showcase-strip__stats { flex-wrap: wrap; gap: 20px; }
+    }
 
     /* Dashboard */
     .hero__visual { position: relative; }
@@ -208,7 +277,7 @@
     .ui-score-info { flex: 1; }
     .ui-score-title { font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; }
     .ui-score-desc { font-size: 13px; font-weight: 600; color: var(--ink); margin-top: 2px; }
-    .ui-score-tag { font-size: 11px; font-weight: 700; color: var(--success); background: rgba(101,163,13,0.08); padding: 3px 9px; border-radius: 100px; border: 1px solid rgba(101,163,13,0.15); }
+    .ui-score-tag { font-size: 11px; font-weight: 700; color: var(--success); background: rgba(34,197,94,0.08); padding: 3px 9px; border-radius: 100px; border: 1px solid rgba(34,197,94,0.15); }
 
     /* Floating chips */
     .chip {
@@ -225,8 +294,9 @@
     @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 
     @media (max-width: 900px) {
-      .hero__inner { grid-template-columns: 1fr; gap: 48px; }
-      .hero__visual { order: -1; }
+      .hero__inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero__image { order: -1; max-height: 320px; }
+      .hero__image img { aspect-ratio: 16/9 !important; }
     }
 
     /* ── VALUE BAND (what/why/benefit) ── */
@@ -286,14 +356,14 @@
       display: flex; align-items: center; justify-content: center;
       transition: all 0.2s;
     }
-    .svc-tab__icon--accent { background: rgba(79,70,229,0.06); color: var(--accent); }
-    .svc-tab.active .svc-tab__icon--accent { background: rgba(79,70,229,0.1); }
+    .svc-tab__icon--accent { background: rgba(255,85,29,0.06); color: var(--accent); }
+    .svc-tab.active .svc-tab__icon--accent { background: rgba(255,85,29,0.1); }
     .svc-tab__icon--cyan { background: rgba(6,182,212,0.06); color: #06B6D4; }
     .svc-tab.active .svc-tab__icon--cyan { background: rgba(6,182,212,0.1); }
     .svc-tab__icon--violet { background: rgba(124,58,237,0.06); color: #7C3AED; }
     .svc-tab.active .svc-tab__icon--violet { background: rgba(124,58,237,0.1); }
-    .svc-tab__icon--lime { background: rgba(182,255,60,0.08); color: #65A30D; }
-    .svc-tab.active .svc-tab__icon--lime { background: rgba(182,255,60,0.14); }
+    .svc-tab__icon--lime { background: rgba(255,85,29,0.08); color: #FF551D; }
+    .svc-tab.active .svc-tab__icon--lime { background: rgba(255,85,29,0.14); }
     .svc-tab__icon--amber { background: rgba(245,158,11,0.06); color: #D97706; }
     .svc-tab.active .svc-tab__icon--amber { background: rgba(245,158,11,0.1); }
     .svc-tab__text { min-width: 0; }
@@ -346,10 +416,15 @@
     }
 
     /* ── PROCESS ── */
-    .process { background: var(--bg-dark); border: none; color: #fff; position: relative; overflow: hidden; padding: 120px 0 100px; }
-    .process__glow-1 { position: absolute; width: 600px; height: 500px; top: -100px; left: -100px; background: radial-gradient(ellipse, rgba(79,70,229,0.18) 0%, transparent 70%); border-radius: 50%; filter: blur(60px); pointer-events: none; }
-    .process__glow-2 { position: absolute; width: 400px; height: 400px; bottom: -80px; right: -60px; background: radial-gradient(ellipse, rgba(182,255,60,0.08) 0%, transparent 70%); border-radius: 50%; filter: blur(50px); pointer-events: none; }
-    .process__header { text-align: center; max-width: 620px; margin: 0 auto 72px; position: relative; }
+    .process {
+      background: var(--bg-dark); border: none; color: #fff;
+      position: relative; overflow: hidden;
+      padding: 80px 0 60px; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .process__glow-1 { position: absolute; width: 600px; height: 500px; top: -100px; left: -100px; background: radial-gradient(ellipse, rgba(255,85,29,0.18) 0%, transparent 70%); border-radius: 50%; filter: blur(60px); pointer-events: none; }
+    .process__glow-2 { position: absolute; width: 400px; height: 400px; bottom: -80px; right: -60px; background: radial-gradient(ellipse, rgba(255,85,29,0.08) 0%, transparent 70%); border-radius: 50%; filter: blur(50px); pointer-events: none; }
+    .process__header { text-align: center; max-width: 620px; margin: 0 auto 48px; position: relative; }
     .process__badge {
       display: inline-flex; align-items: center; gap: 6px;
       background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
@@ -380,22 +455,22 @@
       width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       font-size: 13px; font-weight: 800;
-      border: 2px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.25);
+      border: 2px solid rgba(255,85,29,0.3); color: rgba(255,85,29,0.4);
       background: var(--bg-dark); transition: all 0.3s;
     }
     .stepper__tab.active .stepper__tab-dot {
       border-color: var(--accent); color: #fff; background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(79,70,229,0.25);
+      box-shadow: 0 0 0 4px rgba(255,85,29,0.25);
     }
     .stepper__tab.done .stepper__tab-dot {
-      border-color: var(--success); color: #fff; background: var(--success);
+      border-color: var(--accent); color: #fff; background: var(--accent);
     }
     .stepper__tab-label {
       font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.25);
       transition: color 0.3s; white-space: nowrap; text-align: center;
     }
     .stepper__tab.active .stepper__tab-label { color: #fff; }
-    .stepper__tab.done .stepper__tab-label { color: rgba(255,255,255,0.5); }
+    .stepper__tab.done .stepper__tab-label { color: rgba(255,255,255,0.6); }
     .stepper__tab:hover .stepper__tab-label { color: rgba(255,255,255,0.5); }
     .stepper__timer-wrap {
       width: 100%; max-width: 800px; margin: -28px auto 24px;
@@ -409,6 +484,14 @@
 
     /* Card area */
     .stepper__cards { position: relative; min-height: 300px; }
+    .stepper__hint {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-top: 28px; color: rgba(255,255,255,0.25); font-size: 11px;
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+      transition: opacity 0.3s;
+    }
+    .stepper__hint svg { animation: stepperBounce 1.6s ease-in-out infinite; }
+    @keyframes stepperBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
     .stepper__card {
       position: absolute; top: 0; left: 0; right: 0;
       background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
@@ -429,11 +512,11 @@
       position: absolute; width: 300px; height: 250px; border-radius: 50%;
       top: -100px; right: -80px; filter: blur(60px); pointer-events: none; opacity: 0.6;
     }
-    .stepper__card-glow--accent { background: rgba(79,70,229,0.12); }
+    .stepper__card-glow--accent { background: rgba(255,85,29,0.12); }
     .stepper__card-glow--cyan { background: rgba(6,182,212,0.1); }
     .stepper__card-glow--violet { background: rgba(124,58,237,0.1); }
-    .stepper__card-glow--success { background: rgba(101,163,13,0.1); }
-    .stepper__card-glow--lime { background: rgba(182,255,60,0.08); }
+    .stepper__card-glow--success { background: rgba(34,197,94,0.1); }
+    .stepper__card-glow--lime { background: rgba(255,85,29,0.08); }
     .stepper__card-inner { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start; }
     .stepper__card-left { display: flex; flex-direction: column; align-items: center; gap: 14px; }
     .stepper__card-num {
@@ -445,11 +528,11 @@
       width: 48px; height: 48px; border-radius: 13px;
       display: flex; align-items: center; justify-content: center;
     }
-    .stepper__card-icon--accent { background: rgba(79,70,229,0.15); color: #818CF8; border: 1px solid rgba(79,70,229,0.25); }
+    .stepper__card-icon--accent { background: rgba(255,85,29,0.15); color: #FF8A65; border: 1px solid rgba(255,85,29,0.25); }
     .stepper__card-icon--cyan { background: rgba(6,182,212,0.15); color: #22D3EE; border: 1px solid rgba(6,182,212,0.25); }
-    .stepper__card-icon--violet { background: rgba(124,58,237,0.15); color: #A78BFA; border: 1px solid rgba(124,58,237,0.25); }
-    .stepper__card-icon--success { background: rgba(101,163,13,0.15); color: #84CC16; border: 1px solid rgba(101,163,13,0.25); }
-    .stepper__card-icon--lime { background: rgba(182,255,60,0.12); color: var(--accent-2); border: 1px solid rgba(182,255,60,0.25); }
+    .stepper__card-icon--violet { background: rgba(124,58,237,0.15); color: #FF8A65; border: 1px solid rgba(124,58,237,0.25); }
+    .stepper__card-icon--success { background: rgba(34,197,94,0.15); color: #22C55E; border: 1px solid rgba(34,197,94,0.25); }
+    .stepper__card-icon--lime { background: rgba(255,85,29,0.12); color: var(--accent-2); border: 1px solid rgba(255,85,29,0.25); }
     .stepper__card-title { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.03em; margin-bottom: 4px; }
     .stepper__card-subtitle { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 16px; font-weight: 500; }
     .stepper__card-desc { font-size: 14.5px; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 20px; }
@@ -469,8 +552,8 @@
     .process__tl.animated::after { width: calc(100% - 40px); transition: width 2s ease; }
     .process__tl-step { flex: 1; text-align: center; position: relative; z-index: 1; }
     .process__tl-dot { width: 14px; height: 14px; border-radius: 50%; margin: 9px auto 14px; transition: transform 0.3s; }
-    .process__tl-dot--accent { background: var(--accent); box-shadow: 0 0 0 4px rgba(79,70,229,0.25); }
-    .process__tl-dot--lime { background: var(--accent-2); box-shadow: 0 0 0 4px rgba(182,255,60,0.15); }
+    .process__tl-dot--accent { background: var(--accent); box-shadow: 0 0 0 4px rgba(255,85,29,0.25); }
+    .process__tl-dot--lime { background: var(--accent-2); box-shadow: 0 0 0 4px rgba(255,85,29,0.15); }
     .process__tl-step:hover .process__tl-dot { transform: scale(1.3); }
     .process__tl-day { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 3px; }
     .process__tl-label { font-size: 11.5px; color: rgba(255,255,255,0.3); }
@@ -508,7 +591,7 @@
     .sc-title { font-size: 11px; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.06em; }
     .sc-value { font-size: 38px; font-weight: 800; color: var(--ink); letter-spacing: -0.05em; line-height: 1; margin-top: 6px; }
     .sc-sub { font-size: 13px; color: var(--success); font-weight: 600; margin-top: 4px; }
-    .sc-badge { font-size: 12px; font-weight: 700; color: var(--success); background: rgba(101,163,13,0.08); padding: 5px 12px; border-radius: 100px; border: 1px solid rgba(101,163,13,0.15); }
+    .sc-badge { font-size: 12px; font-weight: 700; color: var(--success); background: rgba(34,197,94,0.08); padding: 5px 12px; border-radius: 100px; border: 1px solid rgba(34,197,94,0.15); }
     .sc-chart { height: 88px; position: relative; }
     .sc-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
     .sc-metric { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
@@ -520,7 +603,7 @@
     .sc-kw__title { font-size: 11px; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
     .sc-kw-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
     .sc-kw-row:last-child { border: none; padding-bottom: 0; }
-    .sc-kw-pos { width: 24px; height: 24px; border-radius: 5px; background: rgba(79,70,229,0.07); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+    .sc-kw-pos { width: 24px; height: 24px; border-radius: 5px; background: rgba(255,85,29,0.07); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
     .sc-kw-term { flex: 1; color: var(--ink-soft); }
     .sc-kw-delta { font-size: 12px; font-weight: 600; color: var(--success); }
     .sc-vis { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
@@ -536,7 +619,7 @@
     @media (max-width: 600px) { .sc-metrics { grid-template-columns: 1fr; } .sc-two { grid-template-columns: 1fr; } }
 
     /* ── VISIBILITY CHECKER (interactive tool) ── */
-    .checker { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .checker { background: var(--bg); border-top: 1px solid var(--border); border-bottom: none; }
     .checker__intro { max-width: 620px; margin: 0 auto 48px; text-align: center; }
     .checker__box {
       max-width: 680px; margin: 0 auto; background: #fff;
@@ -561,8 +644,8 @@
       background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
       opacity: 0.45; transition: opacity 0.3s, border-color 0.3s, background 0.3s;
     }
-    .checker__row.active { opacity: 1; border-color: rgba(79,70,229,0.25); }
-    .checker__row.done { opacity: 1; border-color: rgba(101,163,13,0.18); background: #fff; }
+    .checker__row.active { opacity: 1; border-color: rgba(255,85,29,0.25); }
+    .checker__row.done { opacity: 1; border-color: rgba(34,197,94,0.18); background: #fff; }
     .checker__row-icon { font-size: 18px; width: 24px; text-align: center; flex-shrink: 0; }
     .checker__row-label { flex: 1; font-size: 14px; font-weight: 600; color: var(--ink); }
     .checker__row-finding { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
@@ -615,7 +698,7 @@
     @media (max-width: 900px) { .why__inner { grid-template-columns: 1fr; gap: 48px; } }
 
     /* ── PRICING ── */
-    .pricing { background: var(--bg-soft); border-top: 1px solid var(--border); }
+    .pricing { background: var(--bg-soft); border-top: none; }
     .pricing__dev {
       max-width: 800px; margin: 0 auto 56px; padding: 36px 40px;
       background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-xl);
@@ -647,8 +730,8 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 16px 48px rgba(0,0,0,0.18);
     }
     .plan--featured:hover {
-      border-color: rgba(182,255,60,0.3);
-      box-shadow: 0 0 0 1px rgba(182,255,60,0.2), 0 12px 48px rgba(79,70,229,0.3);
+      border-color: rgba(255,85,29,0.3);
+      box-shadow: 0 0 0 1px rgba(255,85,29,0.2), 0 12px 48px rgba(255,85,29,0.3);
     }
     .plan__chip {
       position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
@@ -670,9 +753,33 @@
       padding: 10px 14px; border-radius: var(--radius);
       margin-bottom: 24px; font-size: 13px; font-weight: 600;
     }
-    .plan__credits { background: var(--bg-soft); color: var(--ink-soft); border: 1px solid var(--border); }
+    .plan__credits { background: var(--bg-soft); color: var(--ink-soft); border: 1px solid var(--border); position: relative; }
     .plan--featured .plan__credits { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.08); }
     .plan__credits-icon { font-size: 15px; }
+    .plan__credits-info {
+      margin-left: auto; cursor: pointer; position: relative; flex-shrink: 0;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: rgba(0,0,0,0.06); border: none;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800; font-style: italic; font-family: Georgia, serif;
+      color: var(--ink-muted); transition: all 0.15s;
+    }
+    .plan--featured .plan__credits-info { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.5); }
+    .plan__credits-info:hover { background: var(--ink); color: #fff; }
+    .plan--featured .plan__credits-info:hover { background: #fff; color: var(--ink); }
+    .plan__credits-tooltip {
+      position: absolute; bottom: calc(100% + 10px); right: -6px; width: 250px;
+      background: var(--bg-dark); color: #fff; font-size: 12px; font-weight: 500;
+      line-height: 1.6; padding: 14px 16px; border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      opacity: 0; visibility: hidden; transform: translateY(4px);
+      transition: all 0.2s ease; pointer-events: none; z-index: 10;
+    }
+    .plan__credits-tooltip::after {
+      content: ''; position: absolute; top: 100%; right: 20px;
+      border: 6px solid transparent; border-top-color: var(--bg-dark);
+    }
+    .plan__credits-info:hover .plan__credits-tooltip { opacity: 1; visibility: visible; transform: none; }
     .plan__hr { height: 1px; background: var(--border); margin: 0 0 20px; }
     .plan--featured .plan__hr { background: rgba(255,255,255,0.08); }
     .plan__section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); margin-bottom: 12px; }
@@ -721,7 +828,7 @@
       font-family: inherit; cursor: pointer; transition: background 0.15s;
       white-space: nowrap;
     }
-    .credits__add-btn:hover { background: #4338CA; }
+    .credits__add-btn:hover { background: #E0440F; }
 
     .credits__list { display: flex; flex-direction: column; gap: 0; margin-bottom: 24px; min-height: 48px; }
     .credits__empty { padding: 32px 0; text-align: center; font-size: 13px; color: var(--ink-faint); }
@@ -784,7 +891,7 @@
 
     .credits__rollover {
       padding: 12px 16px; border-radius: var(--radius);
-      background: rgba(79,70,229,0.06); border: 1px solid rgba(79,70,229,0.1);
+      background: rgba(255,85,29,0.06); border: 1px solid rgba(255,85,29,0.1);
       font-size: 12.5px; color: var(--accent); font-weight: 600; text-align: center;
     }
     @media (max-width: 600px) {
@@ -883,11 +990,11 @@
     }
     .hero__glow--cobalt {
       width: 560px; height: 480px; top: -80px; right: -60px;
-      background: radial-gradient(ellipse, #4F46E5 0%, transparent 70%);
+      background: radial-gradient(ellipse, #FF551D 0%, transparent 70%);
     }
     .hero__glow--lime {
       width: 420px; height: 360px; bottom: -40px; left: -80px;
-      background: radial-gradient(ellipse, #B6FF3C 0%, transparent 70%);
+      background: radial-gradient(ellipse, #FF551D 0%, transparent 70%);
       opacity: 0.13;
     }
 
@@ -903,8 +1010,8 @@
 
     /* ── FEATURED PLAN LIME GLOW ── */
     .plan--featured:hover {
-      border-color: rgba(182,255,60,0.35) !important;
-      box-shadow: 0 0 0 1px rgba(182,255,60,0.2), 0 12px 48px rgba(79,70,229,0.35) !important;
+      border-color: rgba(255,85,29,0.35) !important;
+      box-shadow: 0 0 0 1px rgba(255,85,29,0.2), 0 12px 48px rgba(255,85,29,0.35) !important;
     }
     .plan__chip { background: linear-gradient(135deg, var(--accent), #7C3AED); }
 
@@ -913,13 +1020,13 @@
     .cta-section::before {
       content: ''; position: absolute; pointer-events: none;
       width: 600px; height: 500px; border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(79,70,229,0.22) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(255,85,29,0.22) 0%, transparent 70%);
       top: -100px; left: 50%; transform: translateX(-50%); filter: blur(60px);
     }
     .cta-section::after {
       content: ''; position: absolute; pointer-events: none;
       width: 300px; height: 260px; border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(182,255,60,0.15) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(255,85,29,0.15) 0%, transparent 70%);
       bottom: -40px; right: 10%; filter: blur(50px);
     }
 
@@ -929,10 +1036,10 @@
 
     /* ── NAV BOOK BUTTON ── */
     .nav__cta-accent { background: var(--accent) !important; color: #fff !important; }
-    .nav__cta-accent:hover { background: #4338CA !important; }
+    .nav__cta-accent:hover { background: #E0440F !important; }
 
     /* ── BUTTON ACCENT GLOW ── */
-    .btn--accent:hover { background: #4338CA; box-shadow: 0 0 0 3px rgba(79,70,229,0.18); }
+    .btn--accent:hover { background: #E0440F; box-shadow: 0 0 0 3px rgba(255,85,29,0.18); }
 
     /* ── LIME TAG/BADGE ── */
     .tag--lime {
@@ -942,11 +1049,135 @@
       padding: 4px 10px; border-radius: 100px;
     }
 
-    /* ── MOBILE GLOBAL ── */
+    /* ── CLIENT LOGOS ── */
+    .logos { padding: 48px 0; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .logos__row {
+      display: flex; align-items: center; justify-content: center; gap: 56px; flex-wrap: wrap;
+    }
+    .logos__item {
+      font-size: 16px; font-weight: 800; color: var(--ink-faint); letter-spacing: -0.03em;
+      transition: color 0.2s; cursor: default;
+    }
+    .logos__item:hover { color: var(--ink-muted); }
+    @media (max-width: 600px) { .logos__row { gap: 32px; } .logos__item { font-size: 14px; } }
+
+    /* ── PORTFOLIO ── */
+    .portfolio { background: var(--bg-soft); padding: 112px 0; border-top: 1px solid var(--border); }
+    .portfolio__header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
+    .portfolio__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .portfolio__card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-xl);
+      overflow: hidden; transition: all 0.3s;
+    }
+    .portfolio__card:hover { border-color: #ddd; box-shadow: 0 8px 32px rgba(0,0,0,0.06); transform: translateY(-3px); }
+    .portfolio__img { position: relative; overflow: hidden; background: #f0f0ee; }
+    .portfolio__img img { width: 100%; height: 280px; object-fit: cover; display: block; filter: saturate(0.8); transition: filter 0.4s, transform 0.4s; }
+    .portfolio__card:hover .portfolio__img img { filter: saturate(1); transform: scale(1.02); }
+    .portfolio__body { padding: 24px 28px; }
+    .portfolio__tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 8px; }
+    .portfolio__title { font-size: 18px; font-weight: 800; color: var(--ink); letter-spacing: -0.03em; margin-bottom: 6px; }
+    .portfolio__desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+    @media (max-width: 600px) { .portfolio__grid { grid-template-columns: 1fr; } .portfolio__img img { height: 200px; } }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--bg-dark); padding: 112px 0; color: #fff; }
+    .testimonials__header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
+    .testimonials__header .h2 { color: #fff; }
+    .testimonials__header .eyebrow { color: rgba(255,255,255,0.3); }
+    .testimonials__header .eyebrow::before { background: rgba(255,255,255,0.15); }
+    .testimonials__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .testimonial {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-xl); padding: 32px;
+      transition: border-color 0.2s;
+    }
+    .testimonial:hover { border-color: rgba(255,255,255,0.12); }
+    .testimonial__stars { color: var(--accent); font-size: 14px; letter-spacing: 2px; margin-bottom: 16px; }
+    .testimonial__text { font-size: 14.5px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 24px; }
+    .testimonial__author { display: flex; align-items: center; gap: 12px; }
+    .testimonial__avatar {
+      width: 40px; height: 40px; border-radius: 50%; overflow: hidden; flex-shrink: 0;
+      background: rgba(255,255,255,0.08);
+    }
+    .testimonial__avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .testimonial__name { font-size: 13px; font-weight: 700; color: #fff; }
+    .testimonial__role { font-size: 12px; color: rgba(255,255,255,0.35); }
+    @media (max-width: 900px) { .testimonials__grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .testimonials__grid { grid-template-columns: 1fr; } }
+
+    /* ── BLOG PREVIEW ── */
+    .blog-preview { background: var(--bg); padding: 112px 0; border-top: 1px solid var(--border); }
+    .blog-preview__header { display: flex; align-items: end; justify-content: space-between; margin-bottom: 48px; }
+    .blog-preview__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .blog-card {
+      border-radius: var(--radius-xl); overflow: hidden;
+      border: 1px solid var(--border); background: var(--bg);
+      transition: all 0.3s; text-decoration: none; display: block;
+    }
+    .blog-card:hover { border-color: #ddd; box-shadow: 0 8px 32px rgba(0,0,0,0.06); transform: translateY(-3px); }
+    .blog-card__img { overflow: hidden; }
+    .blog-card__img img { width: 100%; height: 200px; object-fit: cover; display: block; filter: saturate(0.7); transition: filter 0.4s, transform 0.4s; }
+    .blog-card:hover .blog-card__img img { filter: saturate(1); transform: scale(1.03); }
+    .blog-card__body { padding: 24px; }
+    .blog-card__cat { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 8px; }
+    .blog-card__title { font-size: 17px; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.3; }
+    .blog-card__meta { font-size: 12px; color: var(--ink-faint); }
+    @media (max-width: 600px) { .blog-preview__grid { grid-template-columns: 1fr; } .blog-preview__header { flex-direction: column; align-items: flex-start; gap: 16px; } }
+
+    /* ── CONTACT FORM ── */
+    .contact { background: var(--bg-soft); padding: 112px 0; border-top: 1px solid var(--border); }
+    .contact__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .contact__title { font-size: clamp(32px, 4vw, 48px); font-weight: 800; color: var(--ink); letter-spacing: -0.04em; line-height: 1.15; margin-bottom: 16px; }
+    .contact__title span { color: var(--ink-faint); }
+    .contact__desc { font-size: 15px; color: var(--ink-muted); line-height: 1.7; margin-bottom: 32px; }
+    .contact__info { display: flex; flex-direction: column; gap: 16px; }
+    .contact__info-item { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--ink-soft); }
+    .contact__info-icon {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      background: var(--bg); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; color: var(--ink-muted);
+    }
+    .contact__form { display: flex; flex-direction: column; gap: 14px; }
+    .contact__input {
+      padding: 13px 16px; border-radius: var(--radius); border: 1px solid var(--border);
+      font-size: 14px; font-family: inherit; color: var(--ink); background: var(--bg);
+      outline: none; transition: border-color 0.15s; width: 100%;
+    }
+    .contact__input:focus { border-color: var(--accent); }
+    .contact__input::placeholder { color: var(--ink-faint); }
+    textarea.contact__input { min-height: 120px; resize: vertical; line-height: 1.5; }
+    .contact__row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 900px) { .contact__inner { grid-template-columns: 1fr; gap: 48px; } }
+    @media (max-width: 600px) { .contact__row { grid-template-columns: 1fr; } }
+
+    /* ── COOKIE BANNER ── */
+    .cookie {
+      position: fixed; bottom: 24px; left: 24px; right: 24px; z-index: 200;
+      background: var(--bg-dark); color: #fff; border-radius: var(--radius-lg);
+      padding: 18px 24px; display: flex; align-items: center; gap: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2); max-width: 560px;
+      transform: translateY(120%); transition: transform 0.4s ease;
+    }
+    .cookie.show { transform: translateY(0); }
+    .cookie__text { flex: 1; font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .cookie__text a { color: rgba(255,255,255,0.8); text-decoration: underline; }
+    .cookie__btn {
+      padding: 9px 20px; border-radius: 8px; border: none;
+      font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit;
+      flex-shrink: 0; transition: background 0.15s;
+    }
+    .cookie__btn--accept { background: #fff; color: var(--bg-dark); }
+    .cookie__btn--accept:hover { background: #f0f0f0; }
     @media (max-width: 600px) {
-      .hero { padding: 120px 0 60px; }
-      .hero__inner { gap: 40px; }
-      .h1 { font-size: 34px; }
+      .cookie { flex-direction: column; text-align: center; bottom: 12px; left: 12px; right: 12px; }
+    }
+
+    /* ── MOBILE GLOBAL ── */
+    @media (max-width: 900px) {
+      [style*="grid-template-columns: 1fr 1fr"][style*="gap: 64px"] { grid-template-columns: 1fr !important; gap: 32px !important; }
+      [style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 600px) {
       .h2 { font-size: 28px; }
       .pricing__dev { flex-direction: column; text-align: center; gap: 16px; padding: 24px 20px; }
       .pricing__dev-price { text-align: center; }
@@ -956,9 +1187,7 @@
       .credits__inner { padding: 24px 18px; }
       .credits__inner > div[style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; gap: 10px !important; }
       .credits__inner > div[style*="grid-template-columns: repeat(3, 1fr); gap: 12px"] { grid-template-columns: 1fr 1fr !important; }
-      .why__cards { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .why-card { padding: 16px; }
-      .why-card__num { font-size: 22px; }
+      [style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
       .footer__grid { grid-template-columns: 1fr 1fr !important; gap: 24px; }
     }
   </style>
@@ -977,138 +1206,88 @@
     </a>
     <div class="nav__links">
       <a href="#services">Services</a>
-      <a href="#process">How it works</a>
-      <a href="#checker">Free check</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
       <a href="#pricing">Pricing</a>
-      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
     </div>
     <div class="nav__actions">
-      <a href="/dashboard/login.html" class="btn btn--outline btn--sm" style="font-size:13px;padding:9px 18px;">Log in</a>
-      <a href="#contact" class="btn btn--accent nav__cta-accent" style="font-size:13px;padding:9px 18px;">Book a call</a>
+      <a href="/dashboard/login.html" class="btn btn--outline btn--sm" style="font-size:13px;padding:9px 18px;border-radius:100px;">Log in</a>
+      <a href="#contact" class="btn btn--accent nav__cta-accent" style="font-size:13px;padding:9px 18px;border-radius:100px;">Book a call</a>
     </div>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero__glow hero__glow--cobalt"></div>
-  <div class="hero__glow hero__glow--lime"></div>
-  <div class="hero__grid-bg"></div>
   <div class="container">
     <div class="hero__inner">
-      <div class="hero__content">
-        <div class="hero__tag">
-          <span class="tag--lime">New</span>
-          <span class="hero__tag-text">AI Search Optimization — now live</span>
-        </div>
-        <h1 class="h1 hero__title">
-          <div class="line-wrap"><span class="line">Get Found Before Your</span></div>
-          <div class="line-wrap"><span class="line"><em>Competitors</em> Do</span></div>
-        </h1>
-        <p class="lead hero__subtitle">We help businesses increase their visibility across Google, AI search engines, maps, and directories—turning discoverability into measurable growth.</p>
-        <div class="hero__cta">
-          <a href="#contact" class="btn btn--dark btn--lg">Book a free audit
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="#process" class="btn btn--outline btn--lg">See how it works</a>
-        </div>
-        <div class="hero__proof">
-          <div class="hero__proof-faces">
-            <div class="hero__proof-face" style="background:#F0E6FF;color:#7C3AED;">M</div>
-            <div class="hero__proof-face" style="background:#E6F4F1;color:#065F46;">J</div>
-            <div class="hero__proof-face" style="background:#FEF3C7;color:#92400E;">S</div>
-            <div class="hero__proof-face" style="background:#EFF6FF;color:#1D4ED8;">A</div>
-          </div>
-          <p class="hero__proof-text"><strong>250+ businesses</strong> trust FNDLY<br>to manage their online visibility</p>
-        </div>
+      <div class="hero__tag">
+        <span class="tag--lime">FNDLY</span>
+        <span style="font-size: 13px; color: rgba(255,255,255,0.3);">Digital Growth Platform</span>
       </div>
-
-      <div class="hero__visual">
-        <div class="chip chip--a">
-          <div class="chip__label">Search Impressions</div>
-          <div class="chip__value">1.2M+</div>
-          <div class="chip__sub">↑ 184% this month</div>
-        </div>
-        <div class="ui-window">
-          <div class="ui-window__bar">
-            <div class="ui-dot ui-dot--r"></div>
-            <div class="ui-dot ui-dot--y"></div>
-            <div class="ui-dot ui-dot--g"></div>
-            <span class="ui-window__title">FNDLY Visibility Dashboard</span>
-          </div>
-          <div class="ui-window__body">
-            <div class="ui-kpi-row">
-              <div class="ui-kpi">
-                <div class="ui-kpi__label">Visibility Score</div>
-                <div class="ui-kpi__value" id="score-counter">0</div>
-                <div class="ui-kpi__delta">↑ 23 pts this month</div>
-              </div>
-              <div class="ui-kpi">
-                <div class="ui-kpi__label">AI Mentions</div>
-                <div class="ui-kpi__value" id="ai-counter">0</div>
-                <div class="ui-kpi__delta">↑ 4× since Q1</div>
-              </div>
-            </div>
-            <div class="ui-chart-block">
-              <div class="ui-chart-label">Organic Traffic Growth</div>
-              <div class="ui-bars">
-                <div class="ui-bar" style="height:35%"></div>
-                <div class="ui-bar" style="height:42%"></div>
-                <div class="ui-bar" style="height:38%"></div>
-                <div class="ui-bar" style="height:54%"></div>
-                <div class="ui-bar" style="height:50%"></div>
-                <div class="ui-bar" style="height:66%"></div>
-                <div class="ui-bar" style="height:61%"></div>
-                <div class="ui-bar" style="height:78%"></div>
-                <div class="ui-bar" style="height:72%"></div>
-                <div class="ui-bar" style="height:88%"></div>
-                <div class="ui-bar" style="height:83%"></div>
-                <div class="ui-bar ui-bar--hi" style="height:100%"></div>
-              </div>
-            </div>
-            <div class="ui-score-row">
-              <div class="ui-score-ring">
-                <svg viewBox="0 0 48 48">
-                  <circle cx="24" cy="24" r="19" fill="none" stroke="#EBEBEB" stroke-width="5"/>
-                  <circle cx="24" cy="24" r="19" fill="none" stroke="#4F46E5" stroke-width="5" stroke-dasharray="119.4" stroke-dashoffset="19" stroke-linecap="round"/>
-                </svg>
-                <div class="ui-score-num">84</div>
-              </div>
-              <div class="ui-score-info">
-                <div class="ui-score-title">Domain Authority</div>
-                <div class="ui-score-desc">Strong authority score</div>
-              </div>
-              <div class="ui-score-tag">Top 15%</div>
-            </div>
-          </div>
-        </div>
-        <div class="chip chip--b">
-          <div class="chip__label">Review Score</div>
-          <div class="chip__value">4.9 ★</div>
-          <div class="chip__sub">+47 reviews this quarter</div>
-        </div>
+      <div class="hero__title">
+        <h1 class="h1">
+          <div class="line-wrap"><span class="line">We build websites</span></div>
+          <div class="line-wrap"><span class="line">that <em>can't be ignored</em></span></div>
+        </h1>
+      </div>
+      <p class="hero__subtitle">Custom websites, managed infrastructure, and continuous growth — all in one partnership.</p>
+      <div class="hero__cta">
+        <a href="#contact" class="btn btn--dark btn--lg">Start your project
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#process" class="btn btn--outline btn--lg">How it works</a>
+      </div>
+      <div class="hero__scroll">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+        Scroll
       </div>
     </div>
   </div>
 </section>
 
-<!-- VALUE BAND -->
-<div class="value-band">
-  <div class="container value-band__grid">
-    <div class="value-item">
-      <div class="value-item__num">01</div>
-      <div class="value-item__label">What we do</div>
-      <p class="value-item__text">We make your business visible everywhere people search — Google, Maps, AI tools like ChatGPT, and online directories.</p>
+<!-- SHOWCASE STRIP -->
+<div class="showcase-strip">
+  <div class="container">
+    <div class="showcase-strip__inner reveal">
+      <div class="showcase-strip__img">
+        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=700&q=80" alt="Working on digital strategy" style="aspect-ratio: 4/3;">
+      </div>
+      <div>
+        <div class="showcase-strip__eyebrow">Who we are</div>
+        <div class="showcase-strip__title">We don't just build websites. <span>We build businesses.</span></div>
+        <div class="showcase-strip__desc">FNDLY is a digital growth platform that builds, manages and continuously improves the complete online presence of modern businesses. From custom design to ongoing optimisation — we handle everything.</div>
+        <div class="showcase-strip__stats">
+          <div>
+            <div class="showcase-strip__stat-val">250+</div>
+            <div class="showcase-strip__stat-label">Projects delivered</div>
+          </div>
+          <div>
+            <div class="showcase-strip__stat-val">98%</div>
+            <div class="showcase-strip__stat-label">Client retention</div>
+          </div>
+          <div>
+            <div class="showcase-strip__stat-val">2 wk</div>
+            <div class="showcase-strip__stat-label">Avg. delivery</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="value-item">
-      <div class="value-item__num">02</div>
-      <div class="value-item__label">Why it matters</div>
-      <p class="value-item__text">68% of purchases start with a search. If customers can't find you there, they buy from whoever they can find instead.</p>
-    </div>
-    <div class="value-item">
-      <div class="value-item__num">03</div>
-      <div class="value-item__label">What you get</div>
-      <p class="value-item__text">More qualified traffic, more inbound leads, and measurable revenue growth — tracked and reported every month.</p>
+  </div>
+</div>
+
+<!-- CLIENT LOGOS -->
+<div class="logos reveal">
+  <div class="container">
+    <div class="logos__row">
+      <span class="logos__item">Meridian</span>
+      <span class="logos__item">Vantage</span>
+      <span class="logos__item">Helix</span>
+      <span class="logos__item">Nexora</span>
+      <span class="logos__item">Solaris</span>
+      <span class="logos__item">Praximo</span>
+      <span class="logos__item">Orbis</span>
     </div>
   </div>
 </div>
@@ -1116,13 +1295,13 @@
 <!-- SERVICES -->
 <section class="section" id="services">
   <div class="container">
-    <div class="services__intro">
+    <div class="services__intro" style="margin-bottom: 48px;">
       <div class="reveal">
-        <span class="eyebrow" style="margin-bottom: 18px; display: inline-flex;">Services</span>
-        <h2 class="h2">We build, manage<br>and grow it all</h2>
+        <span class="eyebrow" style="margin-bottom: 18px; display: inline-flex;">What we do</span>
+        <h2 class="h2" style="font-size: clamp(32px, 4.5vw, 56px);">Everything your business<br>needs to grow online</h2>
       </div>
       <div class="reveal d1">
-        <p class="body" style="max-width: 400px;">FNDLY isn't just a web design agency. We're a long-term digital partner that builds, manages and continuously improves your complete online presence.</p>
+        <p class="body" style="max-width: 400px;">From custom website development to ongoing optimisation — we handle the full picture so you can focus on your business.</p>
       </div>
     </div>
 
@@ -1238,6 +1417,58 @@
   </div>
 </section>
 
+<!-- PORTFOLIO -->
+<section class="portfolio" id="work">
+  <div class="container">
+    <div class="portfolio__header reveal">
+      <span class="eyebrow" style="margin-bottom:18px;display:inline-flex;justify-content:center;">Selected work</span>
+      <h2 class="h2" style="font-size:clamp(32px,4.5vw,56px);">Projects we're<br><span style="color:var(--ink-faint);">proud of</span></h2>
+    </div>
+    <div class="portfolio__grid">
+      <div class="portfolio__card reveal">
+        <div class="portfolio__img">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="Vantage Analytics">
+        </div>
+        <div class="portfolio__body">
+          <div class="portfolio__tag">Website + SEO</div>
+          <div class="portfolio__title">Vantage Analytics</div>
+          <div class="portfolio__desc">Complete brand identity and website for a data analytics consultancy. Increased organic traffic by 340% within 6 months.</div>
+        </div>
+      </div>
+      <div class="portfolio__card reveal">
+        <div class="portfolio__img">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" alt="Meridian Group">
+        </div>
+        <div class="portfolio__body">
+          <div class="portfolio__tag">Website + Dashboard</div>
+          <div class="portfolio__title">Meridian Group</div>
+          <div class="portfolio__desc">Modern corporate website with client portal. Conversion rate improved by 280% through strategic UX improvements.</div>
+        </div>
+      </div>
+      <div class="portfolio__card reveal">
+        <div class="portfolio__img">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80" alt="Helix Studio">
+        </div>
+        <div class="portfolio__body">
+          <div class="portfolio__tag">Website + Branding</div>
+          <div class="portfolio__title">Helix Studio</div>
+          <div class="portfolio__desc">Complete digital transformation for a creative agency. From outdated WordPress to a high-performance custom platform.</div>
+        </div>
+      </div>
+      <div class="portfolio__card reveal">
+        <div class="portfolio__img">
+          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&q=80" alt="Solaris Ventures">
+        </div>
+        <div class="portfolio__body">
+          <div class="portfolio__tag">Website + Growth</div>
+          <div class="portfolio__title">Solaris Ventures</div>
+          <div class="portfolio__desc">Investment firm website with integrated deal flow platform. Generated 45+ qualified leads in the first quarter.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- HOW FNDLY WORKS -->
 <section class="process" id="process">
   <div class="process__glow-1"></div>
@@ -1260,7 +1491,6 @@
         <button class="stepper__tab" data-step="3"><div class="stepper__tab-dot">4</div><div class="stepper__tab-label">Launch</div></button>
         <button class="stepper__tab" data-step="4"><div class="stepper__tab-dot">5</div><div class="stepper__tab-label">Grow</div></button>
       </div>
-      <div class="stepper__timer-wrap"><div class="stepper__timer" id="stepperTimer"></div></div>
 
       <div class="stepper__cards" id="stepperCards">
         <div class="stepper__card active" data-step="0">
@@ -1343,21 +1573,48 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- DELIVERY TIMELINE -->
-    <div class="process__delivery reveal">
-      <div class="process__delivery-title">Average delivery timeline</div>
-      <div class="process__tl" id="processTl">
-        <div class="process__tl-step"><div class="process__tl-dot process__tl-dot--accent"></div><div><div class="process__tl-day">Day 1</div><div class="process__tl-label">Discovery</div></div></div>
-        <div class="process__tl-step"><div class="process__tl-dot process__tl-dot--accent"></div><div><div class="process__tl-day">Day 2–5</div><div class="process__tl-label">Research &amp; design</div></div></div>
-        <div class="process__tl-step"><div class="process__tl-dot process__tl-dot--accent"></div><div><div class="process__tl-day">Day 6–10</div><div class="process__tl-label">Development</div></div></div>
-        <div class="process__tl-step"><div class="process__tl-dot process__tl-dot--accent"></div><div><div class="process__tl-day">Day 11–13</div><div class="process__tl-label">Review</div></div></div>
-        <div class="process__tl-step"><div class="process__tl-dot process__tl-dot--lime"></div><div><div class="process__tl-day">2 weeks</div><div class="process__tl-label">Go live</div></div></div>
-        <div class="process__tl-step"><div class="process__tl-dot process__tl-dot--lime"></div><div><div class="process__tl-day">Ongoing</div><div class="process__tl-label">Growth</div></div></div>
+      <div class="stepper__hint" id="stepperHint">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        Keep scrolling
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="testimonials__header reveal">
+      <span class="eyebrow" style="margin-bottom:18px;display:inline-flex;justify-content:center;">Testimonials</span>
+      <h2 class="h2" style="font-size:clamp(32px,4.5vw,56px);">What our clients <span style="color:rgba(255,255,255,0.3);">say about us</span></h2>
+    </div>
+    <div class="testimonials__grid">
+      <div class="testimonial reveal">
+        <div class="testimonial__stars">★★★★★</div>
+        <div class="testimonial__text">"FNDLY completely transformed our online presence. Within two weeks we had a website that actually represents our brand. The ongoing optimisation is what really sets them apart."</div>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt=""></div>
+          <div><div class="testimonial__name">Thomas de Vries</div><div class="testimonial__role">CEO, Vantage Analytics</div></div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial__stars">★★★★★</div>
+        <div class="testimonial__text">"We switched from a traditional agency to FNDLY and the difference is night and day. The dashboard gives us full visibility, and the AI recommendations have genuinely improved our SEO."</div>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt=""></div>
+          <div><div class="testimonial__name">Lisa van den Berg</div><div class="testimonial__role">Founder, Solaris Ventures</div></div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial__stars">★★★★★</div>
+        <div class="testimonial__text">"The credit system is brilliant. We save up credits for quarterly updates and always get exactly what we need. It's like having a digital team on call without the overhead."</div>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt=""></div>
+          <div><div class="testimonial__name">Mark Jansen</div><div class="testimonial__role">Director, Meridian Group</div></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1366,8 +1623,8 @@
   <div class="container">
     <div class="checker__intro reveal">
       <span class="eyebrow" style="justify-content:center;margin-bottom:18px;">Free tool</span>
-      <h2 class="h2" style="text-align:center;">How visible is your business right now?</h2>
-      <p class="body" style="text-align:center;margin-top:14px;">Type your website. Get an instant snapshot of your online visibility and website design — no signup required.</p>
+      <h2 class="h2" style="text-align:center;font-size:clamp(28px,4vw,48px);">How visible is your<br>business right now?</h2>
+      <p class="body" style="text-align:center;margin-top:14px;max-width:440px;margin-left:auto;margin-right:auto;">Enter your website and get an instant visibility snapshot — no signup required.</p>
     </div>
 
     <div class="checker__box reveal">
@@ -1387,7 +1644,7 @@
           <div class="checker__row-status"><span class="checker__spinner"></span></div>
         </div>
         <div class="checker__row" data-row>
-          <div class="checker__row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="checker__row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF551D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <div style="flex:1;">
             <div class="checker__row-label">Google Maps &amp; Local</div>
             <div class="checker__row-finding"></div>
@@ -1433,7 +1690,7 @@
           <div class="checker__ring">
             <svg viewBox="0 0 96 96">
               <circle cx="48" cy="48" r="42" fill="none" stroke="#EBEBEB" stroke-width="7"/>
-              <circle class="checker__ring-fill" cx="48" cy="48" r="42" fill="none" stroke="#4F46E5" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
+              <circle class="checker__ring-fill" cx="48" cy="48" r="42" fill="none" stroke="#FF551D" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
             </svg>
             <div class="checker__ring-num">0</div>
           </div>
@@ -1446,11 +1703,11 @@
         <div class="checker__breakdown">
           <div class="checker__bd-row">
             <div class="checker__bd-head"><span class="checker__bd-name">Google Search</span><span class="checker__bd-score">0</span></div>
-            <div class="checker__bd-bar"><div class="checker__bd-fill" style="background:#4F46E5;opacity:0.85"></div></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill" style="background:#FF551D;opacity:0.85"></div></div>
           </div>
           <div class="checker__bd-row">
             <div class="checker__bd-head"><span class="checker__bd-name">Google Maps &amp; Local</span><span class="checker__bd-score">0</span></div>
-            <div class="checker__bd-bar"><div class="checker__bd-fill" style="background:#B6FF3C;opacity:0.9"></div></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill" style="background:#FF551D;opacity:0.9"></div></div>
           </div>
           <div class="checker__bd-row">
             <div class="checker__bd-head"><span class="checker__bd-name">AI Search</span><span class="checker__bd-score">0</span></div>
@@ -1466,7 +1723,7 @@
           </div>
           <div class="checker__bd-row">
             <div class="checker__bd-head"><span class="checker__bd-name">Website Design &amp; UX</span><span class="checker__bd-score">0</span></div>
-            <div class="checker__bd-bar"><div class="checker__bd-fill" style="background:#B6FF3C;opacity:0.9"></div></div>
+            <div class="checker__bd-bar"><div class="checker__bd-fill" style="background:#FF551D;opacity:0.9"></div></div>
           </div>
         </div>
         <div class="checker__leadgen" id="checkerLeadgen">
@@ -1491,8 +1748,7 @@
   </div>
 </section>
 
-<!-- DASHBOARD SHOWCASE -->
-<section class="section showcase" id="dashboard">
+<section class="section showcase" id="dashboard" style="display:none;">
   <div class="container">
     <div class="showcase__header">
       <div class="reveal">
@@ -1526,12 +1782,12 @@
             <svg width="100%" height="88" viewBox="0 0 800 88" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#4F46E5" stop-opacity="0.12"/>
-                  <stop offset="100%" stop-color="#4F46E5" stop-opacity="0"/>
+                  <stop offset="0%" stop-color="#FF551D" stop-opacity="0.12"/>
+                  <stop offset="100%" stop-color="#FF551D" stop-opacity="0"/>
                 </linearGradient>
               </defs>
               <path d="M0,80 L70,72 L140,65 L210,58 L280,50 L350,40 L420,32 L490,22 L560,14 L630,8 L700,4 L800,1 L800,88 L0,88Z" fill="url(#g1)"/>
-              <path d="M0,80 L70,72 L140,65 L210,58 L280,50 L350,40 L420,32 L490,22 L560,14 L630,8 L700,4 L800,1" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round"/>
+              <path d="M0,80 L70,72 L140,65 L210,58 L280,50 L350,40 L420,32 L490,22 L560,14 L630,8 L700,4 L800,1" fill="none" stroke="#FF551D" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </div>
         </div>
@@ -1608,14 +1864,10 @@
 <!-- PRICING -->
 <section class="section pricing" id="pricing">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:48px;">
-      <div class="reveal">
-        <span class="eyebrow" style="margin-bottom:18px;display:inline-flex;">Pricing</span>
-        <h2 class="h2">Invest in your<br>digital growth</h2>
-      </div>
-      <div class="reveal d1">
-        <p class="body">Transparent pricing. No hidden fees. Cancel any time. Every plan includes your complete digital infrastructure platform — not just hosting.</p>
-      </div>
+    <div style="text-align:center;max-width:600px;margin:0 auto 48px;" class="reveal">
+      <span class="eyebrow" style="margin-bottom:18px;display:inline-flex;justify-content:center;">Pricing</span>
+      <h2 class="h2" style="font-size: clamp(32px, 4.5vw, 56px);">Transparent pricing.<br><span style="color:var(--ink-faint);">No surprises.</span></h2>
+      <p class="body" style="margin-top:16px;">Every plan includes your complete digital infrastructure platform. Cancel any time.</p>
     </div>
 
     <!-- ONE-TIME DEVELOPMENT FEE -->
@@ -1645,6 +1897,9 @@
         <div class="plan__credits">
           <span class="plan__credits-icon">⚡</span>
           100 FNDLY Credits / month
+          <span class="plan__credits-info">i
+            <div class="plan__credits-tooltip">Use credits to update text, swap images, add sections, create pages, publish blogs and more. Unused credits roll over for up to 3 months.</div>
+          </span>
         </div>
         <div class="plan__hr"></div>
         <div class="plan__section-label">Platform & Infrastructure</div>
@@ -1684,9 +1939,12 @@
           <div class="plan__period">/month</div>
         </div>
         <div class="plan__tagline">Designed for growing businesses that want continuous improvements and stronger online visibility.</div>
-        <div class="plan__credits" style="background:rgba(182,255,60,0.08);border-color:rgba(182,255,60,0.15);color:var(--accent-2);">
+        <div class="plan__credits" style="background:rgba(255,85,29,0.08);border-color:rgba(255,85,29,0.15);color:var(--accent-2);">
           <span class="plan__credits-icon">⚡</span>
           250 FNDLY Credits / month
+          <span class="plan__credits-info">i
+            <div class="plan__credits-tooltip">Use credits to update text, swap images, add sections, create pages, publish blogs and more. Unused credits roll over for up to 3 months.</div>
+          </span>
         </div>
         <div class="plan__hr"></div>
         <div class="plan__section-label">Everything in Starter, plus</div>
@@ -1721,6 +1979,9 @@
         <div class="plan__credits">
           <span class="plan__credits-icon">⚡</span>
           500 FNDLY Credits / month
+          <span class="plan__credits-info">i
+            <div class="plan__credits-tooltip">Use credits to update text, swap images, add sections, create pages, publish blogs and more. Unused credits roll over for up to 3 months.</div>
+          </span>
         </div>
         <div class="plan__hr"></div>
         <div class="plan__section-label">Everything in Growth, plus</div>
@@ -1751,55 +2012,6 @@
 
     </div>
 
-    <!-- FNDLY CREDITS -->
-    <div class="credits reveal">
-      <div class="credits__inner" style="text-align: center;">
-        <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(79,70,229,0.06); border: 1px solid rgba(79,70,229,0.1); border-radius: 100px; padding: 4px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 18px;">⚡ FNDLY Credits</div>
-        <div class="credits__title" style="font-size: 22px; margin-bottom: 8px;">Your website, always evolving</div>
-        <div class="credits__desc" style="max-width: 520px; margin: 0 auto 32px; text-align: center;">Every plan includes monthly credits you can use to make changes, improvements, and additions to your website — whenever you want. Use them as you go, or stack them up for up to 3 months to make bigger updates all at once.</div>
-
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px;">
-          <div style="padding: 20px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center;">
-            <div style="font-size: 28px; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); line-height: 1;">100</div>
-            <div style="font-size: 12px; color: var(--ink-muted); margin-top: 4px;">credits / month</div>
-            <div style="font-size: 11px; font-weight: 700; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px;">Starter</div>
-          </div>
-          <div style="padding: 20px; background: var(--bg-dark); border: 1px solid var(--bg-dark); border-radius: var(--radius-lg); text-align: center;">
-            <div style="font-size: 28px; font-weight: 800; letter-spacing: -0.04em; color: #fff; line-height: 1;">250</div>
-            <div style="font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px;">credits / month</div>
-            <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px;">Growth</div>
-          </div>
-          <div style="padding: 20px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center;">
-            <div style="font-size: 28px; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); line-height: 1;">500</div>
-            <div style="font-size: 12px; color: var(--ink-muted); margin-top: 4px;">credits / month</div>
-            <div style="font-size: 11px; font-weight: 700; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px;">Scale</div>
-          </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; text-align: left; margin-bottom: 28px;">
-          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink-soft);">
-            <span style="font-weight: 800; color: var(--ink); min-width: 28px;">10</span> Update text
-          </div>
-          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink-soft);">
-            <span style="font-weight: 800; color: var(--ink); min-width: 28px;">10</span> Replace image
-          </div>
-          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink-soft);">
-            <span style="font-weight: 800; color: var(--ink); min-width: 28px;">25</span> New blog post
-          </div>
-          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink-soft);">
-            <span style="font-weight: 800; color: var(--ink); min-width: 28px;">25</span> Add section
-          </div>
-          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink-soft);">
-            <span style="font-weight: 800; color: var(--ink); min-width: 28px;">30</span> Contact form
-          </div>
-          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; color: var(--ink-soft);">
-            <span style="font-weight: 800; color: var(--ink); min-width: 28px;">75</span> Landing page
-          </div>
-        </div>
-
-        <div class="credits__rollover" style="max-width: 480px; margin: 0 auto;">Unused credits roll over for up to 3 months — stack them up for bigger improvements whenever you're ready.</div>
-      </div>
-    </div>
 
   </div>
 </section>
@@ -1807,37 +2019,32 @@
 <!-- WHY FNDLY -->
 <section class="section why" id="about">
   <div class="container">
-    <div class="why__inner">
-      <div>
-        <span class="eyebrow reveal" style="margin-bottom: 18px; display: inline-flex;">Why FNDLY</span>
-        <h2 class="h2 reveal">Visibility is the new competitive advantage</h2>
-        <p class="body reveal" style="margin-top: 20px;">Businesses no longer compete only on product quality or pricing. Today, they compete on discoverability.</p>
-        <p class="body reveal" style="margin-top: 14px;">The businesses easiest to find are the ones that win. FNDLY helps companies become visible where modern customers search—Google, AI tools, maps, and beyond.</p>
-        <p class="body reveal" style="margin-top: 14px; color: var(--ink); font-weight: 600;">If your customers can't find you, they can't buy from you.</p>
-        <div style="margin-top: 32px;" class="reveal d1">
-          <a href="#contact" class="btn btn--dark btn--lg">Start growing today
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
+    <div style="text-align:center;max-width:700px;margin:0 auto 56px;" class="reveal">
+      <span class="eyebrow" style="margin-bottom:18px;display:inline-flex;justify-content:center;">Why FNDLY</span>
+      <h2 class="h2" style="font-size:clamp(32px,4.5vw,56px);">If your customers can't find you, <span style="color:var(--ink-faint);">they can't buy from you.</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;" class="reveal">
+      <div style="text-align:center;padding:32px 16px;">
+        <div style="font-size:clamp(36px,4vw,52px);font-weight:900;letter-spacing:-0.05em;color:var(--ink);line-height:1;margin-bottom:8px;">68%</div>
+        <div style="font-size:13px;color:var(--ink-muted);line-height:1.5;">of online journeys start with a search</div>
       </div>
-      <div class="why__cards reveal d2">
-        <div class="why-card">
-          <div class="why-card__num">68%</div>
-          <div class="why-card__label">of online journeys start with a search</div>
-        </div>
-        <div class="why-card">
-          <div class="why-card__num">3.5B</div>
-          <div class="why-card__label">Google searches happen every single day</div>
-        </div>
-        <div class="why-card">
-          <div class="why-card__num">76%</div>
-          <div class="why-card__label">of local searches lead to a visit within 24 hrs</div>
-        </div>
-        <div class="why-card">
-          <div class="why-card__num">93%</div>
-          <div class="why-card__label">of consumers read reviews before buying</div>
-        </div>
+      <div style="text-align:center;padding:32px 16px;">
+        <div style="font-size:clamp(36px,4vw,52px);font-weight:900;letter-spacing:-0.05em;color:var(--ink);line-height:1;margin-bottom:8px;">3.5B</div>
+        <div style="font-size:13px;color:var(--ink-muted);line-height:1.5;">Google searches happen every single day</div>
       </div>
+      <div style="text-align:center;padding:32px 16px;">
+        <div style="font-size:clamp(36px,4vw,52px);font-weight:900;letter-spacing:-0.05em;color:var(--ink);line-height:1;margin-bottom:8px;">76%</div>
+        <div style="font-size:13px;color:var(--ink-muted);line-height:1.5;">of local searches lead to a visit within 24 hours</div>
+      </div>
+      <div style="text-align:center;padding:32px 16px;">
+        <div style="font-size:clamp(36px,4vw,52px);font-weight:900;letter-spacing:-0.05em;color:var(--ink);line-height:1;margin-bottom:8px;">93%</div>
+        <div style="font-size:13px;color:var(--ink-muted);line-height:1.5;">of consumers read reviews before buying</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;" class="reveal">
+      <a href="#contact" class="btn btn--dark btn--lg">Start growing today
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1848,8 +2055,8 @@
     <div class="faq__inner">
       <div class="reveal">
         <span class="eyebrow" style="margin-bottom:18px;display:inline-flex;">FAQ</span>
-        <h2 class="h2">Common questions</h2>
-        <p class="body" style="margin-top:16px;">Still have questions? <a href="#contact" style="color:var(--ink);font-weight:600;">Reach out</a> and we'll get back to you within one business day.</p>
+        <h2 class="h2" style="font-size:clamp(28px,3.5vw,44px);">Questions we<br>get asked a lot</h2>
+        <p class="body" style="margin-top:16px;">Can't find your answer? <a href="#contact" style="color:var(--ink);font-weight:600;">Let's chat</a> — we respond within one business day.</p>
       </div>
       <div class="faq__list reveal d1">
         <details class="faq-q">
@@ -1881,22 +2088,76 @@
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="cta-section" id="contact">
+<!-- BLOG PREVIEW -->
+<section class="blog-preview">
   <div class="container">
-    <span class="eyebrow cta-section__eyebrow">Ready to grow?</span>
-    <h2 class="h2 cta-section__title">
-      <div class="line-wrap"><span class="line">Ready to become</span></div>
-      <div class="line-wrap"><span class="line"><em>impossible to ignore?</em></span></div>
-    </h2>
-    <p class="cta-section__sub reveal">Book a free strategy call and discover exactly where your business is missing visibility opportunities—and how we'll capture them.</p>
-    <div class="reveal">
-      <a href="mailto:hello@fndly.nl" class="btn btn--accent btn--lg" style="font-size:16px;padding:18px 36px;">
-        Book your free strategy call
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="blog-preview__header reveal">
+      <div>
+        <span class="eyebrow" style="margin-bottom:18px;display:inline-flex;">Insights</span>
+        <h2 class="h2" style="font-size:clamp(28px,3.5vw,44px);">On our minds</h2>
+      </div>
+      <a href="#" class="btn btn--outline" style="flex-shrink:0;">View all articles →</a>
+    </div>
+    <div class="blog-preview__grid">
+      <a href="#" class="blog-card reveal">
+        <div class="blog-card__img"><img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=600&q=80" alt=""></div>
+        <div class="blog-card__body">
+          <div class="blog-card__cat">SEO</div>
+          <div class="blog-card__title">Why your website isn't ranking — and what to do about it</div>
+          <div class="blog-card__meta">5 min read</div>
+        </div>
+      </a>
+      <a href="#" class="blog-card reveal">
+        <div class="blog-card__img"><img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80" alt=""></div>
+        <div class="blog-card__body">
+          <div class="blog-card__cat">Web Design</div>
+          <div class="blog-card__title">The ROI of a professionally managed website in 2026</div>
+          <div class="blog-card__meta">7 min read</div>
+        </div>
+      </a>
+      <a href="#" class="blog-card reveal">
+        <div class="blog-card__img"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80" alt=""></div>
+        <div class="blog-card__body">
+          <div class="blog-card__cat">AI</div>
+          <div class="blog-card__title">How AI is changing the way businesses get found online</div>
+          <div class="blog-card__meta">4 min read</div>
+        </div>
       </a>
     </div>
-    <p class="cta-section__note">No commitment. No credit card. Just clarity.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact__inner">
+      <div class="reveal">
+        <div class="contact__title">Let's build something <span>great together.</span></div>
+        <div class="contact__desc">Tell us about your project and we'll get back to you within one business day. No commitment, no pressure — just a conversation.</div>
+        <div class="contact__info">
+          <div class="contact__info-item">
+            <div class="contact__info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            hello@fndly.nl
+          </div>
+          <div class="contact__info-item">
+            <div class="contact__info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            Amsterdam, Netherlands
+          </div>
+        </div>
+      </div>
+      <form class="contact__form reveal" id="contactForm">
+        <div class="contact__row">
+          <input type="text" class="contact__input" placeholder="Your name" required>
+          <input type="email" class="contact__input" placeholder="Your email" required>
+        </div>
+        <input type="text" class="contact__input" placeholder="Company name (optional)">
+        <input type="text" class="contact__input" placeholder="Your website (if you have one)">
+        <textarea class="contact__input" placeholder="Tell us about your project..."></textarea>
+        <button type="submit" class="btn btn--dark btn--lg" style="align-self:flex-start;">Send message
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -1909,7 +2170,7 @@
           <div class="footer__logo-mark"><img src="/fndly-logo.png" alt="FNDLY"></div>
           FNDLY
         </a>
-        <p class="footer__blurb">Findability Made Simple. We help businesses get found by the customers already searching for them.</p>
+        <p class="footer__blurb">We build, manage and grow the complete digital presence of modern businesses.</p>
         <div class="footer__socials">
           <a href="#" class="footer__s" aria-label="LinkedIn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
@@ -1934,11 +2195,11 @@
       <div>
         <div class="footer__col-h">Services</div>
         <ul class="footer__links">
-          <li><a href="#services">SEO</a></li>
-          <li><a href="#services">AI Search</a></li>
-          <li><a href="#services">Local SEO</a></li>
-          <li><a href="#services">Content</a></li>
-          <li><a href="#services">Reputation</a></li>
+          <li><a href="#services">Website Development</a></li>
+          <li><a href="#services">Digital Infrastructure</a></li>
+          <li><a href="#services">AI Growth Platform</a></li>
+          <li><a href="#services">Continuous Optimisation</a></li>
+          <li><a href="#services">Growth Services</a></li>
         </ul>
       </div>
       <div>
@@ -2012,22 +2273,12 @@
     .from('.hero__title .line', { y: '105%', duration: 1.0, stagger: 0.15 }, '-=0.38')
     .from('.hero__subtitle',    { opacity: 0, y: 20, duration: 0.85 }, '-=0.62')
     .from('.hero__cta > *',     { opacity: 0, y: 14, stagger: 0.1, duration: 0.65 }, '-=0.5')
-    .from('.hero__proof',       { opacity: 0, y: 10, duration: 0.55 }, '-=0.4')
-    .from('.hero__visual',      { opacity: 0, y: 44, duration: 1.2, ease: 'power2.out' }, 0.35)
-    .from('.chip--a',           { opacity: 0, y: -16, duration: 0.55, ease: 'power2.out' }, '-=0.45')
-    .from('.chip--b',           { opacity: 0, y: 16, duration: 0.55, ease: 'power2.out' }, '-=0.35');
+    .from('.hero__scroll',      { opacity: 0, duration: 0.8 }, '-=0.2');
 
-  gsap.from('.ui-bar', {
-    scaleY: 0, transformOrigin: 'bottom center',
-    duration: 0.5, stagger: 0.04, ease: 'power2.out', delay: 1.3
-  });
-  countUp('score-counter', 87, 1.3);
-  countUp('ai-counter', 142, 1.45);
-
-  /* ── HERO PARALLAX (scrubbed) ── */
-  gsap.to('.hero__visual', {
-    yPercent: -14, ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
+  /* ── SHOWCASE STRIP ── */
+  gsap.from('.showcase-strip__inner > *', {
+    opacity: 0, y: 32, stagger: 0.2, duration: 0.9, ease: 'power2.out',
+    scrollTrigger: { trigger: '.showcase-strip', start: 'top 78%', once: true }
   });
 
   /* ── VALUE BAND ── */
@@ -2081,28 +2332,14 @@
     opacity: 0, y: 32, duration: 0.9, ease: 'power2.out',
     scrollTrigger: { trigger: '.stepper', start: 'top 82%', once: true }
   });
-  gsap.from('.process__delivery', {
-    opacity: 0, y: 32, duration: 0.9, ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '.process__delivery', start: 'top 85%', once: true,
-      onEnter: () => document.getElementById('processTl')?.classList.add('animated')
-    }
-  });
-  gsap.from('.process__tl-step', {
-    opacity: 0, y: 14, stagger: 0.1, duration: 0.6, ease: 'power2.out',
-    scrollTrigger: { trigger: '.process__tl', start: 'top 85%', once: true }
-  });
 
-  /* ── PROCESS STEPPER ── */
+  /* ── PROCESS STEPPER (pinned scroll) ── */
   (function () {
-    const DURATION = 5000;
     const tabs = document.querySelectorAll('.stepper__tab');
     const cards = document.querySelectorAll('.stepper__card');
     const fill = document.getElementById('stepperFill');
-    const timer = document.getElementById('stepperTimer');
+    const section = document.querySelector('.process');
     let current = 0;
-    let interval = null;
-    let paused = false;
 
     function goTo(idx) {
       if (idx === current && cards[idx].classList.contains('active')) return;
@@ -2117,58 +2354,32 @@
 
       fill.style.width = current === 0 ? '0%' : (current / (tabs.length - 1) * 100) + '%';
 
-      timer.style.transition = 'none';
-      timer.style.width = '0%';
-      timer.classList.remove('running');
-      void timer.offsetWidth;
-
       cards.forEach(c => {
         c.classList.remove('active', 'exit-left');
         if (c.dataset.step == prev) c.classList.add('exit-left');
       });
       cards[current].classList.add('active');
-
-      if (!paused) startTimer();
-    }
-
-    function startTimer() {
-      timer.classList.remove('running');
-      void timer.offsetWidth;
-      timer.style.transitionDuration = DURATION + 'ms';
-      timer.classList.add('running');
-    }
-
-    function nextStep() {
-      goTo((current + 1) % 5);
-    }
-
-    function startAutoplay() {
-      clearInterval(interval);
-      interval = setInterval(nextStep, DURATION);
-      startTimer();
     }
 
     tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        goTo(parseInt(tab.dataset.step));
-        clearInterval(interval);
-        interval = setInterval(nextStep, DURATION);
-      });
+      tab.addEventListener('click', () => goTo(parseInt(tab.dataset.step)));
     });
 
-    const stepper = document.getElementById('stepper');
-    stepper.addEventListener('mouseenter', () => {
-      paused = true;
-      clearInterval(interval);
-      timer.classList.remove('running');
-    });
-    stepper.addEventListener('mouseleave', () => {
-      paused = false;
-      startAutoplay();
+    const hint = document.getElementById('stepperHint');
+    ScrollTrigger.create({
+      trigger: section,
+      pin: true,
+      start: 'top top',
+      end: '+=150%',
+      scrub: 0.3,
+      onUpdate: self => {
+        const step = Math.min(4, Math.floor(self.progress * 5));
+        if (step !== current) goTo(step);
+        if (hint) hint.style.opacity = self.progress > 0.85 ? '0' : '1';
+      }
     });
 
     goTo(0);
-    startAutoplay();
   })();
 
   /* ── VISIBILITY CHECKER (interactive) ── */
@@ -2329,46 +2540,10 @@
     });
   })();
 
-  /* ── SHOWCASE ── */
-  gsap.from('.showcase__header > *', {
-    opacity: 0, y: 24, stagger: 0.14, duration: 0.85, ease: 'power2.out',
-    scrollTrigger: { trigger: '.showcase__header', start: 'top 82%', once: true }
-  });
-  gsap.from('.showcase__window', {
-    opacity: 0, y: 52, scale: 0.975, duration: 1.1, ease: 'power3.out',
-    scrollTrigger: { trigger: '.showcase__window', start: 'top 84%', once: true }
-  });
-  const chartPath = document.querySelector('.sc-chart path[stroke="#4F46E5"]');
-  if (chartPath) {
-    const len = chartPath.getTotalLength();
-    gsap.set(chartPath, { strokeDasharray: len, strokeDashoffset: len });
-    gsap.to(chartPath, {
-      strokeDashoffset: 0, duration: 2.2, ease: 'power2.inOut',
-      scrollTrigger: { trigger: '.showcase__window', start: 'top 74%', once: true }
-    });
-  }
-  gsap.set('.sc-vis-fill', { scaleX: 0, transformOrigin: 'left center' });
-  gsap.to('.sc-vis-fill', {
-    scaleX: 1, duration: 1.2, stagger: 0.18, ease: 'power2.out',
-    scrollTrigger: { trigger: '.sc-vis', start: 'top 78%', once: true }
-  });
-  gsap.from('.sc-metric', {
-    opacity: 0, y: 18, stagger: 0.1, duration: 0.65, ease: 'power2.out',
-    scrollTrigger: { trigger: '.sc-metrics', start: 'top 78%', once: true }
-  });
-  gsap.from('.sc-kw-row', {
-    opacity: 0, x: -14, stagger: 0.09, duration: 0.55, ease: 'power2.out',
-    scrollTrigger: { trigger: '.sc-kw', start: 'top 78%', once: true }
-  });
-
   /* ── WHY ── */
-  gsap.from('.why__inner > :first-child > *', {
-    opacity: 0, y: 22, stagger: 0.12, duration: 0.85, ease: 'power2.out',
-    scrollTrigger: { trigger: '.why__inner', start: 'top 82%', once: true }
-  });
-  gsap.from('.why-card', {
-    opacity: 0, y: 22, stagger: 0.1, duration: 0.7, ease: 'power2.out',
-    scrollTrigger: { trigger: '.why__cards', start: 'top 82%', once: true }
+  gsap.from('.why .container > *', {
+    opacity: 0, y: 28, stagger: 0.15, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: { trigger: '.why', start: 'top 80%', once: true }
   });
 
   /* ── PRICING ── */
@@ -2405,6 +2580,36 @@
     scrollTrigger: { trigger: '.cta-section', start: 'top 68%', once: true }
   });
 
+  /* ── PORTFOLIO ── */
+  gsap.from('.portfolio__card', {
+    opacity: 0, y: 32, stagger: 0.12, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: { trigger: '.portfolio__grid', start: 'top 82%', once: true }
+  });
+
+  /* ── TESTIMONIALS ── */
+  gsap.from('.testimonial', {
+    opacity: 0, y: 28, stagger: 0.12, duration: 0.8, ease: 'power2.out',
+    scrollTrigger: { trigger: '.testimonials__grid', start: 'top 82%', once: true }
+  });
+
+  /* ── BLOG ── */
+  gsap.from('.blog-card', {
+    opacity: 0, y: 28, stagger: 0.12, duration: 0.8, ease: 'power2.out',
+    scrollTrigger: { trigger: '.blog-preview__grid', start: 'top 82%', once: true }
+  });
+
+  /* ── CONTACT ── */
+  gsap.from('.contact__inner > *', {
+    opacity: 0, y: 28, stagger: 0.2, duration: 0.85, ease: 'power2.out',
+    scrollTrigger: { trigger: '.contact__inner', start: 'top 80%', once: true }
+  });
+
+  /* ── LOGOS ── */
+  gsap.from('.logos__item', {
+    opacity: 0, y: 12, stagger: 0.06, duration: 0.6, ease: 'power2.out',
+    scrollTrigger: { trigger: '.logos', start: 'top 90%', once: true }
+  });
+
   /* ── SMOOTH SCROLL ── */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
@@ -2412,6 +2617,35 @@
       if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -72 }); }
     });
   });
+
+  /* ── CONTACT FORM ── */
+  document.getElementById('contactForm')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = '✓ Message sent';
+      btn.style.background = 'var(--success)';
+      btn.style.color = '#fff';
+    }, 1000);
+  });
+
+  /* ── COOKIE BANNER ── */
+  if (!localStorage.getItem('fndly_cookies')) {
+    setTimeout(() => document.getElementById('cookieBanner')?.classList.add('show'), 2000);
+  }
+  document.getElementById('cookieAccept')?.addEventListener('click', () => {
+    localStorage.setItem('fndly_cookies', '1');
+    document.getElementById('cookieBanner')?.classList.remove('show');
+  });
 </script>
+
+<!-- COOKIE BANNER -->
+<div class="cookie" id="cookieBanner">
+  <div class="cookie__text">We use cookies to improve your experience. By continuing, you agree to our <a href="#">Privacy Policy</a>.</div>
+  <button class="cookie__btn cookie__btn--accept" id="cookieAccept">Accept</button>
+</div>
+
 </body>
 </html>
