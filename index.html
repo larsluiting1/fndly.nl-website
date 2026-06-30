@@ -967,7 +967,7 @@
 
     /* ── LINE REVEAL (GSAP) ── */
     .line-wrap { overflow: hidden; display: block; }
-    .line { display: block; padding-bottom: 0.07em; margin-bottom: -0.07em; }
+    .line { display: block; padding-bottom: 0.18em; margin-bottom: -0.18em; }
 
     /* ── MARQUEE ── */
     .clients { padding: 28px 0 0; border-bottom: 1px solid var(--border); }
@@ -2631,21 +2631,23 @@
     }, 1000);
   });
 
-  /* ── COOKIE BANNER ── */
-  if (!localStorage.getItem('fndly_cookies')) {
-    setTimeout(() => document.getElementById('cookieBanner')?.classList.add('show'), 2000);
-  }
-  document.getElementById('cookieAccept')?.addEventListener('click', () => {
-    localStorage.setItem('fndly_cookies', '1');
-    document.getElementById('cookieBanner')?.classList.remove('show');
-  });
 </script>
 
 <!-- COOKIE BANNER -->
 <div class="cookie" id="cookieBanner">
-  <div class="cookie__text">We use cookies to improve your experience. By continuing, you agree to our <a href="#">Privacy Policy</a>.</div>
+  <div class="cookie__text">We use cookies to improve your experience. By continuing, you agree to our <a href="#" onclick="return false">Privacy Policy</a>.</div>
   <button class="cookie__btn cookie__btn--accept" id="cookieAccept">Accept</button>
 </div>
+<script>
+  /* ── COOKIE BANNER ── */
+  if (!localStorage.getItem('fndly_cookies')) {
+    setTimeout(() => document.getElementById('cookieBanner').classList.add('show'), 2000);
+  }
+  document.getElementById('cookieAccept').addEventListener('click', () => {
+    localStorage.setItem('fndly_cookies', '1');
+    document.getElementById('cookieBanner').classList.remove('show');
+  });
+</script>
 
 </body>
 </html>
